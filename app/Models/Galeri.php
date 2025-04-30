@@ -12,4 +12,9 @@ class Galeri extends Model
     {
         return $this->belongsTo(Destinasi::class, 'destinasi_id', 'id');
     }
+
+    public function notifikasi()
+    {
+        return $this->morphMany(Notifikasi::class, 'terkait');
+    }
 }

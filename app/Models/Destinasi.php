@@ -27,4 +27,9 @@ class Destinasi extends Model
     {
         return $this->hasMany(Bookmark::class, 'destinasi_id', 'id');
     }
+
+    public function notifikasi()
+    {
+        return $this->morphMany(Notifikasi::class, 'terkait');
+    }
 }
