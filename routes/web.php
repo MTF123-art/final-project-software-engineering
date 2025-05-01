@@ -1,7 +1,19 @@
 <?php
 
+use App\Http\Controllers\auth\LoginController;
+use App\Http\Controllers\auth\RegisterController;
+use Illuminate\Auth\Events\Login;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+
+// public routes
+Route::view('/', 'public.home')->name('home');
+Route::view('/about', 'public.about')->name('about');
+Route::view('/contact', 'public.contact')->name('contact');
+Route::view('/destination', 'public.destination')->name('destination');
+
+// auth routes
+Route::view('/login', 'auth.login')->name('login-form');
+Route::post('/login', [LoginController::class, 'login'])->name('login.post');
+Route::view('/register', 'auth.register')->name('register-form');
+Route::post('/register', [RegisterController::class, 'register'])->name('register.post');
