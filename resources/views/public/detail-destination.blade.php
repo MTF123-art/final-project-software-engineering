@@ -12,11 +12,6 @@
             </div>
             <div class="bg-content container">
                 <div class="hero-page-title">
-                    <div class="hero-desc mb-3">
-                        <span class="text-uppercase">From:</span>
-                        <strong class="fs-1 text-white"><sup>$</sup>185.80</strong>
-                        <span class="text-uppercase"><sup>$</sup><del class="">230.00</del></span>
-                    </div>
                     <h1 class="display-4 hero-title mb-2">
                         Explore Noriva Tour
                     </h1>
@@ -487,19 +482,12 @@
                                     </div>
                                 </div>
                                 <nav aria-label="Page navigation" class="text-center">
-                                    <ul class="pagination pagination-circle d-inline-flex mb-0">
-                                        <li class="page-item">
-                                            <a class="page-link" href="#">
-                                                <i class="hicon hicon-edge-arrow-left"></i>
-                                            </a>
-                                        </li>
-                                        <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                        <li class="page-item">
-                                            <a class="page-link" href="#">
-                                                <i class="hicon hicon-edge-arrow-right"></i>
-                                            </a>
-                                        </li>
-                                    </ul>
+                                    <div class="text-center">
+                                        <a href="#" class="fw-medium">
+                                            <i class="hicon hicon-bold hicon-refresh"></i>
+                                            <span>Load More</span>
+                                        </a>
+                                    </div>
                                 </nav>
                             </div>
                         </div>

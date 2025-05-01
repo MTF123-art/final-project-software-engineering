@@ -3,6 +3,7 @@
 <html lang="en">
 
 <!-- Head -->
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -21,11 +22,11 @@
 <body>
 
     <!-- Preloader -->
-    {{-- <div id="preloader">
+    <div id="preloader">
         <div class="spinner-border text-primary" role="status">
             <span class="visually-hidden">Loading...</span>
         </div>
-    </div> --}}
+    </div>
     <!-- /Preloader -->
 
     <!-- Header -->
@@ -48,15 +49,6 @@
                             </a>
                         </div>
                     </div>
-                    <div class="col-6 col-xl-5 col-md-4">
-                        <div class="text-end">
-                            <a class="d-inline-flex align-items-center me-3" data-bs-toggle="modal" href="#mdlLanguage">
-                                <img src="{{ asset('assets') }}/img/flags/en.svg" height="14" class="me-1" alt="">
-                                <span class="me-1">English</span>
-                                <i class="hicon hicon-thin-arrow-down hicon-bold hicon-60"></i>
-                            </a>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
@@ -66,38 +58,45 @@
         <div class="header-navbar">
             <nav class="navbar navbar-expand-xl">
                 <div class="container">
-                    <button class="navbar-toggler me-3" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
+                    <button class="navbar-toggler me-3" type="button" data-bs-toggle="offcanvas"
+                        data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
                         <i class="hicon hicon-bold hicon-hamburger-menu"></i>
                     </button>
                     <a class="navbar-brand" href="index-2.html">
                         <img src="{{ asset('assets') }}/img/logos/logo.png" alt="">
                     </a>
-                    <div class="offcanvas offcanvas-navbar offcanvas-start border-end-0" tabindex="-1" id="offcanvasNavbar">
+                    <div class="offcanvas offcanvas-navbar offcanvas-start border-end-0" tabindex="-1"
+                        id="offcanvasNavbar">
                         <div class="offcanvas-header border-bottom p-4 p-xl-0">
                             <a href="{{ route('home') }}" class="d-inline-block">
                                 <img src="{{ asset('assets') }}/img/logos/menu-logo.png" alt="">
                             </a>
-                            <button type="button" class="btn-close shadow-none" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                            <button type="button" class="btn-close shadow-none" data-bs-dismiss="offcanvas"
+                                aria-label="Close"></button>
                         </div>
                         <div class="offcanvas-body p-4 p-xl-0">
                             <ul class="navbar-nav">
                                 <li class="nav-item dropdown">
-                                    <a class="nav-link @if (request()->is('/*')) active @endif" href="{{ route("home") }}" data-bs-display="static">
+                                    <a class="nav-link @if (request()->is('/*')) active @endif"
+                                        href="{{ route('home') }}" data-bs-display="static">
                                         <span>Home</span>
                                     </a>
                                 </li>
                                 <li class="nav-item dropdown">
-                                    <a class="nav-link @if (request()->is('destination*')) active @endif" href="{{ route('destination') }}" data-bs-display="static">
+                                    <a class="nav-link @if (request()->is('destination*')) active @endif"
+                                        href="{{ route('destination') }}" data-bs-display="static">
                                         <span>Destinations</span>
                                     </a>
                                 </li>
                                 <li class="nav-item dropdown">
-                                    <a class="nav-link @if (request()->is('about*')) active @endif" href="{{ route('about') }}" data-bs-display="static">
+                                    <a class="nav-link @if (request()->is('about*')) active @endif"
+                                        href="{{ route('about') }}" data-bs-display="static">
                                         <span>About Us</span>
                                     </a>
                                 </li>
                                 <li class="nav-item dropdown">
-                                    <a class="nav-link @if (request()->is('contact*')) active @endif" href="{{ route('contact') }}" data-bs-display="static">
+                                    <a class="nav-link @if (request()->is('contact*')) active @endif"
+                                        href="{{ route('contact') }}" data-bs-display="static">
                                         <span>Contact</span>
                                     </a>
                                 </li>
@@ -110,118 +109,94 @@
                             </div>
                         </div>
                     </div>
-                    <div class="dropdown user-menu ms-xl-auto">
-                        <button class="circle-icon circle-icon-link circle-icon-link-hover" data-bs-toggle="dropdown" data-bs-display="static">
-                            <i class="hicon hicon-mmb-account"></i>
-                        </button>
-                        <ul class="dropdown-menu dropdown-menu-end animate slideIn" data-bs-popper="static">
-                            <li>
-                                <a class="dropdown-item" href="{{ route('register-form') }}">
-                                    <i class="hicon hicon-edit me-1"></i>
-                                    <span>Register</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a class="dropdown-item" href="{{ route('login-form') }}">
-                                    <i class="hicon hicon-aps-lock me-1"></i>
-                                    <span>Login</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
+                    @if (Auth::check())
+                        {{-- auth --}}
+                        <div class="dropdown user-menu ms-xl-auto">
+                            <button class="user-menu-avatar show" data-bs-toggle="dropdown" data-bs-display="static"
+                                aria-expanded="true">
+                                <img src="{{ asset('assets') }}/img/avatars/a9.jpg" alt="">
+                            </button>
+                            <ul class="dropdown-menu dropdown-menu-end shadow-sm animate slideIn"
+                                data-bs-popper="static">
+                                <li>
+                                    <a class="dropdown-item fw-medium" href="./dashboard.html">
+                                        Hi! John Deep
+                                    </a>
+                                </li>
+                                <li class="ps-4 pe-4">
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="./dashboard.html">
+                                        <i class="hicon hicon-ycs-dashboard me-1"></i>
+                                        <span>Dashboard</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="./booking.html">
+                                        <i class="hicon hicon-installment-payment me-1"></i>
+                                        <span>Booking</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="./wishlist.html">
+                                        <i class="hicon hicon-menu-favorite me-1"></i>
+                                        <span>Wishlist</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="./settings.html">
+                                        <i class="hicon hicon-luggage me-1"></i>
+                                        <span>Settings</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="./security.html">
+                                        <i class="hicon hicon-aps-lock me-1"></i>
+                                        <span>Security</span>
+                                    </a>
+                                </li>
+                                <li class="ps-4 pe-4">
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li>
+                                    <form class="dropdown-item" action="{{ route('logout') }}" method="POST">
+                                        @csrf
+                                        <i class="hicon hicon-close-popup me-1"></i>
+                                        <button type="submit" style="background: none; border: none; color: inherit; padding: 0; font: inherit; cursor: pointer;">Logout</button>
+                                    </form>
+                                </li>
+                            </ul>
+                        </div>
+                        {{-- auth --}}
+                    @else
+                        {{-- guest --}}
+                        <div class="dropdown user-menu ms-xl-auto">
+                            <button class="circle-icon circle-icon-link circle-icon-link-hover"
+                                data-bs-toggle="dropdown" data-bs-display="static">
+                                <i class="hicon hicon-mmb-account"></i>
+                            </button>
+                            <ul class="dropdown-menu dropdown-menu-end animate slideIn" data-bs-popper="static">
+                                <li>
+                                    <a class="dropdown-item" href="{{ route('register-form') }}">
+                                        <i class="hicon hicon-edit me-1"></i>
+                                        <span>Register</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="{{ route('login-form') }}">
+                                        <i class="hicon hicon-aps-lock me-1"></i>
+                                        <span>Login</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        {{-- guest --}}
+                    @endif
                 </div>
             </nav>
         </div>
         <!-- /Header Navbar -->
-
-        <!-- Language -->
-        <div class="modal fade" id="mdlLanguage" tabindex="-1" aria-labelledby="h3Language" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content border-0 shadow-lg">
-                    <div class="modal-header">
-                        <span class="fs-3 modal-title text-body-emphasis fw-medium" id="h3Language">Select language</span>
-                        <button type="button" class="btn-close shadow-none" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <ul class="list-unstyled row mb-0">
-                            <li class="col-6 col-lg-4">
-                                <a href="destinations-19ed2.html?lang=en" class="link-dark link-hover">
-                                    <span class="d-flex align-items-center pt-2 pb-2">
-                                        <img src="{{ asset('assets') }}/img/flags/en.svg" height="16" alt="">
-                                        <span class="ms-2">English</span>
-                                    </span>
-                                </a>
-                            </li>
-                            <li class="col-6 col-lg-4">
-                                <a href="destinations-19ed2.html?lang=en" class="link-dark link-hover">
-                                    <span class="d-flex align-items-center pt-2 pb-2">
-                                        <img src="{{ asset('assets') }}/img/flags/fr.svg" height="16" alt="">
-                                        <span class="ms-2">Français</span>
-                                    </span>
-                                </a>
-                            </li>
-                            <li class="col-6 col-lg-4">
-                                <a href="destinations-19ed2.html?lang=en" class="link-dark link-hover">
-                                    <span class="d-flex align-items-center pt-2 pb-2">
-                                        <img src="{{ asset('assets') }}/img/flags/es.svg" height="16" alt="">
-                                        <span class="ms-2">Español</span>
-                                    </span>
-                                </a>
-                            </li>
-                            <li class="col-6 col-lg-4">
-                                <a href="destinations-19ed2.html?lang=en" class="link-dark link-hover">
-                                    <span class="d-flex align-items-center pt-2 pb-2">
-                                        <img src="{{ asset('assets') }}/img/flags/de.svg" height="16" alt="">
-                                        <span class="ms-2">Deutsch</span>
-                                    </span>
-                                </a>
-                            </li>
-                            <li class="col-6 col-lg-4">
-                                <a href="destinations-19ed2.html?lang=en" class="link-dark link-hover">
-                                    <span class="d-flex align-items-center pt-2 pb-2">
-                                        <img src="{{ asset('assets') }}/img/flags/it.svg" height="16" alt="">
-                                        <span class="ms-2">Italiano</span>
-                                    </span>
-                                </a>
-                            </li>
-                            <li class="col-6 col-lg-4">
-                                <a href="destinations-19ed2.html?lang=en" class="link-dark link-hover">
-                                    <span class="d-flex align-items-center pt-2 pb-2">
-                                        <img src="{{ asset('assets') }}/img/flags/nl.svg" height="16" alt="">
-                                        <span class="ms-2">Nederlands</span>
-                                    </span>
-                                </a>
-                            </li>
-                            <li class="col-6 col-lg-4">
-                                <a href="destinations-19ed2.html?lang=en" class="link-dark link-hover">
-                                    <span class="d-flex align-items-center pt-2 pb-2">
-                                        <img src="{{ asset('assets') }}/img/flags/pt.svg" height="16" alt="">
-                                        <span class="ms-2">Português</span>
-                                    </span>
-                                </a>
-                            </li>
-                            <li class="col-6 col-lg-4">
-                                <a href="destinations-19ed2.html?lang=en" class="link-dark link-hover">
-                                    <span class="d-flex align-items-center pt-2 pb-2">
-                                        <img src="{{ asset('assets') }}/img/flags/ru.svg" height="16" alt="">
-                                        <span class="ms-2">Русский</span>
-                                    </span>
-                                </a>
-                            </li>
-                            <li class="col-6 col-lg-4">
-                                <a href="destinations-19ed2.html?lang=en" class="link-dark link-hover">
-                                    <span class="d-flex align-items-center pt-2 pb-2">
-                                        <img src="{{ asset('assets') }}/img/flags/cn.svg" height="16" alt="">
-                                        <span class="ms-2">日本語</span>
-                                    </span>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- /Language -->
 
     </header>
     <!-- /Header -->
@@ -235,32 +210,40 @@
 
         <!-- Footer top -->
         <div class="footer-top">
-            <div class="container"> 
+            <div class="container">
                 <div class="row justify-content-between">
                     <div class="col-12 col-xl-3 col-md-6">
                         <!-- Brand -->
                         <div class="footer-widget">
                             <a href="index-2.html" class="brand-img">
-                                <img class="me-4" src="{{ asset('assets') }}/img/logos/footer-logo.png" alt="">
+                                <img class="me-4" src="{{ asset('assets') }}/img/logos/footer-logo.png"
+                                    alt="">
                             </a>
                             <p class="brand-desc">
                                 <em>
-                                    Moliva Travel Agency offers unique and memorable tours, providing rich experiences in the beautiful country of Moliva.
+                                    Moliva Travel Agency offers unique and memorable tours, providing rich experiences
+                                    in the beautiful country of Moliva.
                                 </em>
                                 <a href="about.html">[+]</a>
                             </p>
                             <ul class="social-list">
                                 <li class="social-item">
                                     <a href="#">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke-width="1.75" stroke="none" stroke-linecap="round" stroke-linejoin="round">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                            viewBox="0 0 24 24" fill="none" stroke-width="1.75" stroke="none"
+                                            stroke-linecap="round" stroke-linejoin="round">
                                             <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                                            <path d="M7 10v4h3v7h4v-7h3l1 -4h-4v-2a1 1 0 0 1 1 -1h3v-4h-3a5 5 0 0 0 -5 5v2h-3"></path>
+                                            <path
+                                                d="M7 10v4h3v7h4v-7h3l1 -4h-4v-2a1 1 0 0 1 1 -1h3v-4h-3a5 5 0 0 0 -5 5v2h-3">
+                                            </path>
                                         </svg>
                                     </a>
                                 </li>
                                 <li class="social-item">
                                     <a href="#">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="none" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                            viewBox="0 0 24 24" fill="none" stroke="none" stroke-width="1.75"
+                                            stroke-linecap="round" stroke-linejoin="round">
                                             <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                                             <path d="M4 4l11.733 16h4.267l-11.733 -16z" />
                                             <path d="M4 20l6.768 -6.768m2.46 -2.46l6.772 -6.772" />
@@ -269,26 +252,36 @@
                                 </li>
                                 <li class="social-item">
                                     <a href="#">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" stroke-width="1.75" stroke="none" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                            viewBox="0 0 24 24" stroke-width="1.75" stroke="none" fill="none"
+                                            stroke-linecap="round" stroke-linejoin="round">
                                             <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                                            <path d="M3 5m0 4a4 4 0 0 1 4 -4h10a4 4 0 0 1 4 4v6a4 4 0 0 1 -4 4h-10a4 4 0 0 1 -4 -4z"></path>
+                                            <path
+                                                d="M3 5m0 4a4 4 0 0 1 4 -4h10a4 4 0 0 1 4 4v6a4 4 0 0 1 -4 4h-10a4 4 0 0 1 -4 -4z">
+                                            </path>
                                             <path d="M10 9l5 3l-5 3z"></path>
                                         </svg>
                                     </a>
                                 </li>
                                 <li class="social-item">
                                     <a href="#">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" stroke-width="1.75" stroke="none" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                            viewBox="0 0 24 24" stroke-width="1.75" stroke="none" fill="none"
+                                            stroke-linecap="round" stroke-linejoin="round">
                                             <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
                                             <path d="M8 20l4 -9"></path>
-                                            <path d="M10.7 14c.437 1.263 1.43 2 2.55 2c2.071 0 3.75 -1.554 3.75 -4a5 5 0 1 0 -9.7 1.7"></path>
+                                            <path
+                                                d="M10.7 14c.437 1.263 1.43 2 2.55 2c2.071 0 3.75 -1.554 3.75 -4a5 5 0 1 0 -9.7 1.7">
+                                            </path>
                                             <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0"></path>
                                         </svg>
                                     </a>
                                 </li>
                                 <li class="social-item">
                                     <a href="#">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" stroke-width="1.75" stroke="none" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                            viewBox="0 0 24 24" stroke-width="1.75" stroke="none" fill="none"
+                                            stroke-linecap="round" stroke-linejoin="round">
                                             <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
                                             <path d="M6.5 13.5m-1.5 0a1.5 1.5 0 1 0 3 0a1.5 1.5 0 1 0 -3 0"></path>
                                             <path d="M17.5 13.5m-1.5 0a1.5 1.5 0 1 0 3 0a1.5 1.5 0 1 0 -3 0"></path>
@@ -391,4 +384,5 @@
     <script defer src="{{ asset('assets') }}/js/theme-3.min.js"></script>
 
 </body>
+
 </html>

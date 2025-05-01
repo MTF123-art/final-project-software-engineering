@@ -14,8 +14,12 @@
                             <div class="card-body">
                                 <div class="border-bottom mb-4">
                                     <h1 class="h2 text-body-emphasis">Login</h1>
+                                    @if (session('error'))
+                                        <small class="text-danger">{{ session('error') }}</small>
+                                    @endif
                                 </div>
-                                <form method="post">
+                                <form method="post" action="{{ route('login.post') }}">
+                                    @csrf
                                     <!-- Login Facebook/Google -->
                                     <div class="border-bottom pb-4 mb-4">
                                         <div class="row g-3">
@@ -61,20 +65,26 @@
                                             <label for="txtEmail" class="form-label">Email<span
                                                     class="text-danger">*</span></label>
                                             <input class="form-control shadow-sm" type="text" id="txtEmail"
-                                                name="username" required="">
+                                                name="email" required value="{{ old('email') }}">
+                                            @error('email')
+                                                <small class="text-danger">{{ $message }}</small>
+                                            @enderror
                                         </div>
                                         <div class="mb-4">
                                             <label for="txtPassword" class="form-label">Password<span
                                                     class="text-danger">*</span></label>
                                             <input class="form-control shadow-sm" id="txtPassword" name="password"
-                                                type="password" required="">
+                                                type="password" required>
+                                            @error('password')
+                                                <small class="text-danger">{{ $message }}</small>
+                                            @enderror
                                         </div>
                                         <div class="row">
                                             <div class="col-6">
                                                 <div class="mb-4">
                                                     <div class="form-check">
                                                         <input class="form-check-input shadow-sm" type="checkbox"
-                                                            id="chkRemember">
+                                                            id="chkRemember" name="remember">
                                                         <label class="form-check-label" for="chkRemember"><span
                                                                 class="text-body">Remember me</span></label>
                                                     </div>

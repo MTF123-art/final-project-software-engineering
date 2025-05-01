@@ -14,7 +14,13 @@ Route::view('/destination', 'public.destination')->name('destination');
 Route::view('/destination/detail', 'public.detail-destination')->name('detail-destination');
 
 // auth routes
-Route::view('/login', 'auth.login')->name('login-form');
+Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login-form');
 Route::post('/login', [LoginController::class, 'login'])->name('login.post');
-Route::view('/register', 'auth.register')->name('register-form');
+Route::get('/register', [RegisterController::class, 'showRegisterForm'])->name('register-form');
 Route::post('/register', [RegisterController::class, 'register'])->name('register.post');
+
+// auth routes
+// Route::middleware(['auth'])->group(function () {
+    Route::view('/dashboard', 'user.dashboard')->name('dashboard');
+    Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
+// });
