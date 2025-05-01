@@ -11,6 +11,7 @@ Route::view('/', 'public.home')->name('home');
 Route::view('/about', 'public.about')->name('about');
 Route::view('/contact', 'public.contact')->name('contact');
 Route::view('/destination', 'public.destination')->name('destination');
+Route::view('/destination/detail', 'public.detail-destination')->name('detail-destination');
 
 // auth routes
 Route::view('/login', 'auth.login')->name('login-form');
