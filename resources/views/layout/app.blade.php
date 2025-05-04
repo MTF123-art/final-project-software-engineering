@@ -119,7 +119,7 @@
                             <ul class="dropdown-menu dropdown-menu-end shadow-sm animate slideIn"
                                 data-bs-popper="static">
                                 <li>
-                                    <a class="dropdown-item fw-medium" href="./dashboard.html">
+                                    <a class="dropdown-item fw-medium" href="#">
                                         Hi! John Deep
                                     </a>
                                 </li>
@@ -127,25 +127,25 @@
                                     <hr class="dropdown-divider">
                                 </li>
                                 <li>
-                                    <a class="dropdown-item" href="./dashboard.html">
+                                    <a class="dropdown-item" href="{{ route(Auth::user()->role.'.dashboard') }}">
                                         <i class="hicon hicon-ycs-dashboard me-1"></i>
                                         <span>Dashboard</span>
                                     </a>
                                 </li>
                                 <li>
-                                    <a class="dropdown-item" href="./booking.html">
+                                    <a class="dropdown-item" href="">
                                         <i class="hicon hicon-installment-payment me-1"></i>
                                         <span>Booking</span>
                                     </a>
                                 </li>
                                 <li>
-                                    <a class="dropdown-item" href="./wishlist.html">
+                                    <a class="dropdown-item" href="wishlist.html">
                                         <i class="hicon hicon-menu-favorite me-1"></i>
                                         <span>Wishlist</span>
                                     </a>
                                 </li>
                                 <li>
-                                    <a class="dropdown-item" href="./settings.html">
+                                    <a class="dropdown-item" href="settings.html">
                                         <i class="hicon hicon-luggage me-1"></i>
                                         <span>Settings</span>
                                     </a>

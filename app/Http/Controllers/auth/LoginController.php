@@ -20,10 +20,15 @@ class LoginController extends Controller
 
         if (Auth::attempt($request->only('email', 'password'), $remember)) {
             $request->session()->regenerate();
-            return redirect()->intended('dashboard')->with('success', 'Login berhasil!');
 
+            $role = Auth::user()->role;
+
+            return redirect()
+                ->route("$role.dashboard")
+                ->with('success', 'Login berhasil!');
         }
-        return back()->with('error', 'Login failed. Please check your credentials and try again.')->withInput();
+
+        return back()->with('error', 'Login gagal. Periksa kembali email dan password Anda.')->withInput();
     }
 
     public function logout(Request $request)

@@ -1,6 +1,6 @@
 @extends('layout.app')
 
-@section('title', 'User Dashboard')
+@section('title', 'Pengelola Dashboard')
 
 @section('content')
     <main>

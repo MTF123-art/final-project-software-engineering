@@ -19,6 +19,8 @@ class RegisterController extends Controller
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
+            'role' => "user",
+            'is_active' => "true",
         ]);
 
         return back()->with('success', 'Registration successful! Please login.');
