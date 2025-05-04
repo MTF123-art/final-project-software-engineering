@@ -20,7 +20,7 @@ Route::get('/register', [RegisterController::class, 'showRegisterForm'])->name('
 Route::post('/register', [RegisterController::class, 'register'])->name('register.post');
 
 // auth routes
-// Route::middleware(['auth'])->group(function () {
+Route::middleware(['auth', 'role:user'])->group(function () {
     Route::view('/dashboard', 'user.dashboard')->name('dashboard');
     Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
-// });
+});
