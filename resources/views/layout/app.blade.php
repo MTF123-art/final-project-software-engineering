@@ -22,11 +22,11 @@
 <body>
 
     <!-- Preloader -->
-    <div id="preloader">
+    {{-- <div id="preloader">
         <div class="spinner-border text-primary" role="status">
             <span class="visually-hidden">Loading...</span>
         </div>
-    </div>
+    </div> --}}
     <!-- /Preloader -->
 
     <!-- Header -->

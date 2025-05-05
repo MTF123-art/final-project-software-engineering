@@ -27,10 +27,23 @@ Route::middleware(['auth', 'role:user'])->prefix('user')->name('user.')->group(f
     Route::view('/dashboard', 'user.dashboard')->name('dashboard');
 });
 
+// admin routes
 Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->group(function () {
+    // admin dashboard
     Route::view('/dashboard', 'admin.dashboard')->name('dashboard');
+
     // manage users
-    Route::get('/user', [UserController::class, 'index'])->name('user.index');
+    Route::prefix('user-management')->name('user-management.')->group(function () {
+        Route::get('/', [UserController::class, 'index'])->name('index');
+        Route::get('/filter/{role}', [UserController::class, 'filter'])->name('filter');
+        Route::get('/create', [UserController::class, 'createForm'])->name('create-form');
+        Route::post('/create', [UserController::class, 'create'])->name('create');
+        Route::get('/edit/{id}', [UserController::class, 'editForm'])->name('edit-form');
+        Route::post('/edit/{id}', [UserController::class, 'edit'])->name('edit');
+        Route::post('/delete/{id}', [UserController::class, 'delete'])->name('delete');
+    });
+    
+
 });
 
 Route::middleware(['auth', 'role:pengelola'])->prefix('pengelola')->name('pengelola.')->group(function () {
