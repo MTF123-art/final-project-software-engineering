@@ -1,9 +1,9 @@
 <?php
 
 use App\Http\Controllers\admin\UserController;
+use App\Http\Controllers\admin\AdminProfileController;
 use App\Http\Controllers\auth\LoginController;
 use App\Http\Controllers\auth\RegisterController;
-use App\Http\Controllers\ProfileController;
 use Illuminate\Auth\Events\Login;
 use Illuminate\Support\Facades\Route;
 
@@ -36,7 +36,9 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->grou
     Route::view('/dashboard', 'admin.dashboard')->name('dashboard');
     
     // profile routes
-    Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
+    Route::get('/profile', [AdminProfileController::class,'index'])->name('profile');
+    Route::post('/profile/edit', [AdminProfileController::class,'editProfile'])->name('profile.edit');
+    Route::post('/profile/edit-password', [AdminProfileController::class,'editPassword'])->name('profile.edit-password');
     // manage users
     Route::prefix('user-management')->name('user-management.')->group(function () {
         Route::get('/', [UserController::class, 'index'])->name('index');

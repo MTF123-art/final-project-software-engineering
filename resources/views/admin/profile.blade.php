@@ -26,8 +26,17 @@
                         <div class="pe-xl-4 me-xl-2 mb-4">
                             <div class="card border-0 shadow-sm">
                                 <div class="card-body ">
-                                    <form action="">
-                                        <div class="account-user border-bottom pb-4 mb-3 mt-4 d-flex justify-content-center">
+                                    <div class=" border-bottom pb-4 mb-4">
+                                        <h2 class="h3 text-body-emphasis mb-0">Profile Data</h2>
+                                        @if (session('success-profile'))
+                                            <small class="text-danger">{{ session('success-profile') }}</small>
+                                        @endif
+                                    </div>
+                                    <form action="{{ route('admin.profile.edit') }}" method="post"
+                                        enctype="multipart/form-data">
+                                        @csrf
+                                        <div
+                                            class="account-user border-bottom pb-4 mb-3 mt-4 d-flex justify-content-center">
                                             <div class="user-avatar">
                                                 <img src="http://127.0.0.1:8000/assets/img/avatars/a3.jpg" alt=""
                                                     class="show-avatar rounded-circle" style="width: 150px; height: 150px;">
@@ -48,7 +57,11 @@
                                                         <label class="form-label" for="txtFirtname">Name<span
                                                                 class="text-danger">*</span></label>
                                                         <input type="text" class="form-control shadow-sm"
-                                                            id="txtFirtname" required="" value="{{ Auth::user()->name }}">
+                                                            id="txtFirtname" required="" name="name"
+                                                            value="{{ Auth::user()->name }}">
+                                                        @error('name')
+                                                            <small class="text-danger">{{ $message }}</small>
+                                                        @enderror
                                                     </div>
                                                 </div>
                                                 <div class="col-12 col-md-6">
@@ -56,7 +69,11 @@
                                                         <label class="form-label" for="txtLastname">Email<span
                                                                 class="text-danger">*</span></label>
                                                         <input type="text" class="form-control shadow-sm"
-                                                            id="txtLastname" required="" value="{{ Auth::user()->email }}">
+                                                            id="txtLastname" name="email" required=""
+                                                            value="{{ Auth::user()->email }}">
+                                                        @error('email')
+                                                            <small class="text-danger">{{ $message }}</small>
+                                                        @enderror
                                                     </div>
                                                 </div>
                                                 <div class="col-12">
@@ -64,7 +81,8 @@
                                                         <label class="form-label" for="txtLastname">Role<span
                                                                 class="text-danger">*</span></label>
                                                         <input type="text" class="form-control shadow-sm"
-                                                            id="txtLastname" required disabled="disabled" value="{{ Auth::user()->role }}">
+                                                            id="txtLastname" required disabled="disabled"
+                                                            value="{{ Auth::user()->role }}">
                                                     </div>
                                                 </div>
                                             </div>
@@ -83,35 +101,45 @@
                         <div class="pe-xl-4 me-xl-2">
                             <div class="card border-0 shadow-sm">
                                 <div class="card-body">
-                                    <div class="d-flex align-items-center justify-content-between border-bottom pb-4 mb-4">
+                                    <div class=" border-bottom pb-4 mb-4">
                                         <h2 class="h3 text-body-emphasis mb-0">Change Password</h2>
+                                        @if (session('success-password'))
+                                            <small class="text-danger">{{ session('success-password') }}</small>
+                                        @endif
                                     </div>
-                                    <form method="post">
+                                    <form method="post" action="{{ route('admin.profile.edit-password') }}">
+                                        @csrf
                                         <div class="row">
                                             <div class="col-12 col-md-6">
                                                 <div class="mb-4">
-                                                    <label class="form-label" for="txtOldPassword">Old Password<span
+                                                    <label class="form-label" for="current_password">Current Password<span
                                                             class="text-danger">*</span></label>
-                                                    <input type="text" class="form-control shadow-sm" id="txtOldPassword"
-                                                        required="">
+                                                    <input type="password" class="form-control shadow-sm" id="current_password" name="current_password"
+                                                        required="" minlength="8">  
+                                                    @if(session('current_password'))
+                                                        <small class="text-danger">{{ session('current_password') }}</small>
+                                                    @endif
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="col-12 col-md-6">
                                                 <div class="mb-4">
-                                                    <label class="form-label" for="txtNewPassword">New Password<span
+                                                    <label class="form-label" for="new_password">New Password<span
                                                             class="text-danger">*</span></label>
-                                                    <input type="text" class="form-control shadow-sm" id="txtNewPassword"
-                                                        required="">
+                                                    <input type="password" class="form-control shadow-sm" id="new_password" name="new_password"
+                                                        required="" minlength="8">
                                                 </div>
                                             </div>
                                             <div class="col-12 col-md-6">
                                                 <div class="mb-4">
-                                                    <label class="form-label" for="txtRetypeNewPassword">Retype New
+                                                    <label class="form-label" for="new_password_confirmation">Retype New
                                                         Password<span class="text-danger">*</span></label>
-                                                    <input type="text" class="form-control shadow-sm"
-                                                        id="txtRetypeNewPassword" required="">
+                                                    <input type="password" class="form-control shadow-sm" name="new_password_confirmation"
+                                                        id="new_password_confirmation" required="" minlength="8">
+                                                    @error('new_password')
+                                                        <small class="text-danger">{{ $message }}</small>
+                                                    @enderror
                                                 </div>
                                             </div>
                                         </div>
