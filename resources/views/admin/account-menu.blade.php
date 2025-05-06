@@ -1,12 +1,10 @@
-
 <div class="col-12 col-xl-3">
     <!-- Account menu -->
     <div class="card border-0 shadow-sm sticky-top sticky-top-120 d-none d-xl-block z-0">
         <div class="card-body">
             <div class="account-user border-bottom pb-4 mb-3">
                 <form method="post" class="user-avatar">
-                    <img src="{{ asset('assets') }}/img/avatars/a3.jpg" alt=""
-                        class="show-avatar rounded-circle">
+                    <img src="{{ asset('assets') }}/img/avatars/a3.jpg" alt="" class="show-avatar rounded-circle">
                     <label for="filAvatar" class="select-avatar">
                         <i class="hicon hicon-camera-hover"></i>
                     </label>
@@ -27,23 +25,28 @@
                     </a>
                 </li>
                 <li class="menu-item">
+                    <a href="{{ route('admin.profile') }}">
+                        <i class="hicon hicon-bold hicon-menu-account"></i> <span>My Profile</span>
+                    </a>
+                </li>
+                <li class="menu-item">
                     <a href="{{ route('admin.user-management.index') }}">
-                        <i class="hicon hicon-bold hicon-installment-payment"></i> <span>Users Management</span>
+                        <i class="hicon hicon-bold hicon-occupancy"></i> <span>Users Management</span>
                     </a>
                 </li>
                 <li class="menu-item">
                     <a href="./wishlist.html">
-                        <i class="hicon hicon-bold hicon-menu-favorite"></i> <span>Destinasi</span>
+                        <i class="hicon hicon-bold hicon-poi-text-search"></i> <span>Destinasi</span>
                     </a>
                 </li>
                 <li class="menu-item">
                     <a href="./settings.html">
-                        <i class="hicon hicon-bold hicon-luggage"></i> <span>Review</span>
+                        <i class="hicon hicon-bold hicon-mmb-inbox"></i> <span>Review</span>
                     </a>
                 </li>
                 <li class="menu-item">
                     <a href="./security.html">
-                        <i class="hicon hicon-bold hicon-aps-lock"></i> <span>Notifikasi</span>
+                        <i class="hicon hicon-bold hicon-email-envelope"></i> <span>Notifikasi</span>
                     </a>
                 </li>
                 <li class="menu-item">

@@ -3,8 +3,10 @@
 use App\Http\Controllers\admin\UserController;
 use App\Http\Controllers\auth\LoginController;
 use App\Http\Controllers\auth\RegisterController;
+use App\Http\Controllers\ProfileController;
 use Illuminate\Auth\Events\Login;
 use Illuminate\Support\Facades\Route;
+
 
 
 
@@ -22,7 +24,8 @@ Route::get('/register', [RegisterController::class, 'showRegisterForm'])->name('
 Route::post('/register', [RegisterController::class, 'register'])->name('register.post');
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
-// auth routes
+
+// user routes
 Route::middleware(['auth', 'role:user'])->prefix('user')->name('user.')->group(function () {
     Route::view('/dashboard', 'user.dashboard')->name('dashboard');
 });
@@ -31,7 +34,9 @@ Route::middleware(['auth', 'role:user'])->prefix('user')->name('user.')->group(f
 Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->group(function () {
     // admin dashboard
     Route::view('/dashboard', 'admin.dashboard')->name('dashboard');
-
+    
+    // profile routes
+    Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
     // manage users
     Route::prefix('user-management')->name('user-management.')->group(function () {
         Route::get('/', [UserController::class, 'index'])->name('index');
@@ -46,6 +51,7 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->grou
 
 });
 
+// pengelola routes
 Route::middleware(['auth', 'role:pengelola'])->prefix('pengelola')->name('pengelola.')->group(function () {
     Route::view('/dashboard', 'pengelola.dashboard')->name('dashboard');
 });

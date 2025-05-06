@@ -17,8 +17,8 @@ class DatabaseSeeder extends Seeder
         // User::factory(10)->create();
         for ($a = 1; $a <= 3; $a++) {
             User::factory()->create([
-                'name' => 'admin' . ($a+ 9),
-                'email' => 'admin' . ($a+ 9) . '@gmail.com',
+                'name' => 'admin' . $a,
+                'email' => 'admin' . $a . '@gmail.com',
                 'password' => Hash::make(12345678),
                 'is_active' => true,
                 'role' => 'admin',
@@ -26,8 +26,8 @@ class DatabaseSeeder extends Seeder
         }
         for ($a = 1; $a <= 3; $a++) {
             User::factory()->create([
-                'name' => 'user' . ($a+ 9),
-                'email' => 'user' . ($a+ 9). '@gmail.com',
+                'name' => 'user' . $a,
+                'email' => 'user' . $a. '@gmail.com',
                 'password' => Hash::make(12345678),
                 'is_active' => true,
                 'role' => 'user',
@@ -35,8 +35,8 @@ class DatabaseSeeder extends Seeder
         }
         for ($a = 1; $a <= 3; $a++) {
             User::factory()->create([
-                'name' => 'pengelola' . $a + 9,
-                'email' => 'pengelola' . ($a + 9). '@gmail.com',
+                'name' => 'pengelola' . $a,
+                'email' => 'pengelola' . $a. '@gmail.com',
                 'password' => Hash::make(12345678),
                 'is_active' => true,
                 'role' => 'pengelola',

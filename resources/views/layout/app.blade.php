@@ -120,7 +120,7 @@
                                 data-bs-popper="static">
                                 <li>
                                     <a class="dropdown-item fw-medium" href="#">
-                                        Hi! John Deep
+                                        {{ Auth::user()->name }}
                                     </a>
                                 </li>
                                 <li class="ps-4 pe-4">
@@ -379,9 +379,9 @@
     </a>
     <!-- /Scroll top -->
 
-    <script defer src="{{ asset('assets') }}/js/theme-1.min.js"></script>
-    <script defer src="{{ asset('assets') }}/js/theme-2.min.js"></script>
-    <script defer src="{{ asset('assets') }}/js/theme-3.min.js"></script>
+    <script defer src="{{ asset('assets/js/theme-1.min.js') }}"></script>
+    <script defer src="{{ asset('assets/js/theme-2.min.js') }}"></script>
+    <script defer src="{{ asset('assets/js/theme-3.min.js') }}"></script>
 
 </body>
 

@@ -110,7 +110,6 @@
                                                             <div class="d-flex flex-column">
                                                                 <a href="./booking-details.html"
                                                                     class="link-dark link-hover"><strong>{{ $single->name }}</strong></a>
-                                                                <small class="text-nowrap d-block">code:#B0143</small>
                                                             </div>
                                                         </td>
                                                         <td class="text-center">
