@@ -101,12 +101,15 @@
                                     </a>
                                 </li>
                             </ul>
-                            <div class="d-flex align-items-center ms-auto">
-                                <a href="wishlist.html" class="circle-icon wishlist-icon me-4">
-                                    <i class="hicon hicon-bold hicon-menu-favorite"></i>
-                                    <span>5</span>
-                                </a>
-                            </div>
+                            @auth
+                                <div class="d-flex align-items-center ms-auto">
+                                    <a href="{{ route(Auth::user()->role . '.notification') }}"
+                                        class="circle-icon wishlist-icon me-4">
+                                        <i class="hicon hicon-bold hicon-email-envelope"></i>
+                                        <span>5</span>
+                                    </a>
+                                </div>
+                            @endauth
                         </div>
                     </div>
                     @if (Auth::check())
@@ -127,7 +130,7 @@
                                     <hr class="dropdown-divider">
                                 </li>
                                 <li>
-                                    <a class="dropdown-item" href="{{ route(Auth::user()->role.'.dashboard') }}">
+                                    <a class="dropdown-item" href="{{ route(Auth::user()->role . '.dashboard') }}">
                                         <i class="hicon hicon-ycs-dashboard me-1"></i>
                                         <span>Dashboard</span>
                                     </a>
@@ -163,7 +166,8 @@
                                     <form class="dropdown-item" action="{{ route('logout') }}" method="POST">
                                         @csrf
                                         <i class="hicon hicon-close-popup me-1"></i>
-                                        <button type="submit" style="background: none; border: none; color: inherit; padding: 0; font: inherit; cursor: pointer;">Logout</button>
+                                        <button type="submit"
+                                            style="background: none; border: none; color: inherit; padding: 0; font: inherit; cursor: pointer;">Logout</button>
                                     </form>
                                 </li>
                             </ul>
@@ -382,6 +386,7 @@
     <script defer src="{{ asset('assets/js/theme-1.min.js') }}"></script>
     <script defer src="{{ asset('assets/js/theme-2.min.js') }}"></script>
     <script defer src="{{ asset('assets/js/theme-3.min.js') }}"></script>
+    @stack('scripts')
 
 </body>
 

@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Destinasi extends Model
 {
-    protected $fillable = ['user_id', 'nama_destinasi', 'deskripsi', 'lokasi', 'status'];
+    protected $fillable = ['user_id', 'highlight_photo','nama_destinasi', 'deskripsi', 'lokasi'];
 
     public function pengelola()
     {

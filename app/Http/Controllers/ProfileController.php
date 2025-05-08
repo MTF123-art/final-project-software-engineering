@@ -1,17 +1,18 @@
 <?php
 
-namespace App\Http\Controllers\admin;
+namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Container\Attributes\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rule;
 
-class AdminProfileController extends Controller
+class ProfileController extends Controller
 {
     public function index()
     {
-        return view('admin.profile' , [
+        return view(auth()->user()->role . '.profile', [
             'title' => 'My Profile',
         ]);
     }
@@ -21,13 +22,7 @@ class AdminProfileController extends Controller
         // Validate the request data
         $request->validate([
             'name' => 'required|string|max:255',
-            'email' => [
-                'required',
-                'string',
-                'email',
-                'max:255',
-                Rule::unique('users')->ignore(auth()->user()->id),
-            ],
+            'email' => ['required', 'string', 'email', 'max:255', Rule::unique('users')->ignore(auth()->user()->id)],
         ]);
 
         // Update the user's profile
@@ -36,7 +31,7 @@ class AdminProfileController extends Controller
         $user->email = $request->input('email');
         $user->save();
 
-        return redirect()->route('admin.profile')->with('success-profile', 'Profile updated successfully.');
+        return redirect()->route(auth()->user()->role .'.profile')->with('success-profile', 'Profile updated successfully.');
     }
 
     public function editPassword(Request $request)
@@ -55,6 +50,6 @@ class AdminProfileController extends Controller
         $user->password = Hash::make($request->input('new_password'));
         $user->save();
 
-        return redirect()->route('admin.profile')->with('success-password', 'Password updated successfully.');
+        return redirect()->route(auth()->user()->role .'.profile')->with('success-password', 'Password updated successfully.');
     }
 }

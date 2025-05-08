@@ -11,15 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('destinasis', function (Blueprint $table) {
+        Schema::create('role_requests', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger("user_id");
-            $table->foreign("user_id")->references("id")->on("users")->onDelete("cascade");
-            $table->string("highlight_photo");
-            $table->string("nama_destinasi");
-            $table->text("deskripsi");
+            $table->unsignedBigInteger('user_id');
             $table->enum('status', ['pending', 'approved', 'rejected'])->default('pending');
-            $table->string("lokasi");
+            $table->text('reason');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -29,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('destinasis');
+        Schema::dropIfExists('role_requests');
     }
 };

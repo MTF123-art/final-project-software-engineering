@@ -58,4 +58,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(Notifikasi::class, 'user_id', 'id');
     }
+
+    public function roleRequest()
+    {
+        return $this->hasOne(RoleRequest::class, 'user_id', 'id');
+    }
 }
