@@ -4,7 +4,8 @@ use App\Http\Controllers\admin\UserController;
 use App\Http\Controllers\auth\LoginController;
 use App\Http\Controllers\auth\RegisterController;
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\user\RoleRequestController;
+use App\Http\Controllers\user\RoleRequestController as UserRoleRequestController;
+use App\Http\Controllers\admin\RoleRequestController as AdminRoleRequestController;
 use Illuminate\Auth\Events\Login;
 use Illuminate\Support\Facades\Route;
 
@@ -44,10 +45,11 @@ Route::middleware(['auth', 'role:user'])->prefix('user')->name('user.')->group(f
         echo 'bookmark';
     })->name('bookmark');
     // pengajuan route
-    Route::get('/upgrade', [RoleRequestController::class, 'upgradeForm'])->name('upgrade');
-    Route::post('/upgrade/submit', [RoleRequestController::class, 'upgradeSubmit'])->name('upgrade.submit');
-    Route::get('/upgrade/status', [RoleRequestController::class, 'roleRequestStatus'])->name('upgrade.status');
-    Route::post('/upgrade/destroy/{id}', [RoleRequestController::class, 'roleRequestDestroy'])->name('upgrade.destroy');
+    Route::get('/upgrade', [UserRoleRequestController::class, 'upgradeForm'])->name('upgrade');
+    Route::post('/upgrade/submit', [UserRoleRequestController::class, 'upgradeSubmit'])->name('upgrade.submit');
+    Route::get('/upgrade/status', [UserRoleRequestController::class, 'roleRequestStatus'])->name('upgrade.status');
+    Route::post('/upgrade/destroy/{id}', [UserRoleRequestController::class, 'roleRequestDestroy'])->name('upgrade.destroy');
+    Route::post('/upgrade/destination/submit', [UserRoleRequestController::class, 'destinationSubmit'])->name('upgrade.destination.submit');
     // // profile routes
     Route::get('/profile', [ProfileController::class,'index'])->name('profile');
     Route::post('/profile/edit', [ProfileController::class,'editProfile'])->name('profile.edit');
@@ -76,7 +78,14 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->grou
         Route::post('/edit/{id}', [UserController::class, 'edit'])->name('edit');
         Route::post('/delete/{id}', [UserController::class, 'delete'])->name('delete');
     });
-    
+    // manage role request
+    Route::prefix('role-request')->name('role-request.')->group(function () {
+        Route::get('/', [AdminRoleRequestController::class, 'index'])->name('index');
+        Route::get('/filter/{status}', [AdminRoleRequestController::class, 'filter'])->name('filter');
+        Route::post('/approve/{id}', [AdminRoleRequestController::class, 'approve'])->name('approve');
+        Route::post('/reject/{id}', [AdminRoleRequestController::class, 'reject'])->name('reject');
+        Route::post('/delete/{id}', [AdminRoleRequestController::class, 'delete'])->name('delete');
+    });
     
 });
 

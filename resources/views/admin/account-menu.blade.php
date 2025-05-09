@@ -35,6 +35,11 @@
                     </a>
                 </li>
                 <li class="menu-item">
+                    <a href="{{ route('admin.role-request.index') }}">
+                        <i class="hicon hicon-bold hicon-upload-your-logo"></i> <span>Role Request Management</span>
+                    </a>
+                </li>
+                <li class="menu-item">
                     <a href="./wishlist.html">
                         <i class="hicon hicon-bold hicon-poi-text-search"></i> <span>Destinasi</span>
                     </a>
