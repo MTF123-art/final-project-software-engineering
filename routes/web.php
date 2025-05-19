@@ -6,6 +6,7 @@ use App\Http\Controllers\auth\RegisterController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\user\RoleRequestController as UserRoleRequestController;
 use App\Http\Controllers\admin\RoleRequestController as AdminRoleRequestController;
+use App\Http\Controllers\pengelola\DestinationController;
 use Illuminate\Auth\Events\Login;
 use Illuminate\Support\Facades\Route;
 
@@ -103,18 +104,8 @@ Route::middleware(['auth', 'role:pengelola'])->prefix('pengelola')->name('pengel
     });
     // manage destination
     Route::prefix('destination')->name('destination.')->group(function () {
-        Route::get('/', function(){
-            echo 'destination';
-        })->name('index');
-        Route::get('/create', function(){
-            echo 'create destination';
-        })->name('create');
-        Route::get('/edit/{id}', function($id){
-            echo 'edit destination '.$id;
-        })->name('edit');
-        Route::post('/delete/{id}', function($id){
-            echo 'delete destination '.$id;
-        })->name('delete');
+        Route::get('/', [DestinationController::class, 'index'])->name('index');
+        Route::post('/update', [DestinationController::class, 'update'])->name('update');
     });
 });
 

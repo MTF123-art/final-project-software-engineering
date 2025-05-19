@@ -30,7 +30,7 @@
                     </a>
                 </li>
                 <li class="menu-item">
-                    <a href="./wishlist.html">
+                    <a href="{{ route('pengelola.destination.index') }}">
                         <i class="hicon hicon-bold hicon-poi-text-search"></i> <span>My Destination</span>
                     </a>
                 </li>
