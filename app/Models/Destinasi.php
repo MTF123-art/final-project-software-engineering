@@ -13,6 +13,11 @@ class Destinasi extends Model
         return $this->belongsTo(User::class, 'user_id', 'id');
     }
 
+    public function kategori()
+    {
+        return $this->belongsTo(Kategori::class, 'kategori_id', 'id');
+    }
+
     public function galeri()
     {
         return $this->hasMany(Galeri::class, 'destinasi_id', 'id');
