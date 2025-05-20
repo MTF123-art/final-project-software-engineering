@@ -40,8 +40,8 @@
                     </a>
                 </li>
                 <li class="menu-item">
-                    <a href="./wishlist.html">
-                        <i class="hicon hicon-bold hicon-poi-text-search"></i> <span>Destinasi</span>
+                    <a href="{{ route('admin.destination.index') }}">
+                        <i class="hicon hicon-bold hicon-poi-text-search"></i> <span>Manajemen Destinasi</span>
                     </a>
                 </li>
                 <li class="menu-item">

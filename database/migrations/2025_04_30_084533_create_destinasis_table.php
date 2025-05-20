@@ -18,7 +18,6 @@ return new class extends Migration
             $table->string("highlight_photo");
             $table->string("nama_destinasi");
             $table->text("deskripsi");
-            $table->enum('status', ['pending', 'approved', 'rejected'])->default('pending');
             $table->string("lokasi");
             $table->timestamps();
         });

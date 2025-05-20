@@ -6,13 +6,10 @@ use App\Http\Controllers\auth\RegisterController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\user\RoleRequestController as UserRoleRequestController;
 use App\Http\Controllers\admin\RoleRequestController as AdminRoleRequestController;
-use App\Http\Controllers\pengelola\DestinationController;
+use App\Http\Controllers\admin\DestinationController as AdminDestinationController;
+use App\Http\Controllers\pengelola\DestinationController as PengelolaDestinationController;
 use Illuminate\Auth\Events\Login;
 use Illuminate\Support\Facades\Route;
-
-
-
-
 
 
 // public routes
@@ -79,6 +76,13 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->grou
         Route::post('/edit/{id}', [UserController::class, 'edit'])->name('edit');
         Route::post('/delete/{id}', [UserController::class, 'delete'])->name('delete');
     });
+
+    Route::prefix('destination')->name('destination.')->group(function () {
+        Route::get('/', [AdminDestinationController::class, 'index'])->name('index');
+        Route::get('/detail/{id}', [AdminDestinationController::class, 'detail'])->name('detail');
+        Route::post('/delete/{id}', [AdminDestinationController::class, 'delete'])->name('delete');
+        Route::post('/update/{id}', [AdminDestinationController::class, 'update'])->name('update');
+    });
     // manage role request
     Route::prefix('role-request')->name('role-request.')->group(function () {
         Route::get('/', [AdminRoleRequestController::class, 'index'])->name('index');
@@ -104,8 +108,9 @@ Route::middleware(['auth', 'role:pengelola'])->prefix('pengelola')->name('pengel
     });
     // manage destination
     Route::prefix('destination')->name('destination.')->group(function () {
-        Route::get('/', [DestinationController::class, 'index'])->name('index');
-        Route::post('/update', [DestinationController::class, 'update'])->name('update');
+        Route::get('/', [PengelolaDestinationController::class, 'index'])->name('index');
+        Route::post('/update', [PengelolaDestinationController::class, 'update'])->name('update');
+        Route::post('/submit', [PengelolaDestinationController::class, 'submit'])->name('submit');
     });
 });
 

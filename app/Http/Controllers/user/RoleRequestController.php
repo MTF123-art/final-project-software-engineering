@@ -50,8 +50,7 @@ class RoleRequestController extends Controller
         return redirect()->route('user.upgrade.status')->with('success-upgrade', 'Upgrade request deleted successfully.');
     }
 
-    public function destinationSubmit(Request $request)
-    {
+    public function destinationSubmit(Request $request){
         // dd($request->all());
         $request->validate([
             'nama' => 'required|string|max:255',
