@@ -10,7 +10,7 @@
                 <div class="d-lg-flex align-items-lg-end pb-4">
                     <div class="block-title me-auto">
                         <small class="sub-title">Update your destination</small>
-                        <h1 class="display-5 title">Manage My Destination</h1>
+                        <h1 class="display-5 title">Manage Your Destination</h1>
                     </div>
                 </div>
             </section>
@@ -20,7 +20,7 @@
                     {{-- destination form --}}
 
                     <div class="col-12 col-xl-9">
-                        @if (!$destination->isEmpty())
+                        @if ($destination)
                             <div class="pe-xl-4 me-xl-2 mb-4">
                                 {{-- Success message --}}
                                 @if (session('success'))
@@ -119,6 +119,12 @@
                                         </div>
                                         <div class="d-lg-flex border-bottom mb-4 pb-3">
                                             <div class="mnw-200">
+                                                <h3 class="h5">Category</h3>
+                                            </div>
+                                            <p>{{ $destination->kategori->nama_kategori }}</p>
+                                        </div>
+                                        <div class="d-lg-flex border-bottom mb-4 pb-3">
+                                            <div class="mnw-200">
                                                 <h3 class="h5">Location</h3>
                                             </div>
                                             <p>{{ $destination->lokasi }}</p>
@@ -156,6 +162,23 @@
                                                         @error('lokasi')
                                                             <small class="text-danger">{{ $message }}</small>
                                                         @enderror
+                                                    </div>
+
+                                                    <div class="mb-4">
+                                                        <label class="form-label" for="kategori_id2">Category<span
+                                                                class="text-danger">*</span></label>
+                                                        <select
+                                                            class="form-select shadow-sm dropdown-select me-3 mb-3 use-bootstrap-select-target"
+                                                            aria-label="Booking status" tabindex="-1" name="kategori_id"
+                                                            required id="kategori_id2">
+                                                            <option selected value="{{ $destination->kategori->id }}">{{ $destination->kategori->nama_kategori }}</option>
+                                                            @foreach ($kategori as $kt)
+                                                                @if ($kt->id != $destination->kategori->id)
+                                                                <option value="{{ $kt->id }}">
+                                                                    {{ $kt->nama_kategori }}</option>
+                                                                @endif
+                                                            @endforeach
+                                                        </select>
                                                     </div>
 
                                                     <div class="mb-4">
@@ -287,6 +310,21 @@
                                                 @error('nama')
                                                     <small class="text-danger">{{ $message }}</small>
                                                 @enderror
+                                            </div>
+
+                                            <div class="mb-4">
+                                                <label class="form-label" for="kategori_id">Category<span
+                                                        class="text-danger">*</span></label>
+                                                <select
+                                                    class="form-select shadow-sm dropdown-select me-3 mb-3 use-bootstrap-select-target"
+                                                    aria-label="Booking status" tabindex="-1" name="kategori_id"
+                                                    required id="kategori_id">
+                                                    <option selected="">---</option>
+                                                    @foreach ($kategori as $kt)
+                                                        <option value="{{ $kt->id }}">{{ $kt->nama_kategori }}
+                                                        </option>
+                                                    @endforeach
+                                                </select>
                                             </div>
 
                                             <div class="mb-4">

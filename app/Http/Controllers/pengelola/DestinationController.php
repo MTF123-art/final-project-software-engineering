@@ -5,6 +5,7 @@ namespace App\Http\Controllers\pengelola;
 use App\Http\Controllers\Controller;
 use App\Models\Destinasi;
 use App\Models\Galeri;
+use App\Models\Kategori;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -13,10 +14,11 @@ class DestinationController extends Controller
 {
     public function index()
     {
-        $destination = Destinasi::with('galeri')->where('user_id', auth()->id())->get();
+        $destination = Destinasi::with('galeri')->where('user_id', auth()->id())->first();
+        $kategori = Kategori::get();
         $title = 'My Destinasi';
 
-        return view('pengelola.destination.index', compact('destination', 'title'));
+        return view('pengelola.destination.index', compact('destination', 'title', 'kategori'));
     }
 
     public function update(Request $request){
@@ -39,13 +41,15 @@ class DestinationController extends Controller
                 'highlight_photo' => $highlightPath,
             ]);
             return redirect()->route('pengelola.destination.index')->with('success', 'Highlight photo updated successfully.');
-        } elseif ($request->has(['lokasi', 'deskripsi'])) {
+        } elseif ($request->has(['lokasi', 'deskripsi', 'kategori_id'])) {
             $request->validate([
                 'lokasi' => 'required|string|max:255',
                 'deskripsi' => 'required|string',
+                'kategori_id' => 'required|exists:kategoris,id',
             ]);
             $destinasi->update([
                 'lokasi' => $request->lokasi,
+                'kategori_id' => $request->kategori_id,
                 'deskripsi' => $request->deskripsi,
             ]);
             return redirect()->route('pengelola.destination.index')->with('success', 'Destination updated successfully.');
@@ -79,6 +83,7 @@ class DestinationController extends Controller
         $request->validate([
             'nama' => 'required|string|max:255',
             'highlight_photo' => 'required|image|mimes:jpeg,png,jpg|max:2048',
+            'kategori_id' => 'required|exists:kategoris,id',
             'lokasi' => 'required|string|max:255',
             'deskripsi' => 'required|string',
             'gambar' => 'required|array|min:5|max:8',
@@ -93,10 +98,12 @@ class DestinationController extends Controller
             'user_id' => auth()->id(),
             'highlight_photo' => $highlightPath,
             'nama_destinasi' => $request->nama,
+            'kategori_id' => $request->kategori_id,
             'deskripsi' => $request->deskripsi,
             'lokasi' => $request->lokasi,
             'status' => 'menunggu',
         ]);
+
         // dd($destinasi->id);
         // ========== Simpan semua gambar galeri ==========
         foreach ($request->file('gambar') as $file) {
@@ -109,12 +116,15 @@ class DestinationController extends Controller
             ]);
         }
 
+        
         $user = Auth::user();
-        $user->role = 'pengelola';
-        $user->save();
-
-        Auth::logout();
-
-        return redirect()->route('login-form')->with('success', 'Destinasi berhasil ditambahkan! silahkan login ulang dan kelola destinasi anda.');
+        if($user->role == 'user'){
+            $user->role = 'pengelola';
+            $user->save();
+            Auth::logout();
+            return redirect()->route('login-form')->with('success', 'Destinasi berhasil ditambahkan! silahkan login ulang dan kelola destinasi anda.');
+        }
+        
+        return redirect()->route('pengelola.destination.index')->with('success', 'Destinasi berhasil ditambahkan!');
     }
 }

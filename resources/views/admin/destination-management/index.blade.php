@@ -70,6 +70,9 @@
                                                     <th scope="col">
                                                         <strong>Highlight Photo</strong>
                                                     </th>
+                                                    <th scope="col">
+                                                        <strong>Category</strong>
+                                                    </th>
                                                     </th>
                                                     <th scope="col">
                                                         <strong>Nama Destinasi</strong>
@@ -99,6 +102,9 @@
                                                                         class="hicon hicon-zoom-bold image-hover-icon fs-5"></i>
                                                                 </figure>
                                                             </a>
+                                                        </td>
+                                                        <td class="text-center">
+                                                            <small>{{ $single->kategori->nama_kategori }}</small>
                                                         </td>
                                                         <td class="text-center">
                                                             <small>{{ $single->nama_destinasi }}</small>

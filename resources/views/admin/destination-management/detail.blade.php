@@ -7,12 +7,12 @@
         <div class="p-top-90 p-bottom-90 bg-gray-gradient aos-init aos-animate" data-aos="fade">
             <!-- Title -->
             <section class="container">
-               <div class="d-lg-flex align-items-lg-end pb-4">
-                  <div class="block-title me-auto">
-                     <small class="sub-title">Destination</small>
-                     <h1 class="display-5 title">Management</h1>
-                  </div>
-               </div>
+                <div class="d-lg-flex align-items-lg-end pb-4">
+                    <div class="block-title me-auto">
+                        <small class="sub-title">Destination</small>
+                        <h1 class="display-5 title">Management</h1>
+                    </div>
+                </div>
             </section>
             <!-- Title -->
 
@@ -44,8 +44,8 @@
                                     </div>
                                     <div class="row g-3 align-items-center">
                                         <div class="col-12">
-                                            <a href="{{ asset('storage/' . $detail->highlight_photo) }}"
-                                                class="glightbox" data-glightbox="title:{{ $detail->nama_destinasi }}"
+                                            <a href="{{ asset('storage/' . $detail->highlight_photo) }}" class="glightbox"
+                                                data-glightbox="title:{{ $detail->nama_destinasi }}"
                                                 data-gallery="tour-photos">
                                                 <figure
                                                     class="image-hover image-hover-scale image-hover-overlay rounded mb-0">
@@ -65,8 +65,8 @@
                                 aria-hidden="true">
                                 <div class="modal-dialog modal-dialog-centered">
                                     <div class="modal-content">
-                                        <form action="{{ route('admin.destination.update', ['id'=> $detail->id]) }}" method="POST"
-                                            enctype="multipart/form-data">
+                                        <form action="{{ route('admin.destination.update', ['id' => $detail->id]) }}"
+                                            method="POST" enctype="multipart/form-data">
                                             @csrf
                                             <div class="modal-header">
                                                 <h1 class="modal-title fs-5" id="staticBackdropLabel">New Highlight Photo
@@ -115,9 +115,21 @@
                                     </div>
                                     <div class="d-lg-flex border-bottom mb-4 pb-3">
                                         <div class="mnw-200">
+                                            <h3 class="h5">Pengelola</h3>
+                                        </div>
+                                        <p>{{ $detail->pengelola->name }}</p>
+                                    </div>
+                                    <div class="d-lg-flex border-bottom mb-4 pb-3">
+                                        <div class="mnw-200">
                                             <h3 class="h5">Nama Destinasi</h3>
                                         </div>
                                         <p>{{ $detail->nama_destinasi }}</p>
+                                    </div>
+                                    <div class="d-lg-flex border-bottom mb-4 pb-3">
+                                        <div class="mnw-200">
+                                            <h3 class="h5">Category</h3>
+                                        </div>
+                                        <p>{{ $detail->kategori->nama_kategori }}</p>
                                     </div>
                                     <div class="d-lg-flex border-bottom mb-4 pb-3">
                                         <div class="mnw-200">
@@ -139,7 +151,8 @@
                                 tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                                 <div class="modal-dialog modal-dialog-centered">
                                     <div class="modal-content">
-                                        <form action="{{ route('admin.destination.update', ['id'=> $detail->id]) }}" method="POST">
+                                        <form action="{{ route('admin.destination.update', ['id' => $detail->id]) }}"
+                                            method="POST">
                                             @csrf
                                             <div class="modal-header">
                                                 <h1 class="modal-title fs-5" id="staticBackdropLabel">Update About
@@ -157,6 +170,24 @@
                                                     @error('lokasi')
                                                         <small class="text-danger">{{ $message }}</small>
                                                     @enderror
+                                                </div>
+
+                                                <div class="mb-4">
+                                                    <label class="form-label" for="kategori_id2">Category<span
+                                                            class="text-danger">*</span></label>
+                                                    <select
+                                                        class="form-select shadow-sm dropdown-select me-3 mb-3 use-bootstrap-select-target"
+                                                        aria-label="Booking status" tabindex="-1" name="kategori_id"
+                                                        required id="kategori_id2">
+                                                        <option selected value="{{ $detail->kategori->id }}">
+                                                            {{ $detail->kategori->nama_kategori }}</option>
+                                                        @foreach ($kategori as $kt)
+                                                            @if ($kt->id != $detail->kategori->id)
+                                                                <option value="{{ $kt->id }}">
+                                                                    {{ $kt->nama_kategori }}</option>
+                                                            @endif
+                                                        @endforeach
+                                                    </select>
                                                 </div>
 
                                                 <div class="mb-4">
@@ -216,8 +247,8 @@
                                 tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                                 <div class="modal-dialog modal-dialog-centered">
                                     <div class="modal-content">
-                                        <form action="{{ route('admin.destination.update', ['id'=> $detail->id]) }}" method="POST"
-                                            enctype="multipart/form-data">
+                                        <form action="{{ route('admin.destination.update', ['id' => $detail->id]) }}"
+                                            method="POST" enctype="multipart/form-data">
                                             @csrf
                                             <div class="modal-header">
                                                 <h1 class="modal-title fs-5" id="staticBackdropLabel">Upload New Galery

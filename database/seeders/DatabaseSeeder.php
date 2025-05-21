@@ -16,32 +16,31 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
-            // User::factory()->create([
-            //     'name' => 'admin',
-            //     'email' => 'admin@gmail.com',
-            //     'password' => Hash::make(12345678),
-            //     'is_active' => true,
-            //     'role' => 'admin',
-            // ]);
-            // for($i = 1; $i <=5; $i ++){
-            //     User::factory()->create([
-            //         'name' => 'user'.$i,
-            //         'email' => 'user'.$i.'@gmail.com',
-            //         'password' => Hash::make(12345678),
-            //         'is_active' => true,
-            //         'role' => 'user',
-            //     ]);
-            // }
-            // for($i = 1; $i <=5; $i ++){
-            //     User::factory()->create([
-            //         'name' => 'pengelola'.$i,
-            //         'email' => 'pengelola'.$i.'@gmail.com',
-            //         'password' => Hash::make(12345678),
-            //         'is_active' => true,
-            //         'role' => 'user',
-            //     ]);
-            // }
+            User::factory()->create([
+                'name' => 'admin',
+                'email' => 'admin@gmail.com',
+                'password' => Hash::make(12345678),
+                'is_active' => true,
+                'role' => 'admin',
+            ]);
+            for($i = 1; $i <=5; $i ++){
+                User::factory()->create([
+                    'name' => 'user'.$i,
+                    'email' => 'user'.$i.'@gmail.com',
+                    'password' => Hash::make(12345678),
+                    'is_active' => true,
+                    'role' => 'user',
+                ]);
+            }
+            for($i = 1; $i <=5; $i ++){
+                User::factory()->create([
+                    'name' => 'pengelola'.$i,
+                    'email' => 'pengelola'.$i.'@gmail.com',
+                    'password' => Hash::make(12345678),
+                    'is_active' => true,
+                    'role' => 'pengelola',
+                ]);
+            }
 
             for($a = 1; $a <= 5; $a++){
                 Kategori::create([

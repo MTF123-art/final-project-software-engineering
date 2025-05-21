@@ -5,6 +5,8 @@ namespace App\Http\Controllers\admin;
 use App\Http\Controllers\Controller;
 use App\Models\Destinasi;
 use App\Models\Galeri;
+use App\Models\Kategori;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -13,8 +15,8 @@ class DestinationController extends Controller
     public function index(){
         return view('admin.destination-management.index', [
             'title' => 'Destination Management',
-            'destinasi' => '1',
-            'pengelola' => '1',
+            'destinasi' => Destinasi::count(),
+            'pengelola' => User::where('role', 'pengelola')->count(),
             'all' => Destinasi::paginate(5),
         ]);
     }
@@ -23,6 +25,7 @@ class DestinationController extends Controller
         return view('admin.destination-management.detail', [
             'title' => 'Destination Management',
             'detail' => Destinasi::findOrFail($id),
+            'kategori' => Kategori::get(),
         ]);
     }
 
@@ -59,13 +62,15 @@ class DestinationController extends Controller
                 'highlight_photo' => $highlightPath,
             ]);
             return redirect()->route('admin.destination.index')->with('success', 'Highlight photo updated successfully.');
-        } elseif ($request->has(['lokasi', 'deskripsi'])) {
+        } elseif ($request->has(['lokasi', 'deskripsi', 'kategori_id'])) {
             $request->validate([
                 'lokasi' => 'required|string|max:255',
                 'deskripsi' => 'required|string',
+                'kategori_id' => 'required|exists:kategoris,id',
             ]);
             $destinasi->update([
                 'lokasi' => $request->lokasi,
+                'kategori_id' => $request->kategori_id,
                 'deskripsi' => $request->deskripsi,
             ]);
             return redirect()->route('admin.destination.index')->with('success', 'Destination updated successfully.');

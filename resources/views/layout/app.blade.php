@@ -136,33 +136,6 @@
                                     </a>
                                 </li>
                                 <li>
-                                    <a class="dropdown-item" href="">
-                                        <i class="hicon hicon-installment-payment me-1"></i>
-                                        <span>Booking</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a class="dropdown-item" href="wishlist.html">
-                                        <i class="hicon hicon-menu-favorite me-1"></i>
-                                        <span>Wishlist</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a class="dropdown-item" href="settings.html">
-                                        <i class="hicon hicon-luggage me-1"></i>
-                                        <span>Settings</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a class="dropdown-item" href="./security.html">
-                                        <i class="hicon hicon-aps-lock me-1"></i>
-                                        <span>Security</span>
-                                    </a>
-                                </li>
-                                <li class="ps-4 pe-4">
-                                    <hr class="dropdown-divider">
-                                </li>
-                                <li>
                                     <form class="dropdown-item" action="{{ route('logout') }}" method="POST">
                                         @csrf
                                         <i class="hicon hicon-close-popup me-1"></i>
