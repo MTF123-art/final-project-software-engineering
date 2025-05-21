@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\admin\UserController;
+use App\Http\Controllers\admin\CategoryController;
 use App\Http\Controllers\auth\LoginController;
 use App\Http\Controllers\auth\RegisterController;
 use App\Http\Controllers\ProfileController;
@@ -82,6 +83,13 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->grou
         Route::get('/detail/{id}', [AdminDestinationController::class, 'detail'])->name('detail');
         Route::post('/delete/{id}', [AdminDestinationController::class, 'delete'])->name('delete');
         Route::post('/update/{id}', [AdminDestinationController::class, 'update'])->name('update');
+    });
+    
+    Route::prefix('category')->name('category.')->group(function () {
+        Route::get('/', [CategoryController::class, 'index'])->name('index');
+        Route::post('/submit', [CategoryController::class, 'submit'])->name('submit');
+        Route::post('/delete/{id}', [CategoryController::class, 'delete'])->name('delete');
+        Route::post('/update/{id}', [CategoryController::class, 'update'])->name('update');
     });
     // manage role request
     Route::prefix('role-request')->name('role-request.')->group(function () {

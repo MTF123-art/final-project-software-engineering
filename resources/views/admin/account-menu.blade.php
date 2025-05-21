@@ -45,6 +45,11 @@
                     </a>
                 </li>
                 <li class="menu-item">
+                    <a href="{{ route('admin.category.index') }}">
+                        <i class="hicon hicon-bold hicon-menu-calendar"></i> <span>Manajemen Kategori</span>
+                    </a>
+                </li>
+                <li class="menu-item">
                     <a href="./settings.html">
                         <i class="hicon hicon-bold hicon-mmb-inbox"></i> <span>Review</span>
                     </a>
