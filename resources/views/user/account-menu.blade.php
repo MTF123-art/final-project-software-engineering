@@ -49,11 +49,6 @@
                         <i class="hicon hicon-bold hicon-upload-your-logo"></i> <span>Upgrade Account</span>
                     </a>
                 </li>
-                <li class="menu-item">
-                    <a href="./login.html">
-                        <i class="hicon hicon-bold hicon-close-popup"></i> <span>Logout</span>
-                    </a>
-                </li>
             </ul>
         </div>
     </div>

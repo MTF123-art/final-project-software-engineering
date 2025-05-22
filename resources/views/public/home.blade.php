@@ -73,7 +73,7 @@
                 <div class="row">
                     <div class="col-12 col-xxl-3 col-xl-4 col-md-6" data-aos="fade">
                         <!-- Destination -->
-                        <a href="{{ route('detail-destination') }}" class="destination bottom-overlay hover-effect rounded mb-4">
+                        <a href="{{ route('detail-destination', ['slug'=> "sasasa"]) }}" class="destination bottom-overlay hover-effect rounded mb-4" onerror="this.onerror=null; this.src='{{ asset('assets/img/destinations/placeholder.webp') }}';">
                             <figure class="image-hover image-hover-overlay">
                                 <img src="{{ asset('assets') }}/img/destinations/d1.jpg" alt="">
                                 <i class="hicon hicon-plus-thin image-hover-icon"></i>
@@ -94,7 +94,7 @@
                     </div>
                     <div class="col-12 col-xxl-3 col-xl-4 col-md-6" data-aos="fade">
                         <!-- Destination -->
-                        <a href="{{ route('detail-destination') }}" class="destination bottom-overlay hover-effect rounded mb-4">
+                        <a href="{{ route('detail-destination', ['slug'=> "sasasa"]) }}" class="destination bottom-overlay hover-effect rounded mb-4">
                             <figure class="image-hover image-hover-overlay">
                                 <img src="{{ asset('assets') }}/img/destinations/d2.jpg" alt="">
                                 <i class="hicon hicon-plus-thin image-hover-icon"></i>
@@ -115,7 +115,7 @@
                     </div>
                     <div class="col-12 col-xxl-3 col-xl-4 col-md-6" data-aos="fade">
                         <!-- Destination -->
-                        <a href="{{ route('detail-destination') }}" class="destination bottom-overlay hover-effect rounded mb-4">
+                        <a href="{{ route('detail-destination', ['slug'=> "sasasa"]) }}" class="destination bottom-overlay hover-effect rounded mb-4">
                             <figure class="image-hover image-hover-overlay">
                                 <img src="{{ asset('assets') }}/img/destinations/d3.jpg" alt="">
                                 <i class="hicon hicon-plus-thin image-hover-icon"></i>
@@ -136,7 +136,7 @@
                     </div>
                     <div class="col-12 col-xxl-3 col-xl-4 col-md-6" data-aos="fade">
                         <!-- Destination -->
-                        <a href="{{ route('detail-destination') }}" class="destination bottom-overlay hover-effect rounded mb-4">
+                        <a href="{{ route('detail-destination', ['slug'=> "sasasa"]) }}" class="destination bottom-overlay hover-effect rounded mb-4">
                             <figure class="image-hover image-hover-overlay">
                                 <img src="{{ asset('assets') }}/img/destinations/d4.jpg" alt="">
                                 <i class="hicon hicon-plus-thin image-hover-icon"></i>
@@ -157,7 +157,7 @@
                     </div>
                     <div class="col-12 col-xxl-3 col-xl-4 col-md-6" data-aos="fade">
                         <!-- Destination -->
-                        <a href="{{ route('detail-destination') }}" class="destination bottom-overlay hover-effect rounded mb-4">
+                        <a href="{{ route('detail-destination', ['slug'=> "sasasa"]) }}" class="destination bottom-overlay hover-effect rounded mb-4">
                             <figure class="image-hover image-hover-overlay">
                                 <img src="{{ asset('assets') }}/img/destinations/d6.jpg" alt="">
                                 <i class="hicon hicon-plus-thin image-hover-icon"></i>
@@ -178,7 +178,7 @@
                     </div>
                     <div class="col-12 col-xxl-3 col-xl-4 col-md-6" data-aos="fade">
                         <!-- Destination -->
-                        <a href="{{ route('detail-destination') }}" class="destination bottom-overlay hover-effect rounded mb-4">
+                        <a href="{{ route('detail-destination', ['slug'=> "sasasa"]) }}" class="destination bottom-overlay hover-effect rounded mb-4">
                             <figure class="image-hover image-hover-overlay">
                                 <img src="{{ asset('assets') }}/img/destinations/d5.jpg" alt="">
                                 <i class="hicon hicon-plus-thin image-hover-icon"></i>

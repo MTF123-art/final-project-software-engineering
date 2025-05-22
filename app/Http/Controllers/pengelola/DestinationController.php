@@ -9,6 +9,7 @@ use App\Models\Kategori;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class DestinationController extends Controller
 {
@@ -21,9 +22,10 @@ class DestinationController extends Controller
         return view('pengelola.destination.index', compact('destination', 'title', 'kategori'));
     }
 
-    public function update(Request $request){
+    public function update(Request $request)
+    {
         $destinasi = Destinasi::where('user_id', auth()->id())->firstOrFail();
-        
+
         if ($request->has('highlight_photo')) {
             $request->validate([
                 'highlight_photo' => 'required|image|mimes:jpeg,png,jpg|max:2048',
@@ -73,12 +75,13 @@ class DestinationController extends Controller
                 ]);
             }
             return redirect()->route('pengelola.destination.index')->with('success', 'Gallery updated successfully.');
-        }else{
+        } else {
             return redirect()->route('pengelola.destination.index')->with('error', 'No changes made.');
         }
     }
 
-    public function submit(Request $request){
+    public function submit(Request $request)
+    {
         // dd($request->all());
         $request->validate([
             'nama' => 'required|string|max:255',
@@ -100,6 +103,7 @@ class DestinationController extends Controller
             'nama_destinasi' => $request->nama,
             'kategori_id' => $request->kategori_id,
             'deskripsi' => $request->deskripsi,
+            'slug' => Str::slug($request->nama) . '-' . Str::random(5),
             'lokasi' => $request->lokasi,
             'status' => 'menunggu',
         ]);
@@ -116,15 +120,15 @@ class DestinationController extends Controller
             ]);
         }
 
-        
+
         $user = Auth::user();
-        if($user->role == 'user'){
+        if ($user->role == 'user') {
             $user->role = 'pengelola';
             $user->save();
             Auth::logout();
             return redirect()->route('login-form')->with('success', 'Destinasi berhasil ditambahkan! silahkan login ulang dan kelola destinasi anda.');
         }
-        
+
         return redirect()->route('pengelola.destination.index')->with('success', 'Destinasi berhasil ditambahkan!');
     }
 }

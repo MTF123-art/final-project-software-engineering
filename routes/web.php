@@ -8,17 +8,18 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\user\RoleRequestController as UserRoleRequestController;
 use App\Http\Controllers\admin\RoleRequestController as AdminRoleRequestController;
 use App\Http\Controllers\admin\DestinationController as AdminDestinationController;
+use App\Http\Controllers\landing\LandingController;
 use App\Http\Controllers\pengelola\DestinationController as PengelolaDestinationController;
 use Illuminate\Auth\Events\Login;
 use Illuminate\Support\Facades\Route;
 
 
 // public routes
-Route::view('/', 'public.home')->name('home');
-Route::view('/about', 'public.about')->name('about');
-Route::view('/contact', 'public.contact')->name('contact');
-Route::view('/destination', 'public.destination')->name('destination');
-Route::view('/destination/detail', 'public.detail-destination')->name('detail-destination');
+Route::get('/', [LandingController::class, 'home'])->name('home');
+Route::get('/about', [LandingController::class, 'about'])->name('about');
+Route::get('/contact', [LandingController::class, 'contact'])->name('contact');
+Route::get('/destination/filter/{slug?}', [LandingController::class, 'destination'])->name('destination');
+Route::get('/destination/detail/{slug}', [LandingController::class, 'destinationDetail'])->name('detail-destination');
 
 // auth routes
 Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login-form');

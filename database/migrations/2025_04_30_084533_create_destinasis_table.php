@@ -19,6 +19,7 @@ return new class extends Migration
             $table->foreign("kategori_id")->references("id")->on("kategoris")->onDelete("cascade");
             $table->string("highlight_photo");
             $table->string("nama_destinasi");
+            $table->string("slug")->unique();
             $table->text("deskripsi");
             $table->string("lokasi");
             $table->timestamps();

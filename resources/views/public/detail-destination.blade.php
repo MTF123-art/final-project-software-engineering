@@ -8,21 +8,20 @@
         <!-- Title -->
         <section class="hero aos-init aos-animate" data-aos="fade">
             <div class="hero-bg">
-                <img src="{{ asset('assets') }}/img/tours/t16.jpg" alt="">
+                <img src="{{ asset('Storage/'.$destinasi->highlight_photo) }}" alt="{{ $destinasi->nama_destinasi }}" onerror="this.onerror=null; this.src='{{ asset('assets/img/destinations/placeholder.webp') }}';">
             </div>
             <div class="bg-content container">
                 <div class="hero-page-title">
                     <h1 class="display-4 hero-title mb-2">
-                        Explore Noriva Tour
+                        {{ $destinasi->nama_destinasi }}
                     </h1>
                     <div class="fs-5 hero-desc">
-                        <span class="me-3"><i class="hicon hicon-menu-calendar"></i> 5 days</span>
-                        <span class="me-3"><i class="hicon hicon-flights-pin"></i> Noriva</span>
+                        <span class="me-3"><i class="hicon hicon-flights-pin"></i> {{ $destinasi->lokasi }}</span>
                     </div>
                     <div class="mt-5">
                         <a href="#book-tour" class="btn btn-primary btn-uppercase mnw-180">
-                            <i class="hicon hicon hicon-bold hicon-menu-calendar"></i>
-                            <span>Book tour</span>
+                            <i class="hicon hicon hicon-bold hicon-dynamic-banner"></i>
+                            <span>Add to Bookmark</span>
                         </a>
                     </div>
                 </div>
@@ -145,48 +144,18 @@
                         </div>
                         <div class="d-lg-flex border-bottom pb-3 mb-4">
                             <div class="mnw-200">
-                                <h3 class="h5">Highlights</h3>
+                                <h3 class="h5">Destination Manager</h3>
                             </div>
-                            <ul class="highlight-list checked">
-                                <li>
-                                    <span><strong>Stunning Mountain Views:</strong> Breathtaking vistas from Noriva’s
-                                        peaks.</span>
-                                </li>
-                                <li>
-                                    <span><strong>Serene Lakeside Parks:</strong> Relax and enjoy the peaceful lake
-                                        scenery.</span>
-                                </li>
-                                <li>
-                                    <span><strong>Vibrant Cultural Festivals:</strong> Experience colorful local
-                                        celebrations.</span>
-                                </li>
-                                <li>
-                                    <span><strong>Historic Landmarks:</strong> Explore the rich history of Noriva’s
-                                        sites.</span>
-                                </li>
-                                <li>
-                                    <span><strong>Adventure Activities:</strong> Thrilling outdoor fun in beautiful
-                                        surroundings.</span>
-                                </li>
-                            </ul>
+                            <p>
+                                {{ $destinasi->pengelola->name }}
+                            </p>
                         </div>
                         <div class="d-lg-flex">
                             <div class="mnw-200">
                                 <h3 class="h5">Description</h3>
                             </div>
                             <p>
-                                A trip to Noriva, the capital of Moliva, promises an unforgettable experience filled
-                                with stunning natural beauty and vibrant culture. Begin your journey by exploring the
-                                breathtaking mountain views, where panoramic vistas captivate your senses and offer
-                                perfect photo opportunities. Stroll through serene lakeside parks, where the tranquil
-                                waters and lush greenery provide a peaceful escape from the hustle and bustle.
-                                Immerse yourself in the local culture by attending vibrant festivals, where colorful
-                                celebrations showcase the rich traditions and artistic flair of Noriva. Discover
-                                historic landmarks that narrate the city’s fascinating past and add depth to your
-                                travel experience. For those seeking excitement, the adventure activities available
-                                will provide thrilling moments amid some of the most picturesque landscapes you’ll ever see.
-                                Noriva offers a rich blend of natural wonders, cultural highlights, and engaging activities,
-                                making it an essential destination on your journey through Moliva.
+                                {{ $destinasi->deskripsi }}
                             </p>
                         </div>
                     </div>
@@ -201,82 +170,17 @@
                             </h2>
                         </div>
                         <div class="row g-3 align-items-center">
-                            <div class="col-12 col-xl-6">
-                                <a href="./assets/img/tours/t7z.jpg" class="glightbox"
+                            @foreach ($destinasi->galeri as $single)
+                            <div class="col-6 col-xl-4">
+                                <a href="{{ asset('Storage/'. $single->url_gambar) }}" class="glightbox"
                                     data-glightbox="title:Explore Noriva Bay" data-gallery="tour-photos">
                                     <figure class="image-hover image-hover-scale image-hover-overlay rounded mb-0">
-                                        <img src="{{ asset('assets') }}/img/tours/t7.jpg" alt="">
+                                        <img src="{{ asset('Storage/'. $single->url_gambar) }}" alt="">
                                         <i class="hicon hicon-zoom-bold image-hover-icon fs-5"></i>
                                     </figure>
                                 </a>
                             </div>
-                            <div class="col-12 col-xl-6">
-                                <div class="row g-3 align-items-center">
-                                    <div class="col-6">
-                                        <a href="./assets/img/tours/t8z.jpg" class="glightbox"
-                                            data-glightbox="title:Explore Noriva Bay" data-gallery="tour-photos">
-                                            <figure class="image-hover image-hover-scale image-hover-overlay rounded mb-0">
-                                                <img src="{{ asset('assets') }}/img/tours/t8.jpg" alt="">
-                                                <i class="hicon hicon-zoom-bold image-hover-icon fs-5"></i>
-                                            </figure>
-                                        </a>
-                                    </div>
-                                    <div class="col-6">
-                                        <a href="./assets/img/tours/t9z.jpg" class="glightbox"
-                                            data-glightbox="title:Explore Noriva Bay" data-gallery="tour-photos">
-                                            <figure class="image-hover image-hover-scale image-hover-overlay rounded mb-0">
-                                                <img src="{{ asset('assets') }}/img/tours/t9.jpg" alt="">
-                                                <i class="hicon hicon-zoom-bold image-hover-icon fs-5"></i>
-                                            </figure>
-                                        </a>
-                                    </div>
-                                    <div class="col-6">
-                                        <a href="./assets/img/tours/t10z.jpg" class="glightbox"
-                                            data-glightbox="title:Explore Noriva Bay" data-gallery="tour-photos">
-                                            <figure class="image-hover image-hover-scale image-hover-overlay rounded mb-0">
-                                                <img src="{{ asset('assets') }}/img/tours/t10.jpg" alt="">
-                                                <i class="hicon hicon-zoom-bold image-hover-icon fs-5"></i>
-                                            </figure>
-                                        </a>
-                                    </div>
-                                    <div class="col-6">
-                                        <a href="./assets/img/tours/t11z.jpg" class="glightbox"
-                                            data-glightbox="title:Explore Noriva Bay" data-gallery="tour-photos">
-                                            <figure class="image-hover image-hover-scale image-hover-overlay rounded mb-0">
-                                                <img src="{{ asset('assets') }}/img/tours/t11.jpg" alt="">
-                                                <i class="hicon hicon-zoom-bold image-hover-icon fs-5"></i>
-                                            </figure>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-6 col-xl-3">
-                                <a href="./assets/img/tours/t12z.jpg" class="glightbox"
-                                    data-glightbox="title:Explore Noriva Bay" data-gallery="tour-photos">
-                                    <figure class="image-hover image-hover-scale image-hover-overlay rounded mb-0">
-                                        <img src="{{ asset('assets') }}/img/tours/t12.jpg" alt="">
-                                        <i class="hicon hicon-zoom-bold image-hover-icon fs-5"></i>
-                                    </figure>
-                                </a>
-                            </div>
-                            <div class="col-6 col-xl-3">
-                                <a href="./assets/img/tours/t13z.jpg" class="glightbox"
-                                    data-glightbox="title:Explore Noriva Bay" data-gallery="tour-photos">
-                                    <figure class="image-hover image-hover-scale image-hover-overlay rounded mb-0">
-                                        <img src="{{ asset('assets') }}/img/tours/t13.jpg" alt="">
-                                        <i class="hicon hicon-zoom-bold image-hover-icon fs-5"></i>
-                                    </figure>
-                                </a>
-                            </div>
-                            <div class="col-12 col-xl-6">
-                                <a href="./assets/img/tours/t14z.jpg" class="glightbox"
-                                    data-glightbox="title:Explore Noriva Bay" data-gallery="tour-photos">
-                                    <figure class="image-hover image-hover-scale image-hover-overlay rounded mb-0">
-                                        <img src="{{ asset('assets') }}/img/tours/t14.jpg" alt="">
-                                        <i class="hicon hicon-zoom-bold image-hover-icon fs-5"></i>
-                                    </figure>
-                                </a>
-                            </div>
+                            @endforeach
                         </div>
                     </div>
                 </div>
