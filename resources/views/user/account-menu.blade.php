@@ -30,7 +30,7 @@
                     </a>
                 </li>
                 <li class="menu-item">
-                    <a href="{{ route('user.bookmark') }}">
+                    <a href="{{ route('user.bookmark.index') }}">
                         <i class="hicon hicon-bold hicon-dynamic-banner"></i> <span>Bookmark</span>
                     </a>
                 </li>

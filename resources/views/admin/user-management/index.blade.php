@@ -69,7 +69,7 @@
                                         <div>
                                             <h2 class="h3 ff-primary mb-0 text-body-emphasis">Resent Registrants</h2>
                                             @if (session('success'))
-                                                <small class="text-danger">{{ session('success') }}</small>
+                                                <x-toast type="success" />
                                             @endif
                                         </div>
                                         <a href="{{ route('admin.user-management.create-form') }}"
@@ -84,6 +84,9 @@
                                                     </th>
                                                     <th scope="col">
                                                         <strong>Name</strong>
+                                                    </th>
+                                                    <th scope="col">
+                                                        <strong>Photo</strong>
                                                     </th>
                                                     <th scope="col">
                                                         <strong>Email</strong>
@@ -110,6 +113,15 @@
                                                             <div class="d-flex flex-column">
                                                                 <a href="./booking-details.html"
                                                                     class="link-dark link-hover"><strong>{{ $single->name }}</strong></a>
+                                                            </div>
+                                                        </td>
+                                                        <td class="">
+                                                            <div class="account-user justify-content-center">
+                                                                <div class="user-avatar" style="margin-right: 0px;">
+                                                                    <img src="{{ asset('Storage/' . $single->image) }}"
+                                                                        onerror="this.onerror=null; this.src='{{ asset('assets/img/destinations/placeholder.webp') }}';"
+                                                                        alt="" class="show-avatar rounded-circle">
+                                                                </div>
                                                             </div>
                                                         </td>
                                                         <td class="text-center">

@@ -105,7 +105,6 @@ class DestinationController extends Controller
             'deskripsi' => $request->deskripsi,
             'slug' => Str::slug($request->nama) . '-' . Str::random(5),
             'lokasi' => $request->lokasi,
-            'status' => 'menunggu',
         ]);
 
         // dd($destinasi->id);

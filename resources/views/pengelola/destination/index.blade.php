@@ -24,10 +24,10 @@
                             <div class="pe-xl-4 me-xl-2 mb-4">
                                 {{-- Success message --}}
                                 @if (session('success'))
-                                    <div class="alert alert-success">{{ session('success') }}</div>
+                                    <x-toast type="success" />
                                 @endif
                                 @if (session('error'))
-                                    <div class="alert alert-danger">{{ session('error') }}</div>
+                                    <x-toast type="error" />
                                 @endif
 
                                 <!-- Highlight Photos -->
@@ -171,11 +171,12 @@
                                                             class="form-select shadow-sm dropdown-select me-3 mb-3 use-bootstrap-select-target"
                                                             aria-label="Booking status" tabindex="-1" name="kategori_id"
                                                             required id="kategori_id2">
-                                                            <option selected value="{{ $destination->kategori->id }}">{{ $destination->kategori->nama_kategori }}</option>
+                                                            <option selected value="{{ $destination->kategori->id }}">
+                                                                {{ $destination->kategori->nama_kategori }}</option>
                                                             @foreach ($kategori as $kt)
                                                                 @if ($kt->id != $destination->kategori->id)
-                                                                <option value="{{ $kt->id }}">
-                                                                    {{ $kt->nama_kategori }}</option>
+                                                                    <option value="{{ $kt->id }}">
+                                                                        {{ $kt->nama_kategori }}</option>
                                                                 @endif
                                                             @endforeach
                                                         </select>

@@ -28,13 +28,37 @@
                                     <div class="border-bottom pb-4 mb-4">
                                         <h2 class="h3 ff-primary mb-0 text-body-emphasis">Add User</h2>
                                         @if (session('success'))
-                                            <small class="text-danger">{{ session('success') }}</small>
+                                            <x-toast type="success" />
                                         @endif
                                     </div>
                                     {{-- disini --}}
-                                    <form action="{{ route('admin.user-management.create') }}" method="POST">
+                                    <form action="{{ route('admin.user-management.create') }}" method="POST"
+                                        enctype="multipart/form-data">
                                         @csrf
                                         <div class="row g-4 align-items-center justify-content-center mb-4">
+                                            <div
+                                                class="account-user border-bottom pb-4 mb-3 mt-4 d-flex justify-content-center">
+                                                <div class="user-avatar">
+                                                    <img src="http://127.0.0.1:8000/assets/img/destinations/placeholder.webp"
+                                                        alt=""
+                                                        onerror="this.onerror=null; this.src='http://127.0.0.1:8000/assets/img/destinations/placeholder.webp';"
+                                                        class="show-avatar rounded-circle"
+                                                        style="width: 150px; height: 150px;">
+                                                    <label for="filAvatar" class="select-avatar"
+                                                        style="width: 40px; height: 40px;">
+                                                        <i class="hicon hicon-200 hicon-camera-hover"></i>
+                                                    </label>
+                                                    <div class="btn btn-primary btn-update-avatar d-none"
+                                                        style="cursor: unset">
+                                                        <i class="hicon hicon-check-valid-state"></i>
+                                                    </div>
+                                                    <input class="input-avatar d-none" type="file" id="filAvatar"
+                                                        name="image">
+                                                </div>
+                                                @error('image')
+                                                    <small class="text-danger">{{ $message }}</small>
+                                                @enderror
+                                            </div>
                                             <div class="col-12 col-md-8">
                                                 <div class="">
                                                     <label for="name">Name</label>

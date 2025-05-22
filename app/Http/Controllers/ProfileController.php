@@ -3,9 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Container\Attributes\Auth;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rule;
 
 class ProfileController extends Controller
@@ -19,19 +20,36 @@ class ProfileController extends Controller
 
     public function editProfile(Request $request)
     {
-        // Validate the request data
-        $request->validate([
+        $user = Auth::user();
+
+        $validated = $request->validate([
             'name' => 'required|string|max:255',
-            'email' => ['required', 'string', 'email', 'max:255', Rule::unique('users')->ignore(auth()->user()->id)],
+            'email' => 'required|email|max:255|unique:users,email,' . $user->id,
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:2048', // max 2MB
         ]);
 
-        // Update the user's profile
-        $user = auth()->user();
-        $user->name = $request->input('name');
-        $user->email = $request->input('email');
+        // Update user data
+        $user->name = $validated['name'];
+        $user->email = $validated['email'];
+
+        // Handle image upload
+        if ($request->hasFile('image')) {
+            
+            if ($user->image) {
+                Storage::disk('public')->delete($user->image);
+            }
+
+            $file = $request->file('image');
+            $filename = 'userImage_' . uniqid() . '.' . $file->getClientOriginalExtension();
+            $path = $file->storeAs('user-images', $filename, 'public');
+
+
+            $user->image = $path;
+        }
+
         $user->save();
 
-        return redirect()->route(auth()->user()->role .'.profile')->with('success-profile', 'Profile updated successfully.');
+        return redirect()->back()->with('success', 'Profile updated successfully.');
     }
 
     public function editPassword(Request $request)
@@ -50,6 +68,8 @@ class ProfileController extends Controller
         $user->password = Hash::make($request->input('new_password'));
         $user->save();
 
-        return redirect()->route(auth()->user()->role .'.profile')->with('success-password', 'Password updated successfully.');
+        return redirect()
+            ->route(auth()->user()->role . '.profile')
+            ->with('success-password', 'Password updated successfully.');
     }
 }

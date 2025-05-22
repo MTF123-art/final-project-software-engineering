@@ -15,7 +15,7 @@ class UserController extends Controller
             'admin' => User::where('role', 'admin')->count(),
             'pengelola' => User::where('role', 'pengelola')->count(),
             'user' => User::where('role', 'user')->count(),
-            'all' => User::paginate(5),
+            'all' => User::orderBy('id', 'desc')->paginate(5),
             'title' => 'User Management',
         ]);
     }
@@ -39,19 +39,30 @@ class UserController extends Controller
         ]);
     }
 
-    public function create(Request $request)
-    {
+    public function create(Request $request){
         $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:8|confirmed',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:2048',
             'role' => 'required|string|in:admin,pengelola,user',
         ]);
+
+        $path = null;
+
+        // Handle image upload
+        if ($request->hasFile('image')) {
+            $file = $request->file('image');
+            $filename = 'userImage_' . uniqid() . '.' . $file->getClientOriginalExtension();
+            $file->storeAs('user-images', $filename, 'public');
+            $path = 'user-images/' . $filename;
+        }
 
         User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
+            'image' => $path,
             'role' => $request->role,
             'is_acvite' => true,
         ]);

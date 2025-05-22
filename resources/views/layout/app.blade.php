@@ -117,7 +117,7 @@
                         <div class="dropdown user-menu ms-xl-auto">
                             <button class="user-menu-avatar show" data-bs-toggle="dropdown" data-bs-display="static"
                                 aria-expanded="true">
-                                <img src="{{ asset('assets') }}/img/avatars/a9.jpg" alt="">
+                                <img src="{{ asset('Storage/'.Auth::user()->image) }}" onerror="this.onerror=null; this.src='{{ asset('assets/img/destinations/placeholder.webp') }}';" alt="">
                             </button>
                             <ul class="dropdown-menu dropdown-menu-end shadow-sm animate slideIn"
                                 data-bs-popper="static">

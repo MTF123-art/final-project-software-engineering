@@ -8,7 +8,8 @@
         <!-- Title -->
         <section class="hero aos-init aos-animate" data-aos="fade">
             <div class="hero-bg">
-                <img src="{{ asset('Storage/'.$destinasi->highlight_photo) }}" alt="{{ $destinasi->nama_destinasi }}" onerror="this.onerror=null; this.src='{{ asset('assets/img/destinations/placeholder.webp') }}';">
+                <img src="{{ asset('Storage/' . $destinasi->highlight_photo) }}" alt="{{ $destinasi->nama_destinasi }}"
+                    onerror="this.onerror=null; this.src='{{ asset('assets/img/destinations/placeholder.webp') }}';">
             </div>
             <div class="bg-content container">
                 <div class="hero-page-title">
@@ -19,10 +20,27 @@
                         <span class="me-3"><i class="hicon hicon-flights-pin"></i> {{ $destinasi->lokasi }}</span>
                     </div>
                     <div class="mt-5">
-                        <a href="#book-tour" class="btn btn-primary btn-uppercase mnw-180">
-                            <i class="hicon hicon hicon-bold hicon-dynamic-banner"></i>
-                            <span>Add to Bookmark</span>
-                        </a>
+                        @if (Auth::check() && Auth::user()->role == 'user')
+                            <form action="{{ route('user.bookmark.save', ['id' => $destinasi->id]) }}" method="POST">
+                                @csrf
+                                <button class="btn btn-primary btn-uppercase mnw-180" type="submit">
+                                    <i class="hicon hicon hicon-bold hicon-dynamic-banner"></i>
+                                    <span>Add to Bookmark</span>
+                                </button>
+                            </form>
+                        @elseif ((Auth::check() && Auth::user()->role == 'admin') || (Auth::check() && Auth::user()->role == 'pengelola'))
+                            <button class="btn btn-primary btn-uppercase mnw-180" data-bs-toggle="modal"
+                                data-bs-target="#alertModal2">
+                                <i class="hicon hicon hicon-bold hicon-dynamic-banner"></i>
+                                <span>Add to Bookmark</span>
+                            </button>
+                        @else
+                            <button class="btn btn-primary btn-uppercase mnw-180" data-bs-toggle="modal"
+                                data-bs-target="#alertModal1">
+                                <i class="hicon hicon hicon-bold hicon-dynamic-banner"></i>
+                                <span>Add to Bookmark</span>
+                            </button>
+                        @endif
                     </div>
                 </div>
                 <nav aria-label="breadcrumb">
@@ -171,15 +189,15 @@
                         </div>
                         <div class="row g-3 align-items-center">
                             @foreach ($destinasi->galeri as $single)
-                            <div class="col-6 col-xl-4">
-                                <a href="{{ asset('Storage/'. $single->url_gambar) }}" class="glightbox"
-                                    data-glightbox="title:Explore Noriva Bay" data-gallery="tour-photos">
-                                    <figure class="image-hover image-hover-scale image-hover-overlay rounded mb-0">
-                                        <img src="{{ asset('Storage/'. $single->url_gambar) }}" alt="">
-                                        <i class="hicon hicon-zoom-bold image-hover-icon fs-5"></i>
-                                    </figure>
-                                </a>
-                            </div>
+                                <div class="col-6 col-xl-4">
+                                    <a href="{{ asset('Storage/' . $single->url_gambar) }}" class="glightbox"
+                                        data-glightbox="title:Explore Noriva Bay" data-gallery="tour-photos">
+                                        <figure class="image-hover image-hover-scale image-hover-overlay rounded mb-0">
+                                            <img src="{{ asset('Storage/' . $single->url_gambar) }}" alt="">
+                                            <i class="hicon hicon-zoom-bold image-hover-icon fs-5"></i>
+                                        </figure>
+                                    </a>
+                                </div>
                             @endforeach
                         </div>
                     </div>
@@ -439,4 +457,46 @@
         </section>
         <!-- /Customer Reviews -->
     </main>
+
+    {{-- alert modal --}}
+    <div class="modal fade" id="alertModal1" tabindex="-1" aria-labelledby="alertModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="alertModalLabel">Autentikasi Diperlukan</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Tutup"></button>
+                </div>
+
+                <div class="modal-body">
+                    Untuk menggunakan fitur <strong>bookmark</strong>, Anda harus login terlebih dahulu.
+                    <br><br>
+                    Sudah punya akun? Silakan <a href="{{ route('login-form') }}">Login</a>.
+                    <br>
+                    Belum punya akun? Silakan <a href="{{ route('register-form') }}">Register</a> terlebih dahulu.
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="alertModal2" tabindex="-1" aria-labelledby="alertModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="alertModalLabel">Autentikasi Diperlukan</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Tutup"></button>
+                </div>
+
+                <div class="modal-body">
+                    Hanya role user yang bisa menggunakan fitur <strong>bookmark</strong>
+                </div>
+            </div>
+        </div>
+    </div>
+    {{-- alert modal --}}
+    {{-- toasts --}}
+    @if (session('success'))
+        <x-toast type="success" />
+    @endif
+    {{-- toasts --}}
 @endsection

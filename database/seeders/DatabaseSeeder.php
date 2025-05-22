@@ -21,6 +21,7 @@ class DatabaseSeeder extends Seeder
                 'email' => 'admin@gmail.com',
                 'password' => Hash::make(12345678),
                 'is_active' => true,
+                'image' => Str::random(10).'.jpg',
                 'role' => 'admin',
             ]);
             for($i = 1; $i <=5; $i ++){
@@ -28,6 +29,7 @@ class DatabaseSeeder extends Seeder
                     'name' => 'user'.$i,
                     'email' => 'user'.$i.'@gmail.com',
                     'password' => Hash::make(12345678),
+                    'image' => Str::random(10).'.jpg',
                     'is_active' => true,
                     'role' => 'user',
                 ]);
@@ -37,6 +39,7 @@ class DatabaseSeeder extends Seeder
                     'name' => 'pengelola'.$i,
                     'email' => 'pengelola'.$i.'@gmail.com',
                     'password' => Hash::make(12345678),
+                    'image' => Str::random(10).'.jpg',
                     'is_active' => true,
                     'role' => 'pengelola',
                 ]);

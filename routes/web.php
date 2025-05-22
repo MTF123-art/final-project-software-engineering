@@ -1,17 +1,19 @@
 <?php
 
-use App\Http\Controllers\admin\UserController;
 use App\Http\Controllers\admin\CategoryController;
+use App\Http\Controllers\admin\DestinationController as AdminDestinationController;
+use App\Http\Controllers\admin\RoleRequestController as AdminRoleRequestController;
+use App\Http\Controllers\admin\UserController;
 use App\Http\Controllers\auth\LoginController;
 use App\Http\Controllers\auth\RegisterController;
-use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\user\RoleRequestController as UserRoleRequestController;
-use App\Http\Controllers\admin\RoleRequestController as AdminRoleRequestController;
-use App\Http\Controllers\admin\DestinationController as AdminDestinationController;
 use App\Http\Controllers\landing\LandingController;
 use App\Http\Controllers\pengelola\DestinationController as PengelolaDestinationController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\user\BookmarkController;
+use App\Http\Controllers\user\RoleRequestController as UserRoleRequestController;
 use Illuminate\Auth\Events\Login;
 use Illuminate\Support\Facades\Route;
+
 
 
 // public routes
@@ -41,9 +43,13 @@ Route::middleware(['auth', 'role:user'])->prefix('user')->name('user.')->group(f
         echo 'review';
     })->name('review');
     // bookmark
-    Route::get('/bookmark', function(){
-        echo 'bookmark';
-    })->name('bookmark');
+    Route::prefix('bookmark')->name('bookmark.')->group(function () {
+        Route::get('/', function(){
+            echo 'bookmark';
+        })->name('index');
+        Route::post('/save/{id}', [BookmarkController::class, 'saveBookmark'])->name('save');
+        Route::post('/delete/{id}', [BookmarkController::class, 'deleteBookmark'])->name('delete');
+    });
     // pengajuan route
     Route::get('/upgrade', [UserRoleRequestController::class, 'upgradeForm'])->name('upgrade');
     Route::post('/upgrade/submit', [UserRoleRequestController::class, 'upgradeSubmit'])->name('upgrade.submit');

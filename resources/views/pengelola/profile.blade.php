@@ -29,7 +29,7 @@
                                     <div class=" border-bottom pb-4 mb-4">
                                         <h2 class="h3 text-body-emphasis mb-0">Profile Data</h2>
                                         @if (session('success-profile'))
-                                            <small class="text-danger">{{ session('success-profile') }}</small>
+                                         <x-toast type="success-profile" />
                                         @endif
                                     </div>
                                     <form action="{{ route('pengelola.profile.edit') }}" method="post"
@@ -104,7 +104,7 @@
                                     <div class=" border-bottom pb-4 mb-4">
                                         <h2 class="h3 text-body-emphasis mb-0">Change Password</h2>
                                         @if (session('success-password'))
-                                            <small class="text-danger">{{ session('success-password') }}</small>
+                                             <x-toast type="success-password" />
                                         @endif
                                     </div>
                                     <form method="post" action="{{ route('pengelola.profile.edit-password') }}">
