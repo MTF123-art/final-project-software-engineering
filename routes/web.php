@@ -44,9 +44,7 @@ Route::middleware(['auth', 'role:user'])->prefix('user')->name('user.')->group(f
     })->name('review');
     // bookmark
     Route::prefix('bookmark')->name('bookmark.')->group(function () {
-        Route::get('/', function(){
-            echo 'bookmark';
-        })->name('index');
+        Route::get('/', [BookmarkController::class, 'index'])->name('index');
         Route::post('/save/{id}', [BookmarkController::class, 'saveBookmark'])->name('save');
         Route::post('/delete/{id}', [BookmarkController::class, 'deleteBookmark'])->name('delete');
     });

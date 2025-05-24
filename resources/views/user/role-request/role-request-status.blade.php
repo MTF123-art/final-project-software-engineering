@@ -24,13 +24,13 @@
                             <div class="card border-0 shadow-sm">
                                 <div class="card-body">
                                     @if (session('success-upgrade'))
-                                        <div class="alert alert-success">{{ session('success-upgrade') }}</div>
+                                        <x-toast type="success-upgrade" />
                                     @endif
                                     @if (session('info-upgrade'))
-                                        <div class="alert alert-success">{{ session('info-upgrade') }}</div>
+                                        <x-toast type="info-upgrade" />
                                     @endif
                                     @if (session('error'))
-                                        <div class="alert alert-danger">{{ session('error') }}</div>
+                                        <x-toast type="error" />
                                     @endif
 
                                     <p class="text-muted mb-4">Here is your role upgrade request to become a destination
@@ -94,7 +94,8 @@
                                         </div>
 
                                         <form action="{{ route('user.upgrade.destination.submit') }}" method="POST"
-                                            enctype="multipart/form-data" onsubmit="return confirm('Once the destination is saved, you will be automatically logged out and logged back in as a Destination Manager. Are you sure you want to continue?');">
+                                            enctype="multipart/form-data"
+                                            onsubmit="return confirm('Once the destination is saved, you will be automatically logged out and logged back in as a Destination Manager. Are you sure you want to continue?');">
                                             @csrf
 
                                             <div class="mb-4">

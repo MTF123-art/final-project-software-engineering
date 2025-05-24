@@ -28,8 +28,8 @@
                                 <div class="card-body ">
                                     <div class=" border-bottom pb-4 mb-4">
                                         <h2 class="h3 text-body-emphasis mb-0">Profile Data</h2>
-                                        @if (session('success-profile'))
-                                         <x-toast type="success-profile" />
+                                        @if (session('success'))
+                                         <x-toast type="success" />
                                         @endif
                                     </div>
                                     <form action="{{ route('pengelola.profile.edit') }}" method="post"
@@ -38,7 +38,8 @@
                                         <div
                                             class="account-user border-bottom pb-4 mb-3 mt-4 d-flex justify-content-center">
                                             <div class="user-avatar">
-                                                <img src="http://127.0.0.1:8000/assets/img/avatars/a3.jpg" alt=""
+                                                <img src="{{ asset('storage/'.Auth::user()->image) }}" alt=""
+                                                    onerror="this.onerror=null; this.src='{{ asset('assets/img/destinations/placeholder.webp') }}';"
                                                     class="show-avatar rounded-circle" style="width: 150px; height: 150px;">
                                                 <label for="filAvatar"
                                                     class="select-avatar"style="width: 40px; height: 40px;">
@@ -47,7 +48,8 @@
                                                 <div class="btn btn-primary btn-update-avatar d-none" style="cursor: unset">
                                                     <i class="hicon hicon-check-valid-state"></i>
                                                 </div>
-                                                <input class="input-avatar d-none" type="file" id="filAvatar">
+                                                <input class="input-avatar d-none" type="file" id="filAvatar"
+                                                    name="image">
                                             </div>
                                         </div>
                                         <div>
@@ -103,9 +105,6 @@
                                 <div class="card-body">
                                     <div class=" border-bottom pb-4 mb-4">
                                         <h2 class="h3 text-body-emphasis mb-0">Change Password</h2>
-                                        @if (session('success-password'))
-                                             <x-toast type="success-password" />
-                                        @endif
                                     </div>
                                     <form method="post" action="{{ route('pengelola.profile.edit-password') }}">
                                         @csrf

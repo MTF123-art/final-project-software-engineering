@@ -16,7 +16,7 @@
                                 <div class="border-bottom mb-4">
                                     <h1 class="h2 text-body-emphasis">Register</h1>
                                     @if (session('success'))
-                                        <small class="text-danger">{{ session('success') }}</small>
+                                        <x-toast type="success" />
                                     @endif
                                     @if (session('error'))
                                         <small class="text-danger">{{ session('error') }}</small>

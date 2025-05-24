@@ -245,9 +245,9 @@
                             <!-- /Booking list -->
                         </div>
                     </div>
-                        <!-- Account menu -->
-                        @include('user.account-menu')
-                        <!-- Account menu -->
+                    <!-- Account menu -->
+                    @include('user.account-menu')
+                    <!-- Account menu -->
                 </div>
             </section>
             <!-- /Dashboard -->
@@ -255,4 +255,8 @@
         </div>
 
     </main>
+
+    @if (session('success'))
+        <x-toast type="success" />
+    @endif
 @endsection

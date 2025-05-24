@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
 {
@@ -100,6 +101,9 @@ class UserController extends Controller
     {
         $user = User::findOrFail($id);
         $user->delete();
+        if ($user->image) {
+                Storage::disk('public')->delete($user->image);
+        }
 
         return redirect()->route('admin.user-management.index')->with('success', 'User deleted successfully');
     }

@@ -3,16 +3,9 @@
     <div class="card border-0 shadow-sm sticky-top sticky-top-120 d-none d-xl-block z-0">
         <div class="card-body">
             <div class="account-user border-bottom pb-4 mb-3">
-                <form method="post" class="user-avatar">
-                    <img src="{{ asset('assets') }}/img/avatars/a3.jpg" alt="" class="show-avatar rounded-circle">
-                    <label for="filAvatar" class="select-avatar">
-                        <i class="hicon hicon-camera-hover"></i>
-                    </label>
-                    <button type="submit" class="btn btn-primary btn-update-avatar d-none">
-                        <i class="hicon hicon-check-valid-state"></i>
-                    </button>
-                    <input class="input-avatar d-none" type="file" id="filAvatar">
-                </form>
+                <div class="user-avatar">
+                    <img src="{{ asset('Storage/'.Auth::user()->image) }}" onerror="this.onerror=null; this.src='{{ asset('assets/img/destinations/placeholder.webp') }}';" alt="" class="show-avatar rounded-circle">
+                </div>
                 <div class="username">
                     <span>Hi!</span>
                     <strong>{{ Auth::user()->name }}</strong>

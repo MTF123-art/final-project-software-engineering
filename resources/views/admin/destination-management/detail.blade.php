@@ -23,10 +23,10 @@
                         <div class="pe-xl-4 me-xl-2 mb-4">
                             {{-- Success message --}}
                             @if (session('success'))
-                                <div class="alert alert-success">{{ session('success') }}</div>
+                                <x-toast type="success" />
                             @endif
                             @if (session('error'))
-                                <div class="alert alert-danger">{{ session('error') }}</div>
+                                <x-toast type="error" />
                             @endif
 
                             <!-- Highlight Photos -->

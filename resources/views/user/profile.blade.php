@@ -28,8 +28,8 @@
                                 <div class="card-body ">
                                     <div class=" border-bottom pb-4 mb-4">
                                         <h2 class="h3 text-body-emphasis mb-0">Profile Data</h2>
-                                        @if (session('success-profile'))
-                                            <small class="text-danger">{{ session('success-profile') }}</small>
+                                        @if (session('success'))
+                                            <x-toast type="success" />
                                         @endif
                                     </div>
                                     <form action="{{ route('user.profile.edit') }}" method="post"
@@ -38,7 +38,8 @@
                                         <div
                                             class="account-user border-bottom pb-4 mb-3 mt-4 d-flex justify-content-center">
                                             <div class="user-avatar">
-                                                <img src="http://127.0.0.1:8000/assets/img/avatars/a3.jpg" alt=""
+                                                <img src="{{ asset('storage/'.Auth::user()->image) }}" alt=""
+                                                    onerror="this.onerror=null; this.src='{{ asset('assets/img/destinations/placeholder.webp') }}';"
                                                     class="show-avatar rounded-circle" style="width: 150px; height: 150px;">
                                                 <label for="filAvatar"
                                                     class="select-avatar"style="width: 40px; height: 40px;">
@@ -47,7 +48,8 @@
                                                 <div class="btn btn-primary btn-update-avatar d-none" style="cursor: unset">
                                                     <i class="hicon hicon-check-valid-state"></i>
                                                 </div>
-                                                <input class="input-avatar d-none" type="file" id="filAvatar">
+                                                <input class="input-avatar d-none" type="file" id="filAvatar"
+                                                    name="image">
                                             </div>
                                         </div>
                                         <div>
@@ -106,6 +108,7 @@
                                         @if (session('success-password'))
                                             <small class="text-danger">{{ session('success-password') }}</small>
                                         @endif
+                                        
                                     </div>
                                     <form method="post" action="{{ route('user.profile.edit-password') }}">
                                         @csrf
@@ -114,9 +117,10 @@
                                                 <div class="mb-4">
                                                     <label class="form-label" for="current_password">Current Password<span
                                                             class="text-danger">*</span></label>
-                                                    <input type="password" class="form-control shadow-sm" id="current_password" name="current_password"
-                                                        required="" minlength="8">  
-                                                    @if(session('current_password'))
+                                                    <input type="password" class="form-control shadow-sm"
+                                                        id="current_password" name="current_password" required=""
+                                                        minlength="8">
+                                                    @if (session('current_password'))
                                                         <small class="text-danger">{{ session('current_password') }}</small>
                                                     @endif
                                                 </div>
@@ -127,16 +131,18 @@
                                                 <div class="mb-4">
                                                     <label class="form-label" for="new_password">New Password<span
                                                             class="text-danger">*</span></label>
-                                                    <input type="password" class="form-control shadow-sm" id="new_password" name="new_password"
-                                                        required="" minlength="8">
+                                                    <input type="password" class="form-control shadow-sm"
+                                                        id="new_password" name="new_password" required=""
+                                                        minlength="8">
                                                 </div>
                                             </div>
                                             <div class="col-12 col-md-6">
                                                 <div class="mb-4">
                                                     <label class="form-label" for="new_password_confirmation">Retype New
                                                         Password<span class="text-danger">*</span></label>
-                                                    <input type="password" class="form-control shadow-sm" name="new_password_confirmation"
-                                                        id="new_password_confirmation" required="" minlength="8">
+                                                    <input type="password" class="form-control shadow-sm"
+                                                        name="new_password_confirmation" id="new_password_confirmation"
+                                                        required="" minlength="8">
                                                     @error('new_password')
                                                         <small class="text-danger">{{ $message }}</small>
                                                     @enderror

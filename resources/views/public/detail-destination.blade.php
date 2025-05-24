@@ -218,10 +218,10 @@
                 <!-- Title -->
                 <!-- Review list -->
                 <div class="row g-0">
-                    <div class="col-12 col-xl-4">
+                    <div class="col-12">
                         <div class="pe-xl-4 me-xl-2">
                             <div class="row">
-                                <div class="col-12 col-xl-12 col-lg-6">
+                                <div class="col-12 col-xl-6">
                                     <!-- Overall rating -->
                                     <div class="horizontal-review rounded shadow-sm mb-4 aos-init" data-aos="fade">
                                         <h2 class="h4 review-title pb-4 mb-4 lh-base">Overall rating</h2>
@@ -229,7 +229,7 @@
                                             <h3 class="review-score">4.9</h3>
                                             <div class="review-total">
                                                 <span class="star-rate-view"><span
-                                                        class="star-value rate-50"></span></span>
+                                                        class="star-value rate-10"></span></span>
                                                 <span><strong class="text-body">2,394</strong> reviews</span>
                                             </div>
                                         </div>
@@ -239,42 +239,15 @@
                                     </div>
                                     <!-- /Overall rating -->
                                 </div>
-                                <div class="col-12 col-xl-12 col-lg-6">
+                                <div class="col-12 col-xl-6">
                                     <!-- Review summary -->
                                     <div class="review-summary rounded shadow-sm mb-4 aos-init" data-aos="fade">
-                                        <h3 class="h4 review-title">Review summary</h3>
+                                        <h3 class="h4 review-title">Leave Your Review</h3>
                                         <ul class="review-content">
                                             <li>
-                                                <span class="review-lable">Transportation:</span>
-                                                <div class="review-score">
-                                                    <strong>4.5</strong>
-                                                    <span class="star-rate-view star-rate-size-sm"><span
-                                                            class="star-value rate-45"></span></span>
-                                                </div>
-                                            </li>
-                                            <li>
-                                                <span class="review-lable">Value for money:</span>
-                                                <div class="review-score">
-                                                    <strong>4.5</strong>
-                                                    <span class="star-rate-view star-rate-size-sm"><span
-                                                            class="star-value rate-45"></span></span>
-                                                </div>
-                                            </li>
-                                            <li>
-                                                <span class="review-lable">Support services:</span>
-                                                <div class="review-score">
-                                                    <strong>4.5</strong>
-                                                    <span class="star-rate-view star-rate-size-sm"><span
-                                                            class="star-value rate-45"></span></span>
-                                                </div>
-                                            </li>
-                                            <li>
-                                                <span class="review-lable">Organization:</span>
-                                                <div class="review-score">
-                                                    <strong>4.0</strong>
-                                                    <span class="star-rate-view star-rate-size-sm"><span
-                                                            class="star-value rate-40"></span></span>
-                                                </div>
+                                                <button class="btn btn-primary  d-block w-100" type="button">
+                                                    <i class="hicon hicon-bold hicon-mmb-inbox"></i>
+                                                </button>
                                             </li>
                                         </ul>
                                     </div>
@@ -283,7 +256,8 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-12 col-xl-8">
+
+                    <div class="col-12">
                         <!-- Review list -->
                         <div class="card border-0 rounded shadow-sm mb-4 aos-init" data-aos="fade">
                             <div class="card-body">
@@ -415,42 +389,6 @@
                         </div>
                         <!-- Review list -->
                     </div>
-
-                    <div class="col-12 col-xl-12">
-                        <div class="card border-0 rounded shadow-sm mb-4 aos-init " data-aos="fade">
-                            <div class="card-body">
-                                <div class="border-bottom pb-4 mb-4">
-                                    <h3 class="h4 me-auto mb-0">Leave a review</h3>
-                                </div>
-                                <form method="post">
-                                    <div class="row g-4">
-                                        <div class="col-12 col-md-6">
-                                            <div class="form-floating mb-4">
-                                                <input class="form-control shadow-sm" id="txtFullname20"
-                                                    placeholder="name@example.com" required="">
-                                                <label for="txtFullname20">Full Name</label>
-                                            </div>
-                                        </div>
-                                        <div class="col-12 col-md-6">
-                                            <div class="form-floating mb-4">
-                                                <input type="email" class="form-control shadow-sm" id="txtEmail20"
-                                                    placeholder="name@example.com" required="">
-                                                <label for="txtEmail20">Your Email</label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="form-floating mb-4">
-                                        <textarea class="form-control shadow-sm" placeholder="Enter message..." id="txtMessage20" style="height:180px"
-                                            required=""></textarea>
-                                        <label for="txtMessage20">Comment</label>
-                                    </div>
-                                    <button type="submit" class="btn btn-primary" id="btnSubmit20">
-                                        <span>Submit</span>
-                                    </button>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
                 </div>
                 <!-- Review list -->
             </div>
@@ -462,7 +400,6 @@
     <div class="modal fade" id="alertModal1" tabindex="-1" aria-labelledby="alertModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
-
                 <div class="modal-header">
                     <h1 class="modal-title fs-5" id="alertModalLabel">Autentikasi Diperlukan</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Tutup"></button>
@@ -497,6 +434,9 @@
     {{-- toasts --}}
     @if (session('success'))
         <x-toast type="success" />
+    @endif
+    @if (session('error'))
+        <x-toast type="error" />
     @endif
     {{-- toasts --}}
 @endsection

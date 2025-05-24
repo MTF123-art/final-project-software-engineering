@@ -70,6 +70,6 @@ class ProfileController extends Controller
 
         return redirect()
             ->route(auth()->user()->role . '.profile')
-            ->with('success-password', 'Password updated successfully.');
+            ->with('success', 'Password updated successfully.');
     }
 }

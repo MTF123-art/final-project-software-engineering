@@ -30,7 +30,7 @@
                                         <div>
                                             <h2 class="h3 ff-primary mb-0 text-body-emphasis">Resent Categrory</h2>
                                             @if (session('success'))
-                                                <small class="text-danger">{{ session('success') }}</small>
+                                                <x-toast type="success" />
                                             @endif
                                         </div>
                                         <btn class="btn btn-primary btn-uppercase mnw-180" data-bs-toggle="modal"

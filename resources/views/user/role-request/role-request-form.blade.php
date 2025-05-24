@@ -28,7 +28,7 @@
                                     <div class="border-bottom pb-4 mb-4">
                                         <h2 class="h3 text-body-emphasis mb-0">Upgrade Account Request</h2>
                                         @if (session('success-upgrade'))
-                                            <small class="text-success">{{ session('success-upgrade') }}</small>
+                                                <x-toast type="success-upgrade" />
                                         @endif
                                     </div>
                                     <form action="{{ route('user.upgrade.submit') }}" method="POST">

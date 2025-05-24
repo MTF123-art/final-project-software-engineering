@@ -73,7 +73,7 @@
                                         <a href="{{ route('destination', ['slug' => $single->kategori->slug]) }}" class="float-text float-absolute">{{ $single->kategori->nama_kategori }}</a>
                                         <a href="{{ route('detail-destination', ['slug' => $single->slug]) }}">
                                             <figure class="image-hover image-hover-overlay rounded">
-                                                <img src="{{ asset('storage/' . $single->highlight_phoo) }}" alt="{{ $single->nama_destinasi }}"
+                                                <img src="{{ asset('storage/' . $single->highlight_photo) }}" alt="{{ $single->nama_destinasi }}"
                                                     class="img-fluid rounded" onerror="this.onerror=null; this.src='{{ asset('assets/img/destinations/placeholder.webp') }}';">
                                                 <i class="hicon hicon-plus-thin image-hover-icon"></i>
                                             </figure>
@@ -94,10 +94,6 @@
                                                 <div class="post-comment">
                                                     <i class="hicon hicon-chat"></i>
                                                     <span>36</span>
-                                                </div>
-                                                <div class="post-view">
-                                                    <i class="hicon hicon-installment-graph"></i>
-                                                    <span>754</span>
                                                 </div>
                                             </div>
                                             <a href="{{ route('detail-destination', ['slug' => $single->slug]) }}"

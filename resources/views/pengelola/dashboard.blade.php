@@ -253,4 +253,9 @@
         </div>
 
     </main>
+
+
+    @if (session('success'))
+        <x-toast type="success" />
+    @endif
 @endsection

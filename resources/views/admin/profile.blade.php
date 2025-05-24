@@ -105,9 +105,6 @@
                                 <div class="card-body">
                                     <div class=" border-bottom pb-4 mb-4">
                                         <h2 class="h3 text-body-emphasis mb-0">Change Password</h2>
-                                        @if (session('success-password'))
-                                            <small class="text-danger">{{ session('success-password') }}</small>
-                                        @endif
                                     </div>
                                     <form method="post" action="{{ route('admin.profile.edit-password') }}">
                                         @csrf
