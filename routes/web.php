@@ -10,9 +10,11 @@ use App\Http\Controllers\landing\LandingController;
 use App\Http\Controllers\pengelola\DestinationController as PengelolaDestinationController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\user\BookmarkController;
+use App\Http\Controllers\user\ReviewController;
 use App\Http\Controllers\user\RoleRequestController as UserRoleRequestController;
 use Illuminate\Auth\Events\Login;
 use Illuminate\Support\Facades\Route;
+
 
 
 
@@ -39,9 +41,12 @@ Route::middleware(['auth', 'role:user'])->prefix('user')->name('user.')->group(f
         echo 'notication';
     })->name('notification');
     // review
-    Route::get('/review', function(){
-        echo 'review';
-    })->name('review');
+    Route::prefix('review')->name('review.')->group(function () {
+        Route::get('/', [ReviewController::class, 'index'])->name('index');
+        Route::post('/store/{id}', [ReviewController::class, 'storeReview'])->name('store');
+        Route::post('/update/{id}', [ReviewController::class, 'updateReview'])->name('update');
+        Route::post('/delete/{id}', [ReviewController::class, 'deleteReview'])->name('delete');
+    });
     // bookmark
     Route::prefix('bookmark')->name('bookmark.')->group(function () {
         Route::get('/', [BookmarkController::class, 'index'])->name('index');

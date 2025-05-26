@@ -25,10 +25,10 @@ class LandingController extends Controller
         if ($slug) {
             $kategori = Kategori::where('slug', $slug)->first();
             if ($kategori) {
-                $destinasi = Destinasi::where('kategori_id', $kategori->id)->paginate(6);
+                $destinasi = Destinasi::with('reviews')->where('kategori_id', $kategori->id)->paginate(6);
             } else {
                 // Jika slug tidak ditemukan, bisa redirect atau tampilkan semua
-                $destinasi = Destinasi::paginate(6);
+                $destinasi = Destinasi::with('reviews')->paginate(6);
             }
         } else {
             $destinasi = Destinasi::paginate(6);
@@ -40,7 +40,7 @@ class LandingController extends Controller
     }
 
     public function destinationDetail($slug){
-        $destinasi = Destinasi::where('slug', $slug)->first();
+        $destinasi = Destinasi::with('reviews')->where('slug', $slug)->first();
         return view('public.detail-destination', compact('destinasi'));
     }
 }

@@ -93,7 +93,7 @@
                                                 </div>
                                                 <div class="post-comment">
                                                     <i class="hicon hicon-chat"></i>
-                                                    <span>36</span>
+                                                    <span>{{ $single->reviews->count() }}</span>
                                                 </div>
                                             </div>
                                             <a href="{{ route('detail-destination', ['slug' => $single->slug]) }}"

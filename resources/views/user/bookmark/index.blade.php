@@ -57,10 +57,15 @@
                                                 </div>
                                                 <div class="tour-booking justify-content-between">
                                                     <div>
-                                                        <span class="review-score">4.9</span>
+                                                        @php
+                                                            $avg = $bookmark->destinasi->reviews->avg('rating') ?? 0;
+                                                            $rounded = round($avg / 5) * 5;
+                                                            $class = max(5, min(50, $rounded));
+                                                        @endphp
+                                                        <span class="review-score">{{ $bookmark->destinasi->reviews->avg('rating') / 10 }}</span>
                                                         <span class="star-rate-view star-rate-size-sm me-2"><span
-                                                                class="star-value rate-50"></span></span>
-                                                        <small class="review-total"><span>(231 reviews)</span></small>
+                                                                class="star-value rate-{{ $class }}"></span></span>
+                                                        <small class="review-total"><span>({{ $bookmark->destinasi->reviews->count() }} reviews)</span></small>
                                                     </div>
                                                     <a href="{{ route('detail-destination', $bookmark->destinasi->slug) }}"
                                                         class="circle-icon circle-icon-link">
@@ -99,7 +104,7 @@
                 </div>
                 <div class="modal-content">
                     <form action="" method="POST" id="deleteForm">
-                     @csrf
+                        @csrf
                         <div class="modal-body text-center">
                             <p class="mb-0">Are you sure you want to remove this bookmark?</p>
                         </div>
@@ -126,4 +131,5 @@
                 });
             });
         </script>
-    @endsection
+    </div>
+@endsection

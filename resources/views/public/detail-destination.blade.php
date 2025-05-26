@@ -226,11 +226,17 @@
                                     <div class="horizontal-review rounded shadow-sm mb-4 aos-init" data-aos="fade">
                                         <h2 class="h4 review-title pb-4 mb-4 lh-base">Overall rating</h2>
                                         <div class="review-content">
-                                            <h3 class="review-score">4.9</h3>
+                                            <h3 class="review-score">{{ $destinasi->reviews->avg('rating') / 10 }}</h3>
                                             <div class="review-total">
+                                                @php
+                                                    $avg = $destinasi->reviews->avg('rating') ?? 0;
+                                                    $rounded = round($avg / 5) * 5;
+                                                    $class = max(5, min(50, $rounded));
+                                                @endphp
                                                 <span class="star-rate-view"><span
-                                                        class="star-value rate-10"></span></span>
-                                                <span><strong class="text-body">2,394</strong> reviews</span>
+                                                        class="star-value rate-{{ $class }}"></span></span>
+                                                <span><strong class="text-body">{{ $destinasi->reviews->count() }}</strong>
+                                                    reviews</span>
                                             </div>
                                         </div>
                                         <div class="review-label">
@@ -245,9 +251,22 @@
                                         <h3 class="h4 review-title">Leave Your Review</h3>
                                         <ul class="review-content">
                                             <li>
-                                                <button class="btn btn-primary  d-block w-100" type="button">
-                                                    <i class="hicon hicon-bold hicon-mmb-inbox"></i>
-                                                </button>
+                                                @if (Auth::check() && Auth::user()->role == 'user')
+                                                    <button class="btn btn-primary  d-block w-100" type="button"
+                                                        data-bs-toggle="modal" data-bs-target="#reviewModal">
+                                                        <i class="hicon hicon-bold hicon-mmb-inbox"></i>
+                                                    </button>
+                                                @elseif (Auth::check() && Auth::user()->role != 'user')
+                                                    <button class="btn btn-primary  d-block w-100" type="button"
+                                                        data-bs-toggle="modal" data-bs-target="#alertModal3">
+                                                        <i class="hicon hicon-bold hicon-mmb-inbox"></i>
+                                                    </button>
+                                                @else
+                                                    <button class="btn btn-primary  d-block w-100" type="button"
+                                                        data-bs-toggle="modal" data-bs-target="#alertModal4">
+                                                        <i class="hicon hicon-bold hicon-mmb-inbox"></i>
+                                                    </button>
+                                                @endif
                                             </li>
                                         </ul>
                                     </div>
@@ -263,120 +282,37 @@
                             <div class="card-body">
                                 <div class="border-bottom d-flex align-items-center pb-4 mb-4">
                                     <h3 class="h4 me-auto mb-0">Recent reviews</h3>
-                                    <strong>2,394 reviews</strong>
+                                    <strong>{{ count($destinasi->reviews) }} reviews</strong>
                                 </div>
-                                <div class="review-list">
-                                    <div class="review-item">
-                                        <div class="review-client">
-                                            <figure class="review-avatar">
-                                                <img src="{{ asset('assets') }}/img/avatars/a1.jpg" alt=""
-                                                    class="rounded-circle">
-                                            </figure>
-                                            <div class="review-name">
-                                                <strong>John Doe <small>(Italy)</small></strong>
-                                                <span class="star-rate-view star-rate-size-sm"><span
-                                                        class="star-value rate-45"></span></span>
+                                @forelse ($destinasi->reviews as $review)
+                                    <div class="review-list">
+                                        <div class="review-item">
+                                            <div class="review-client">
+                                                <figure class="review-avatar">
+                                                    <img src="{{ asset('storage/' . $review->user->image) }}"
+                                                        alt="" style="width: 70px; height: 70px;"
+                                                        onerror="this.onerror=null; this.src='{{ asset('assets/img/destinations/placeholder.webp') }}';"
+                                                        class="rounded-circle">
+                                                </figure>
+                                                <div class="review-name">
+                                                    <strong>{{ $review->user->name }}
+                                                        <small>({{ $review->user->role }})</small></strong>
+                                                    <span class="star-rate-view star-rate-size-sm"><span
+                                                            class="star-value rate-{{ $review->rating }}"></span></span>
+                                                </div>
+                                            </div>
+                                            <p>
+                                                {{ $review->komentar }}
+                                            </p>
+                                            <div class="review-date">
+                                                <small>{{ $review->created_at->format('d-M-Y') }}</small> - <button
+                                                    class="review-verify"
+                                                    style="background: none; border: none;">Reply</button>
                                             </div>
                                         </div>
-                                        <p>
-                                            "The 5-day tour of Noriva was fantastic! Stunning landscapes, well-organized
-                                            activities,
-                                            and friendly guides made the trip unforgettable. Highly recommend!"
-                                        </p>
-                                        <div class="review-date">
-                                            <small>February 9, 2023</small> - <span class="review-verify">Verified
-                                                booking</span>
-                                        </div>
                                     </div>
-                                    <div class="review-item">
-                                        <div class="review-client">
-                                            <figure class="review-avatar">
-                                                <img src="{{ asset('assets') }}/img/avatars/a2.jpg" alt=""
-                                                    class="rounded-circle">
-                                            </figure>
-                                            <div class="review-name">
-                                                <strong>Emily Smith <small>(USA)</small></strong>
-                                                <span class="star-rate-view star-rate-size-sm"><span
-                                                        class="star-value rate-45"></span></span>
-                                            </div>
-                                        </div>
-                                        <p>
-                                            "An incredible journey through Noriva! From breathtaking mountain views to
-                                            exciting water sports,
-                                            every day was packed with adventure and beauty. A must-visit!"
-                                        </p>
-                                        <div class="review-date">
-                                            <small>February 9, 2023</small> - <span class="review-verify">Verified
-                                                booking</span>
-                                        </div>
-                                    </div>
-                                    <div class="review-item">
-                                        <div class="review-client">
-                                            <figure class="review-avatar">
-                                                <img src="{{ asset('assets') }}/img/avatars/a3.jpg" alt=""
-                                                    class="rounded-circle">
-                                            </figure>
-                                            <div class="review-name">
-                                                <strong>Ariol Deep <small>(France)</small></strong>
-                                                <span class="star-rate-view star-rate-size-sm"><span
-                                                        class="star-value rate-45"></span></span>
-                                            </div>
-                                        </div>
-                                        <p>
-                                            "Our trip to Noriva exceeded expectations. The mix of scenic hikes, relaxing
-                                            lakeside days,
-                                            and cultural experiences made for a perfect vacation. Will definitely return!"
-                                        </p>
-                                        <div class="review-date">
-                                            <small>February 9, 2023</small> - <span class="review-verify">Verified
-                                                booking</span>
-                                        </div>
-                                    </div>
-                                    <div class="review-item">
-                                        <div class="review-client">
-                                            <figure class="review-avatar">
-                                                <img src="{{ asset('assets') }}/img/avatars/a5.jpg" alt=""
-                                                    class="rounded-circle">
-                                            </figure>
-                                            <div class="review-name">
-                                                <strong>Emma Ross <small>(UK)</small></strong>
-                                                <span class="star-rate-view star-rate-size-sm"><span
-                                                        class="star-value rate-45"></span></span>
-                                            </div>
-                                        </div>
-                                        <p>
-                                            "I loved every moment of this Noriva tour. The guided hikes, serene lakes,
-                                            and exploration of tropical forests were highlights. Excellent value and great
-                                            memories!"
-                                        </p>
-                                        <div class="review-date">
-                                            <small>February 9, 2023</small> - <span class="review-verify">Verified
-                                                booking</span>
-                                        </div>
-                                    </div>
-                                    <div class="review-item">
-                                        <div class="review-client">
-                                            <figure class="review-avatar">
-                                                <img src="{{ asset('assets') }}/img/avatars/a4.jpg" alt=""
-                                                    class="rounded-circle">
-                                            </figure>
-                                            <div class="review-name">
-                                                <strong>David Kane <small>(Germany)</small></strong>
-                                                <span class="star-rate-view star-rate-size-sm"><span
-                                                        class="star-value rate-45"></span></span>
-                                            </div>
-                                        </div>
-                                        <p>
-                                            "Fantastic 5-day itinerary in Noriva! Enjoyed everything from mountain climbs to
-                                            cultural experiences.
-                                            Well-organized, beautiful scenery, and a truly memorable trip."
-                                        </p>
-                                        <div class="review-date">
-                                            <small>February 9, 2023</small> - <span class="review-verify">Verified
-                                                booking</span>
-                                        </div>
-                                    </div>
-                                </div>
+                                @empty
+                                @endforelse
                                 <nav aria-label="Page navigation" class="text-center">
                                     <div class="text-center">
                                         <a href="#" class="fw-medium">
@@ -396,7 +332,7 @@
         <!-- /Customer Reviews -->
     </main>
 
-    {{-- alert modal --}}
+    {{-- alert bookmark modal --}}
     <div class="modal fade" id="alertModal1" tabindex="-1" aria-labelledby="alertModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
@@ -430,13 +366,106 @@
             </div>
         </div>
     </div>
-    {{-- alert modal --}}
-    {{-- toasts --}}
-    @if (session('success'))
-        <x-toast type="success" />
-    @endif
-    @if (session('error'))
-        <x-toast type="error" />
-    @endif
+    {{-- alert bookmark modal --}}
+    {{-- alert review modal --}}
+    <div class="modal fade" id="alertModal4" tabindex="-1" aria-labelledby="alertModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="alertModalLabel">Autentikasi Diperlukan</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Tutup"></button>
+                </div>
+
+                <div class="modal-body">
+                    Untuk menggunakan fitur <strong>leave review</strong>, Anda harus login terlebih dahulu.
+                    <br><br>
+                    Sudah punya akun? Silakan <a href="{{ route('login-form') }}">Login</a>.
+                    <br>
+                    Belum punya akun? Silakan <a href="{{ route('register-form') }}">Register</a> terlebih dahulu.
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="alertModal3" tabindex="-1" aria-labelledby="alertModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="alertModalLabel">Autentikasi Diperlukan</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Tutup"></button>
+                </div>
+
+                <div class="modal-body">
+                    Hanya role user yang bisa menggunakan fitur <strong>bookmark</strong>
+                </div>
+            </div>
+        </div>
+    </div>
+    {{-- alert review modal --}}
+
+    {{-- review modal --}}
+    @auth
+        <div class="modal fade" id="reviewModal" tabindex="-1" aria-labelledby="alertModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="alertModalLabel">{{ $destinasi->nama_destinasi }}</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Tutup"></button>
+                    </div>
+
+                    <div class="modal-body">
+                        <div class="review-list">
+                            <div class="">
+                                <div class="review-client">
+                                    <figure class="review-avatar">
+                                        <img src="{{ asset('storage/' . Auth::user()->image) }}" alt=""
+                                            class="rounded-circle" style="max-width: 100px;">
+                                    </figure>
+                                    <div class="review-name">
+                                        <strong>{{ Auth::user()->name }}</strong>
+                                        <small>({{ Auth::user()->role }})</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <form method="post" action="{{ route('user.review.store', ['id' => $destinasi->id]) }}">
+                            @csrf
+                            <div class="row g-4">
+                                <div class="col-12 col-md-12">
+                                    <select class="form-select shadow-sm dropdown-select" name="rating">
+                                        <option selected>-- Pilih Rating --</option>
+                                        <option value="50">5 ★ - Sangat Bagus</option>
+                                        <option value="40">4 ★ - Bagus</option>
+                                        <option value="30">3 ★ - Cukup</option>
+                                        <option value="20">2 ★ - Kurang</option>
+                                        <option value="10">1 ★ - Buruk</option>
+                                    </select>
+                                </div>
+                                <div class="col-12 col-md-12">
+                                    <div class="form-floating mb-4">
+                                        <textarea class="form-control shadow-sm" placeholder="Enter message..." id="txtMessage20" style="height:180px"
+                                            required="" name="komentar"></textarea>
+                                        <label for="txtMessage20">Comment</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-primary" id="btnSubmit20">
+                                <span>Submit</span>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {{-- review modal --}}
+
+        {{-- toasts --}}
+        @if (session('success'))
+            <x-toast type="success" />
+        @endif
+        @if (session('error'))
+            <x-toast type="error" />
+        @endif
+    @endauth
     {{-- toasts --}}
 @endsection
