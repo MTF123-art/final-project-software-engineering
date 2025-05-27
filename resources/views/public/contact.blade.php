@@ -65,13 +65,15 @@
                     <div class="col-12 col-xl-6">
                         <!-- Contact Form -->
                         <div class="form-contact rounded shadow-sm">
-                            <form class="needs-validation" method="post" novalidate="">
+                            <form class="needs-validation" method="post" novalidate=""
+                                action="{{ route('contact.store') }}" id="formContact">
+                                @csrf
                                 <div class="border-bottom pb-4 mb-4">
                                     <h2 class="text-white mb-0">Looking for any help?</h2>
                                 </div>
                                 <div class="alert d-none" role="alert" id="msg_alert"></div>
                                 <div class="form-floating mb-4">
-                                    <input id="txtYourName" type="text" name="yourname" class="form-control shadow-sm"
+                                    <input id="txtYourName" type="text" name="name" class="form-control shadow-sm"
                                         placeholder="Your Name" required="">
                                     <label for="txtYourName">Your Name *</label>
                                 </div>
@@ -108,4 +110,7 @@
         <!-- /About -->
 
     </main>
+    @if (session('success'))
+        <x-toast type="success" />
+    @endif
 @endsection

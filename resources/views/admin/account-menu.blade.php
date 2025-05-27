@@ -48,6 +48,11 @@
                     </a>
                 </li>
                 <li class="menu-item">
+                    <a href="{{ route('admin.customer-message.index') }}">
+                        <i class="hicon hicon-bold hicon-email-envelope"></i> <span>Customer Message</span>
+                    </a>
+                </li>
+                <li class="menu-item">
                     <a href="./security.html">
                         <i class="hicon hicon-bold hicon-email-envelope"></i> <span>Notifikasi</span>
                     </a>

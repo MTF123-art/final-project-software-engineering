@@ -10,6 +10,7 @@ use App\Http\Controllers\landing\LandingController;
 use App\Http\Controllers\pengelola\DestinationController as PengelolaDestinationController;
 use App\Http\Controllers\pengelola\ReviewController as PengelolaReviewController;
 use App\Http\Controllers\admin\ReviewController as AdminReviewController;
+use App\Http\Controllers\admin\CustomerMessageController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\user\BookmarkController;
 use App\Http\Controllers\user\ReviewController;
@@ -24,6 +25,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [LandingController::class, 'home'])->name('home');
 Route::get('/about', [LandingController::class, 'about'])->name('about');
 Route::get('/contact', [LandingController::class, 'contact'])->name('contact');
+Route::post('/contact/store', [LandingController::class, 'contactStore'])->name('contact.store');
 Route::get('/destination/filter/{slug?}', [LandingController::class, 'destination'])->name('destination');
 Route::get('/destination/detail/{slug}', [LandingController::class, 'destinationDetail'])->name('detail-destination');
 
@@ -116,6 +118,11 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->grou
         Route::get('/',[AdminReviewController::class , 'index'])->name('index');
         Route::post('/update/{id}',[AdminReviewController::class , 'updateStatus'])->name('update');
         Route::post('/delete/{id}',[AdminReviewController::class , 'delete'])->name('delete');
+    });
+
+    Route::prefix('customer-message')->name('customer-message.')->group(function () {
+        Route::get('/', [CustomerMessageController::class, 'index'])->name('index');
+        Route::post('/delete/{id}', [CustomerMessageController::class, 'delete'])->name('delete');
     });
     
 });

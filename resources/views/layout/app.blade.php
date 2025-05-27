@@ -300,19 +300,16 @@
                             <h2 class="h4 pb-3">Explore Sumenep</h2>
                             <ul class="footer-link">
                                 <li class="link-item">
-                                    <a href="about.html">About us</a>
+                                    <a href="{{ route('home') }}">Home</a>
                                 </li>
                                 <li class="link-item">
-                                    <a href="destinations-1.html">Destinations</a>
+                                    <a href="{{ route('destination') }}">Destinations</a>
                                 </li>
                                 <li class="link-item">
-                                    <a href="tour-packages-1.html">Moliva Tours</a>
+                                    <a href="{{ route('about') }}">About</a>
                                 </li>
                                 <li class="link-item">
-                                    <a href="post-list.html">Travel insight</a>
-                                </li>
-                                <li class="link-item">
-                                    <a href="contact.html">Contact us</a>
+                                    <a href="{{ route('contact') }}">Contact us</a>
                                 </li>
                             </ul>
                         </div>
@@ -329,18 +326,6 @@
                 <div class="row">
                     <div class="col-12 col-md-6">
                         <p class="mb-lg-0">© 2024 Moliva Travel Agency. All rights reserved.</p>
-                    </div>
-                    <div class="col-12 col-md-6">
-                        <div class="text-start text-md-end">
-                            <ul class="list-inline mb-lg-0">
-                                <li class="list-inline-item">
-                                    <a href="#">Privacy Policy</a>
-                                </li>
-                                <li class="list-inline-item">
-                                    <a href="#">Terms of Use</a>
-                                </li>
-                            </ul>
-                        </div>
                     </div>
                 </div>
             </div>

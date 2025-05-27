@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\landing;
 
 use App\Http\Controllers\Controller;
+use App\Models\Contact;
 use App\Models\Destinasi;
 use App\Models\Kategori;
 use Illuminate\Http\Request;
@@ -22,6 +23,26 @@ class LandingController extends Controller
     {
         return view('public.contact');
     }
+
+    public function contactStore(Request $request)
+    {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|max:255',
+            'subject' => 'required|string|max:255',
+            'message' => 'required|string',
+        ]);
+
+        Contact::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'subject' => $request->subject,
+            'message' => $request->message,
+        ]);
+
+        return redirect()->back()->with('success', 'Pesan Anda telah terkirim!');
+    }
+
     public function destination($slug = null)
     {
         if ($slug) {
