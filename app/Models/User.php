@@ -41,7 +41,7 @@ class User extends Authenticatable
 
     public function destinasi()
     {
-        return $this->hasMany(Destinasi::class, 'user_id', 'id');
+        return $this->hasOne(Destinasi::class, 'user_id', 'id');
     }
 
     public function bookmakrs()

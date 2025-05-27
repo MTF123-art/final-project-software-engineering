@@ -235,7 +235,8 @@
                                                 @endphp
                                                 <span class="star-rate-view"><span
                                                         class="star-value rate-{{ $class }}"></span></span>
-                                                <span><strong class="text-body">{{ $destinasi->reviews->count() }}</strong>
+                                                <span><strong
+                                                        class="text-body">{{ $destinasi->reviews->count() }}</strong>
                                                     reviews</span>
                                             </div>
                                         </div>
@@ -285,32 +286,34 @@
                                     <strong>{{ count($destinasi->reviews) }} reviews</strong>
                                 </div>
                                 @forelse ($destinasi->reviews as $review)
-                                    <div class="review-list">
-                                        <div class="review-item">
-                                            <div class="review-client">
-                                                <figure class="review-avatar">
-                                                    <img src="{{ asset('storage/' . $review->user->image) }}"
-                                                        alt="" style="width: 70px; height: 70px;"
-                                                        onerror="this.onerror=null; this.src='{{ asset('assets/img/destinations/placeholder.webp') }}';"
-                                                        class="rounded-circle">
-                                                </figure>
-                                                <div class="review-name">
-                                                    <strong>{{ $review->user->name }}
-                                                        <small>({{ $review->user->role }})</small></strong>
-                                                    <span class="star-rate-view star-rate-size-sm"><span
-                                                            class="star-value rate-{{ $review->rating }}"></span></span>
+                                    @if ($review->status != 'hidden')
+                                        <div class="review-list">
+                                            <div class="review-item">
+                                                <div class="review-client">
+                                                    <figure class="review-avatar">
+                                                        <img src="{{ asset('storage/' . $review->user->image) }}"
+                                                            alt="" style="width: 70px; height: 70px;"
+                                                            onerror="this.onerror=null; this.src='{{ asset('assets/img/destinations/placeholder.webp') }}';"
+                                                            class="rounded-circle">
+                                                    </figure>
+                                                    <div class="review-name">
+                                                        <strong>{{ $review->user->name }}
+                                                            <small>({{ $review->user->role }})</small></strong>
+                                                        <span class="star-rate-view star-rate-size-sm"><span
+                                                                class="star-value rate-{{ $review->rating }}"></span></span>
+                                                    </div>
+                                                </div>
+                                                <p>
+                                                    {{ $review->komentar }}
+                                                </p>
+                                                <div class="review-date">
+                                                    <small>{{ $review->created_at->format('d-M-Y') }}</small> - <button
+                                                        class="review-verify"
+                                                        style="background: none; border: none;">Reply</button>
                                                 </div>
                                             </div>
-                                            <p>
-                                                {{ $review->komentar }}
-                                            </p>
-                                            <div class="review-date">
-                                                <small>{{ $review->created_at->format('d-M-Y') }}</small> - <button
-                                                    class="review-verify"
-                                                    style="background: none; border: none;">Reply</button>
-                                            </div>
                                         </div>
-                                    </div>
+                                    @endif
                                 @empty
                                 @endforelse
                                 <nav aria-label="Page navigation" class="text-center">
@@ -419,7 +422,9 @@
                                 <div class="review-client">
                                     <figure class="review-avatar">
                                         <img src="{{ asset('storage/' . Auth::user()->image) }}" alt=""
-                                            class="rounded-circle" style="max-width: 100px;">
+                                            onerror="this.onerror=null; this.src='{{ asset('assets/img/destinations/placeholder.webp') }}';"
+                                            style="width: 70px; height: 70px;" class="rounded-circle"
+                                            style="max-width: 100px;">
                                     </figure>
                                     <div class="review-name">
                                         <strong>{{ Auth::user()->name }}</strong>

@@ -19,6 +19,7 @@ return new class extends Migration
             $table->foreign("destinasi_id")->references("id")->on("destinasis")->onDelete("cascade");
             $table->integer("rating");
             $table->text("komentar")->nullable();
+            $table->enum('status', ['hidden', 'visible'])->default('visible');
             $table->timestamps();
         });
     }

@@ -8,6 +8,8 @@ use App\Http\Controllers\auth\LoginController;
 use App\Http\Controllers\auth\RegisterController;
 use App\Http\Controllers\landing\LandingController;
 use App\Http\Controllers\pengelola\DestinationController as PengelolaDestinationController;
+use App\Http\Controllers\pengelola\ReviewController as PengelolaReviewController;
+use App\Http\Controllers\admin\ReviewController as AdminReviewController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\user\BookmarkController;
 use App\Http\Controllers\user\ReviewController;
@@ -73,11 +75,11 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->grou
     Route::get('/notication', function(){
         echo 'notication';
     })->name('notification');
-    // // profile routes
+
     Route::get('/profile', [ProfileController::class,'index'])->name('profile');
     Route::post('/profile/edit', [ProfileController::class,'editProfile'])->name('profile.edit');
     Route::post('/profile/edit-password', [ProfileController::class,'editPassword'])->name('profile.edit-password');
-    // manage users
+
     Route::prefix('user-management')->name('user-management.')->group(function () {
         Route::get('/', [UserController::class, 'index'])->name('index');
         Route::get('/filter/{role}', [UserController::class, 'filter'])->name('filter');
@@ -109,6 +111,12 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->grou
         Route::post('/reject/{id}', [AdminRoleRequestController::class, 'reject'])->name('reject');
         Route::post('/delete/{id}', [AdminRoleRequestController::class, 'delete'])->name('delete');
     });
+
+    Route::prefix('review-management')->name('review-management.')->group(function () {
+        Route::get('/',[AdminReviewController::class , 'index'])->name('index');
+        Route::post('/update/{id}',[AdminReviewController::class , 'updateStatus'])->name('update');
+        Route::post('/delete/{id}',[AdminReviewController::class , 'delete'])->name('delete');
+    });
     
 });
 
@@ -129,6 +137,11 @@ Route::middleware(['auth', 'role:pengelola'])->prefix('pengelola')->name('pengel
         Route::get('/', [PengelolaDestinationController::class, 'index'])->name('index');
         Route::post('/update', [PengelolaDestinationController::class, 'update'])->name('update');
         Route::post('/submit', [PengelolaDestinationController::class, 'submit'])->name('submit');
+    });
+    
+    Route::prefix('review')->name('review.')->group(function () {
+        Route::get('/', [PengelolaReviewController::class, 'index'])->name('index');
+        Route::post('/update/{id}', [PengelolaReviewController::class, 'updateStatus'])->name('update');
     });
 });
 

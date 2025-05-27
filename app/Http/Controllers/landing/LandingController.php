@@ -11,7 +11,8 @@ class LandingController extends Controller
 {
     public function home()
     {
-        return view('public.home');
+        $popular = Destinasi::withCount('reviews')->orderByDesc('reviews_count')->take(6)->get();
+        return view('public.home', compact('popular'));
     }
     public function about()
     {
@@ -21,13 +22,13 @@ class LandingController extends Controller
     {
         return view('public.contact');
     }
-    public function destination($slug = null){
+    public function destination($slug = null)
+    {
         if ($slug) {
             $kategori = Kategori::where('slug', $slug)->first();
             if ($kategori) {
                 $destinasi = Destinasi::with('reviews')->where('kategori_id', $kategori->id)->paginate(6);
             } else {
-                // Jika slug tidak ditemukan, bisa redirect atau tampilkan semua
                 $destinasi = Destinasi::with('reviews')->paginate(6);
             }
         } else {
@@ -39,7 +40,8 @@ class LandingController extends Controller
         return view('public.destination', compact('kategori', 'destinasi'));
     }
 
-    public function destinationDetail($slug){
+    public function destinationDetail($slug)
+    {
         $destinasi = Destinasi::with('reviews')->where('slug', $slug)->first();
         return view('public.detail-destination', compact('destinasi'));
     }

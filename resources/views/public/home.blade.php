@@ -18,7 +18,7 @@
                     </h1>
                 </div>
             </div>
-            
+
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb mb-0">
                     <li class="breadcrumb-item"><a href="./index.html">Home</a></li>
@@ -71,132 +71,31 @@
                 <!-- Title -->
                 <!-- Destination list -->
                 <div class="row">
-                    <div class="col-12 col-xxl-3 col-xl-4 col-md-6" data-aos="fade">
-                        <!-- Destination -->
-                        <a href="{{ route('detail-destination', ['slug'=> "sasasa"]) }}" class="destination bottom-overlay hover-effect rounded mb-4" onerror="this.onerror=null; this.src='{{ asset('assets/img/destinations/placeholder.webp') }}';">
-                            <figure class="image-hover image-hover-overlay">
-                                <img src="{{ asset('assets') }}/img/destinations/d1.jpg" alt="">
-                                <i class="hicon hicon-plus-thin image-hover-icon"></i>
-                            </figure>
-                            <div class="bottom-overlay-content">
-                                <div class="destination-content">
-                                    <div class="destination-info">
-                                        <h3 class="destination-title">Noriva</h3>
-                                        <span>162 tours</span>
+
+                    @forelse ($popular as $single)
+                        <div class="col-12 col-xxl-3 col-xl-4 col-md-6" data-aos="fade">
+                            <!-- Destination -->
+                            <a href="{{ route('detail-destination', ['slug' => $single->slug]) }}"
+                                class="destination bottom-overlay hover-effect rounded mb-4">
+                                <figure class="image-hover image-hover-overlay">
+                                    <img src="{{ asset('storage/' . $single->highlight_photo) }}" alt=""
+                                        onerror="this.onerror=null; this.src='{{ asset('assets/img/destinations/placeholder.webp') }}';">
+                                    <i class="hicon hicon-plus-thin image-hover-icon"></i>
+                                </figure>
+                                <div class="bottom-overlay-content">
+                                    <div class="destination-content">
+                                        <div class="destination-info">
+                                            <h3 class="destination-title">{{ $single->nama_destinasi }}</h3>
+                                            <span>{{ $single->reviews->count() }} Reviews</span>
+                                        </div>
                                     </div>
-                                    <span class="circle-icon circle-icon-link">
-                                        <i class="hicon hicon-flights-pin"></i>
-                                    </span>
                                 </div>
-                            </div>
-                        </a>
-                        <!-- /Destination -->
-                    </div>
-                    <div class="col-12 col-xxl-3 col-xl-4 col-md-6" data-aos="fade">
-                        <!-- Destination -->
-                        <a href="{{ route('detail-destination', ['slug'=> "sasasa"]) }}" class="destination bottom-overlay hover-effect rounded mb-4">
-                            <figure class="image-hover image-hover-overlay">
-                                <img src="{{ asset('assets') }}/img/destinations/d2.jpg" alt="">
-                                <i class="hicon hicon-plus-thin image-hover-icon"></i>
-                            </figure>
-                            <div class="bottom-overlay-content">
-                                <div class="destination-content">
-                                    <div class="destination-info">
-                                        <h3 class="destination-title">Kardal</h3>
-                                        <span>127 tours</span>
-                                    </div>
-                                    <span class="circle-icon circle-icon-link">
-                                        <i class="hicon hicon-flights-pin"></i>
-                                    </span>
-                                </div>
-                            </div>
-                        </a>
-                        <!-- /Destination -->
-                    </div>
-                    <div class="col-12 col-xxl-3 col-xl-4 col-md-6" data-aos="fade">
-                        <!-- Destination -->
-                        <a href="{{ route('detail-destination', ['slug'=> "sasasa"]) }}" class="destination bottom-overlay hover-effect rounded mb-4">
-                            <figure class="image-hover image-hover-overlay">
-                                <img src="{{ asset('assets') }}/img/destinations/d3.jpg" alt="">
-                                <i class="hicon hicon-plus-thin image-hover-icon"></i>
-                            </figure>
-                            <div class="bottom-overlay-content">
-                                <div class="destination-content">
-                                    <div class="destination-info">
-                                        <h3 class="destination-title">Leront</h3>
-                                        <span>155 tours</span>
-                                    </div>
-                                    <span class="circle-icon circle-icon-link">
-                                        <i class="hicon hicon-flights-pin"></i>
-                                    </span>
-                                </div>
-                            </div>
-                        </a>
-                        <!-- /Destination -->
-                    </div>
-                    <div class="col-12 col-xxl-3 col-xl-4 col-md-6" data-aos="fade">
-                        <!-- Destination -->
-                        <a href="{{ route('detail-destination', ['slug'=> "sasasa"]) }}" class="destination bottom-overlay hover-effect rounded mb-4">
-                            <figure class="image-hover image-hover-overlay">
-                                <img src="{{ asset('assets') }}/img/destinations/d4.jpg" alt="">
-                                <i class="hicon hicon-plus-thin image-hover-icon"></i>
-                            </figure>
-                            <div class="bottom-overlay-content">
-                                <div class="destination-content">
-                                    <div class="destination-info">
-                                        <h3 class="destination-title">Fruska</h3>
-                                        <span>210 tours</span>
-                                    </div>
-                                    <span class="circle-icon circle-icon-link">
-                                        <i class="hicon hicon-flights-pin"></i>
-                                    </span>
-                                </div>
-                            </div>
-                        </a>
-                        <!-- /Destination -->
-                    </div>
-                    <div class="col-12 col-xxl-3 col-xl-4 col-md-6" data-aos="fade">
-                        <!-- Destination -->
-                        <a href="{{ route('detail-destination', ['slug'=> "sasasa"]) }}" class="destination bottom-overlay hover-effect rounded mb-4">
-                            <figure class="image-hover image-hover-overlay">
-                                <img src="{{ asset('assets') }}/img/destinations/d6.jpg" alt="">
-                                <i class="hicon hicon-plus-thin image-hover-icon"></i>
-                            </figure>
-                            <div class="bottom-overlay-content">
-                                <div class="destination-content">
-                                    <div class="destination-info">
-                                        <h3 class="destination-title">Zolmir</h3>
-                                        <span>176 tours</span>
-                                    </div>
-                                    <span class="circle-icon circle-icon-link">
-                                        <i class="hicon hicon-flights-pin"></i>
-                                    </span>
-                                </div>
-                            </div>
-                        </a>
-                        <!-- /Destination -->
-                    </div>
-                    <div class="col-12 col-xxl-3 col-xl-4 col-md-6" data-aos="fade">
-                        <!-- Destination -->
-                        <a href="{{ route('detail-destination', ['slug'=> "sasasa"]) }}" class="destination bottom-overlay hover-effect rounded mb-4">
-                            <figure class="image-hover image-hover-overlay">
-                                <img src="{{ asset('assets') }}/img/destinations/d5.jpg" alt="">
-                                <i class="hicon hicon-plus-thin image-hover-icon"></i>
-                            </figure>
-                            <div class="bottom-overlay-content">
-                                <div class="destination-content">
-                                    <div class="destination-info">
-                                        <h3 class="destination-title">Sitafo</h3>
-                                        <span>321 tours</span>
-                                    </div>
-                                    <span class="circle-icon circle-icon-link">
-                                        <i class="hicon hicon-flights-pin"></i>
-                                    </span>
-                                </div>
-                            </div>
-                        </a>
-                        <!-- /Destination -->
-                    </div>
+                            </a>
+                            <!-- /Destination -->
+                        </div>
+
+                    @empty
+                    @endforelse
                 </div>
             </div>
         </section>

@@ -30,7 +30,7 @@
                     </a>
                 </li>
                 <li class="menu-item">
-                    <a href="./settings.html">
+                    <a href="{{ route('pengelola.review.index') }}">
                         <i class="hicon hicon-bold hicon-mmb-inbox"></i> <span>Review</span>
                     </a>
                 </li>
