@@ -58,9 +58,8 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-
                                                 @php $no = $messages->firstItem(); @endphp
-                                                @foreach ($messages as $single)
+                                                @forelse ($messages as $single)
                                                     <tr>
                                                         <td class="text-center">
                                                             <span>{{ $no++ }}</span>
@@ -69,14 +68,13 @@
                                                             <small class="text-nowrap">{{ $single->name }}</small>
                                                         </td>
                                                         <td class="text-center">
-                                                            <small
-                                                                class="text-nowrap">{{ $single->email }}</small>
+                                                            <small class="text-nowrap">{{ $single->email }}</small>
                                                         </td>
                                                         <td class="text-center">
-                                                            <small class="text-nowrap">{{ $single->subject}}</small>
+                                                            <small class="text-nowrap">{{ $single->subject }}</small>
                                                         </td>
-                                                        <td class="text-center " style="max-width: 200px;">
-                                                            <small class="text-wrap ">{{ $single->message }}</small>
+                                                        <td class="text-center" style="max-width: 200px;">
+                                                            <small class="text-wrap">{{ $single->message }}</small>
                                                         </td>
                                                         <td class="text-center">
                                                             <small
@@ -85,19 +83,26 @@
                                                         <td class="text-center">
                                                             <form
                                                                 action="{{ route('admin.customer-message.delete', ['id' => $single->id]) }}"
-                                                                class="m-1" method="POST" class="d-inline">
+                                                                class="m-1" method="POST">
                                                                 @csrf
                                                                 <button type="submit"
                                                                     onclick="return confirm('Are you sure you want to delete this message?')"
                                                                     class="circle-icon circle-icon-link circle-icon-sm"
                                                                     title="Delete Review">
-                                                                    <i class="hicon hicon-trash "></i>
+                                                                    <i class="hicon hicon-trash"></i>
                                                                 </button>
                                                             </form>
                                                         </td>
                                                     </tr>
-                                                @endforeach
+                                                @empty
+                                                    <tr>
+                                                        <td colspan="7" class="text-center text-muted">
+                                                            <em>No customer messages found.</em>
+                                                        </td>
+                                                    </tr>
+                                                @endforelse
                                             </tbody>
+
                                         </table>
                                     </div>
                                     {{ $messages->links('vendor.pagination.bootstrap-5') }}

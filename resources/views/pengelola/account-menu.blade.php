@@ -36,7 +36,7 @@
                 </li>
                 <li class="menu-item">
                     <a href="{{ route('pengelola.notification') }}">
-                        <i class="hicon hicon-bold hicon-email-envelope"></i> <span>Notifikasi</span>
+                        <i class="hicon hicon-bold hicon-bell-alerts"></i> <span>Notifikasi</span>
                     </a>
                 </li>
             </ul>

@@ -105,7 +105,7 @@
                                 <div class="d-flex align-items-center ms-auto">
                                     <a href="{{ route(Auth::user()->role . '.notification') }}"
                                         class="circle-icon wishlist-icon me-4">
-                                        <i class="hicon hicon-bold hicon-email-envelope"></i>
+                                        <i class="hicon hicon-bold hicon-bell-alerts"></i>
                                         <span>5</span>
                                     </a>
                                 </div>
