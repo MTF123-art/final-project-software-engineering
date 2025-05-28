@@ -58,7 +58,7 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-
+                                                
                                                 @php $no = $reviews->firstItem(); @endphp
                                                 @forelse ($reviews as $single)
                                                     <tr>
