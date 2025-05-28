@@ -60,7 +60,7 @@
                                             <tbody>
 
                                                 @php $no = $reviews->firstItem(); @endphp
-                                                @foreach ($reviews as $single)
+                                                @forelse ($reviews as $single)
                                                     <tr>
                                                         <td class="text-center">
                                                             <span>{{ $no++ }}</span>
@@ -108,7 +108,13 @@
                                                             </form>
                                                         </td>
                                                     </tr>
-                                                @endforeach
+                                                @empty
+                                                    <tr>
+                                                        <td colspan="7" class="text-center text-muted">
+                                                            <em>No user review found.</em>
+                                                        </td>
+                                                    </tr>
+                                                @endforelse
                                             </tbody>
                                         </table>
                                     </div>

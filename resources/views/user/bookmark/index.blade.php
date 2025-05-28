@@ -25,7 +25,7 @@
                         <!-- Tour list -->
                         <div class="tour-grid pe-xl-4 me-xl-2">
                             <div class="row">
-                                @foreach ($bookmarks as $bookmark)
+                                @forelse ($bookmarks as $bookmark)
                                     <div class="col-12 col-xxl-4 col-md-6 aos-init aos-animate" data-aos="fade">
                                         <!-- Tour -->
                                         <div class="tour-item rounded shadow-sm hover-effect mb-4">
@@ -62,10 +62,12 @@
                                                             $rounded = round($avg / 5) * 5;
                                                             $class = max(5, min(50, $rounded));
                                                         @endphp
-                                                        <span class="review-score">{{ $bookmark->destinasi->reviews->avg('rating') / 10 }}</span>
+                                                        <span
+                                                            class="review-score">{{ $bookmark->destinasi->reviews->avg('rating') / 10 }}</span>
                                                         <span class="star-rate-view star-rate-size-sm me-2"><span
                                                                 class="star-value rate-{{ $class }}"></span></span>
-                                                        <small class="review-total"><span>({{ $bookmark->destinasi->reviews->count() }} reviews)</span></small>
+                                                        <small class="review-total"><span>({{ $bookmark->destinasi->reviews->count() }}
+                                                                reviews)</span></small>
                                                     </div>
                                                     <a href="{{ route('detail-destination', $bookmark->destinasi->slug) }}"
                                                         class="circle-icon circle-icon-link">
@@ -76,7 +78,16 @@
                                         </div>
                                         <!-- /Tour -->
                                     </div>
-                                @endforeach
+                                @empty
+                                    <div class="col-12 text-center my-5">
+                                        <h4 class="text-muted">Belum ada destinasi favorit</h4>
+                                        <p class="text-muted">Tambahkan destinasi ke daftar favoritmu untuk akses lebih
+                                            cepat di kemudian hari.</p>
+                                        <a href="{{ route('destination') }}" class="btn btn-primary mt-3">
+                                            Jelajahi Destinasi
+                                        </a>
+                                    </div>
+                                @endforelse
                             </div>
                         </div>
                         <!-- Tour list -->

@@ -12,43 +12,43 @@
                 </div>
             </div>
             <ul class="account-menu fw-medium mb-0">
-                <li class="menu-item active">
-                    <a href="{{ route('admin.dashboard') }}">
+                <li class="menu-item">
+                    <a href="{{ route('admin.dashboard') }}" class="{{ request()->routeIs('admin.dashboard') ? 'active' : '' }}">
                         <i class="hicon hicon-bold hicon-ycs-dashboard"></i> <span>Dashboard</span>
                     </a>
                 </li>
-                <li class="menu-item">
-                    <a href="{{ route('admin.profile') }}">
+                <li class="menu-item ">
+                    <a href="{{ route('admin.profile') }}" class="{{ request()->routeIs('admin.profile') ? 'active' : '' }}">
                         <i class="hicon hicon-bold hicon-menu-account"></i> <span>My Profile</span>
                     </a>
                 </li>
-                <li class="menu-item">
-                    <a href="{{ route('admin.user-management.index') }}">
+                <li class="menu-item ">
+                    <a href="{{ route('admin.user-management.index') }}" class="{{ request()->routeIs('admin.user-management.index') ? 'active' : '' }}">
                         <i class="hicon hicon-bold hicon-occupancy"></i> <span>Users Management</span>
                     </a>
                 </li>
-                <li class="menu-item">
-                    <a href="{{ route('admin.role-request.index') }}">
+                <li class="menu-item ">
+                    <a href="{{ route('admin.role-request.index') }}" class="{{ request()->routeIs('admin.role-request.index') ? 'active' : '' }}">
                         <i class="hicon hicon-bold hicon-upload-your-logo"></i> <span>Role Request Management</span>
                     </a>
                 </li>
                 <li class="menu-item">
-                    <a href="{{ route('admin.destination.index') }}">
+                    <a href="{{ route('admin.destination.index') }}" class="{{ request()->routeIs('admin.destination.index') ? 'active' : '' }}">
                         <i class="hicon hicon-bold hicon-poi-text-search"></i> <span>Manajemen Destinasi</span>
                     </a>
                 </li>
-                <li class="menu-item">
-                    <a href="{{ route('admin.category.index') }}">
+                <li class="menu-item ">
+                    <a href="{{ route('admin.category.index') }}" class="{{ request()->routeIs('admin.category.index') ? 'active' : '' }}">
                         <i class="hicon hicon-bold hicon-menu-calendar"></i> <span>Manajemen Kategori</span>
                     </a>
                 </li>
-                <li class="menu-item">
-                    <a href="{{ route('admin.review-management.index') }}">
+                <li class="menu-item ">
+                    <a href="{{ route('admin.review-management.index') }}" class="{{ request()->routeIs('admin.review-management.index') ? 'active' : '' }}">
                         <i class="hicon hicon-bold hicon-mmb-inbox"></i> <span>Review Management</span>
                     </a>
                 </li>
-                <li class="menu-item">
-                    <a href="{{ route('admin.customer-message.index') }}">
+                <li class="menu-item ">
+                    <a href="{{ route('admin.customer-message.index') }}" class="{{ request()->routeIs('admin.customer.index') ? 'active' : '' }}">
                         <i class="hicon hicon-bold hicon-email-envelope"></i> <span>Customer Message</span>
                     </a>
                 </li>

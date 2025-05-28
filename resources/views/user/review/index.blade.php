@@ -42,7 +42,8 @@
                                                 <div class="d-md-flex pt-4 pt-md-0">
                                                     <div class="pe-4 flex-grow-1">
                                                         <h2 class="h5 mb-2">
-                                                            <a href="{{ route('detail-destination', $review->destinasi->slug) }}" class="link-dark link-hover">
+                                                            <a href="{{ route('detail-destination', $review->destinasi->slug) }}"
+                                                                class="link-dark link-hover">
                                                                 {{ $review->destinasi->nama_destinasi }}
                                                             </a>
                                                         </h2>
@@ -84,6 +85,13 @@
                                 </div>
 
                             @empty
+                                <div class="col-12 text-center my-5">
+                                    <h4 class="text-muted">Belum ada ulasan yang ditulis</h4>
+                                    <p class="text-muted">Kunjungi destinasi dan bagikan pengalamanmu.</p>
+                                    <a href="{{ route('destination') }}" class="btn btn-primary mt-3">
+                                        Jelajahi Destinasi
+                                    </a>
+                                </div>
                             @endforelse
                         </div>
                         <!-- /Tours -->
@@ -194,7 +202,7 @@
             const komentar = button.dataset.komentar;
             const destinasi = button.dataset.destinasi;
 
-            updateForm.action = `/user/review/update/${id}`;    
+            updateForm.action = `/user/review/update/${id}`;
 
             for (let option of ratingSelect.options) {
                 option.selected = (option.value === rating);
@@ -204,7 +212,7 @@
             alertModalLabel.textContent = destinasi;
         });
     </script>
-    
+
 
 
 @endsection

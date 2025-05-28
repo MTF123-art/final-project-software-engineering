@@ -13,32 +13,32 @@
             </div>
             <ul class="account-menu fw-medium mb-0">
                 <li class="menu-item active">
-                    <a href="{{ route('user.dashboard') }}">
+                    <a href="{{ route('user.dashboard') }}" class="{{ request()->routeIs('user.dashboard') ? 'active' : '' }}">
                         <i class="hicon hicon-bold hicon-ycs-dashboard"></i> <span>Dashboard</span>
                     </a>
                 </li>
                 <li class="menu-item">
-                    <a href="{{ route('user.profile') }}">
+                    <a href="{{ route('user.profile') }}" class="{{ request()->routeIs('user.profile') ? 'active' : '' }}">
                         <i class="hicon hicon-bold hicon-menu-account"></i> <span>My Profile</span>
                     </a>
                 </li>
                 <li class="menu-item">
-                    <a href="{{ route('user.bookmark.index') }}">
+                    <a href="{{ route('user.bookmark.index') }}" class="{{ request()->routeIs('user.bookmark.index') ? 'active' : '' }}">
                         <i class="hicon hicon-bold hicon-dynamic-banner"></i> <span>Bookmark</span>
                     </a>
                 </li>
                 <li class="menu-item">
-                    <a href="{{ route('user.review.index') }}">
+                    <a href="{{ route('user.review.index') }}" class="{{ request()->routeIs('user.review.index') ? 'active' : '' }}">
                         <i class="hicon hicon-bold hicon-mmb-inbox"></i> <span>Review</span>
                     </a>
                 </li>
                 <li class="menu-item">
-                    <a href="{{ route('user.notification') }}">
+                    <a href="{{ route('user.notification') }}" class="{{ request()->routeIs('user.notification') ? 'active' : '' }}">
                         <i class="hicon hicon-bold hicon-bell-alerts"></i> <span>Notifikasi</span>
                     </a>
                 </li>
                 <li class="menu-item">
-                    <a href="{{ route('user.upgrade') }}" title="Daftar sebagai pengelola wisata">
+                    <a href="{{ route('user.upgrade') }}" title="Daftar sebagai pengelola wisata" class="{{ request()->routeIs('user.upgrade') ? 'active' : '' }}">
                         <i class="hicon hicon-bold hicon-upload-your-logo"></i> <span>Upgrade Account</span>
                     </a>
                 </li>

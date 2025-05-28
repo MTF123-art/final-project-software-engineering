@@ -58,7 +58,7 @@
                                             </thead>
                                             <tbody>
                                                 @php $no = $all->firstItem(); @endphp
-                                                @foreach ($all as $single)
+                                                @forelse ($all as $single)
                                                     <tr>
                                                         <td class="text-center">
                                                             <span>{{ $no++ }}</span>
@@ -90,7 +90,13 @@
                                                             </button>
                                                         </td>
                                                     </tr>
-                                                @endforeach
+                                                @empty
+                                                    <tr>
+                                                        <td colspan="7" class="text-center text-muted">
+                                                            <em>No category found.</em>
+                                                        </td>
+                                                    </tr>
+                                                @endforelse
                                             </tbody>
                                         </table>
                                     </div>
