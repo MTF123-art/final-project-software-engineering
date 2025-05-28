@@ -95,6 +95,12 @@
                         </div>
 
                     @empty
+                        <div class="col-12">
+                            <div class="post shadow-sm rounded text-center p-5 mb-4">
+                                <h4 class="mb-2">Tidak ada destinasi yang ditemukan</h4>
+                                <p class="text-muted mb-0">Silakan coba lagi nanti atau pilih kategori lain.</p>
+                            </div>
+                        </div>
                     @endforelse
                 </div>
             </div>

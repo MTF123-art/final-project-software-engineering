@@ -35,15 +35,18 @@
                             id="splide01-track" style="padding-left: 0px; padding-right: 0px;" aria-live="polite"
                             aria-atomic="true">
                             <ul class="splide__list cat-list" id="splide01-list" role="presentation">
-                                <li class="splide__slide cat-item {{ request('slug') === 'all' || !request('slug') ? 'is-active' : '' }}" role="group" aria-roledescription="slide"
+                                <li class="splide__slide cat-item {{ request('slug') === 'all' || !request('slug') ? 'is-active' : '' }}"
+                                    role="group" aria-roledescription="slide"
                                     aria-label="1 of {{ $kategori->count() + 1 }}"
                                     style="margin-right: 1rem; width: calc(20% - 0.8rem);" aria-hidden="false">
-                                    <a href="{{ route('destination', ['slug' => 'all']) }}" class="shadow-sm hover-effect rounded {{ request('slug') === 'all' || !request('slug')  ? 'active' : '' }}">
+                                    <a href="{{ route('destination', ['slug' => 'all']) }}"
+                                        class="shadow-sm hover-effect rounded {{ request('slug') === 'all' || !request('slug') ? 'active' : '' }}">
                                         <h2 class="title h6 mb-0 lh-1">All Category</h2>
                                     </a>
                                 </li>
                                 @foreach ($kategori as $index => $single)
-                                    <li class="splide__slide cat-item {{ request('slug') === $single->slug ? 'active' : '' }}" role="group" aria-roledescription="slide"
+                                    <li class="splide__slide cat-item {{ request('slug') === $single->slug ? 'active' : '' }}"
+                                        role="group" aria-roledescription="slide"
                                         aria-label="{{ $index + 2 }} of {{ $kategori->count() + 1 }}"
                                         style="margin-right: 1rem; width: calc(20% - 0.8rem);" aria-hidden="true">
                                         <a href="{{ route('destination', ['slug' => $single->slug]) }}"
@@ -65,16 +68,18 @@
                 <div class="container">
                     <!-- Post list -->
                     <div class="row">
-                        @foreach ($destinasi as $single)
+                        @forelse ($destinasi as $single)
                             <div class="col-12 col-xxl-3 col-xl-4 col-md-6 aos-init aos-animate" data-aos="fade">
                                 <!-- Post -->
                                 <div class="post shadow-sm rounded hover-effect mb-4">
                                     <div class="post-img">
-                                        <a href="{{ route('destination', ['slug' => $single->kategori->slug]) }}" class="float-text float-absolute">{{ $single->kategori->nama_kategori }}</a>
+                                        <a href="{{ route('destination', ['slug' => $single->kategori->slug]) }}"
+                                            class="float-text float-absolute">{{ $single->kategori->nama_kategori }}</a>
                                         <a href="{{ route('detail-destination', ['slug' => $single->slug]) }}">
                                             <figure class="image-hover image-hover-overlay rounded">
-                                                <img src="{{ asset('storage/' . $single->highlight_photo) }}" alt="{{ $single->nama_destinasi }}"
-                                                    class="img-fluid rounded" onerror="this.onerror=null; this.src='{{ asset('assets/img/destinations/placeholder.webp') }}';">
+                                                <img src="{{ asset('storage/' . $single->highlight_photo) }}"
+                                                    alt="{{ $single->nama_destinasi }}" class="img-fluid rounded"
+                                                    onerror="this.onerror=null; this.src='{{ asset('assets/img/destinations/placeholder.webp') }}';">
                                                 <i class="hicon hicon-plus-thin image-hover-icon"></i>
                                             </figure>
                                         </a>
@@ -105,7 +110,15 @@
                                 </div>
                                 <!-- /Post -->
                             </div>
-                        @endforeach
+                        @empty
+                            <div class="col-12">
+                                <div class="post shadow-sm rounded text-center p-5 mb-4">
+                                    <h4 class="mb-2">Tidak ada destinasi yang ditemukan</h4>
+                                    <p class="text-muted mb-0">Silakan coba lagi nanti atau pilih kategori lain.</p>
+                                </div>
+                            </div>
+                        @endforelse
+
                     </div>
                     <!-- /pagination -->
                     {{ $destinasi->links('vendor.pagination.bootstrap-5') }}
