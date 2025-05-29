@@ -26,12 +26,12 @@
                                 <div
                                     class="mini-card shadow-sm rounded p-4 mb-4 justify-content-between align-items-center">
                                     <div>
-                                        <h2 class="card-title mb-1">Pantai Sembilan</h2>
-                                        <p class="mb-0">Pantai indah dengan pasir putih yang terletak di Pulau
-                                            Giligenting, Sumenep.</p>
+                                        <h2 class="card-title mb-1">{{ $mydestination->nama_destinasi }}</h2>
+                                        <p class="mb-0">{{ $mydestination->deskripsi }}</p>
                                     </div>
                                     <div>
-                                        <a href="#" class="btn btn-primary">Edit Destinasi</a>
+                                        <a href="{{ route('pengelola.destination.index') }}" class="btn btn-primary">Edit
+                                            Destinasi</a>
                                     </div>
                                 </div>
                             </div>
@@ -40,43 +40,20 @@
                             <!-- Review Section -->
                             <div class="card border-0 shadow-sm">
                                 <div class="card-body">
-                                    <h2 class="h3 ff-primary mb-4 text-body-emphasis">Ulasan Pengunjung</h2>
-
-                                    <!-- Review 1 -->
-                                    <div class="border-bottom pb-3 mb-3">
-                                        <strong>Ayu Lestari</strong>
-                                        <div class="testimonial-star d-flex align-items-center gap-2 mb-1">
-                                            <span class="star-rate-view star-rate-size-sm">
-                                                <span class="star-value rate-45"></span>
-                                            </span>
-                                            <span class="testimonial-date rounded-1">Mei 12 24</span>
+                                    <h2 class="h3 ff-primary mb-4 text-body-emphasis">Ulasan terbaru</h2>
+                                    @forelse ($mydestination->reviews->take(3) as $review)
+                                        <div class="border-bottom pb-3 mb-3">
+                                            <strong>{{ $review->user->name }}</strong>
+                                            <div class="testimonial-star d-flex align-items-center gap-2 mb-1">
+                                                <span class="star-rate-view star-rate-size-sm">
+                                                    <span class="star-value rate-45"></span>
+                                                </span>
+                                                <span class="testimonial-date rounded-1">{{ $review->created_at->format('d-m-Y') }}</span>
+                                            </div>
+                                            <p class="mb-0">{{ $review->komentar }}</p>
                                         </div>
-                                        <p class="mb-0">Tempatnya bagus dan bersih, cocok buat liburan keluarga!</p>
-                                    </div>
-
-                                    <!-- Review 2 -->
-                                    <div class="border-bottom pb-3 mb-3">
-                                        <strong>Rudi Hartono</strong>
-                                        <div class="testimonial-star d-flex align-items-center gap-2 mb-1">
-                                            <span class="star-rate-view star-rate-size-sm">
-                                                <span class="star-value rate-30"></span>
-                                            </span>
-                                            <span class="testimonial-date rounded-1">Apr 18 24</span>
-                                        </div>
-                                        <p class="mb-0">Pemandangannya oke, tapi fasilitas kurang lengkap.</p>
-                                    </div>
-
-                                    <!-- Review 3 -->
-                                    <div class="border-bottom pb-3 mb-3">
-                                        <strong>Sinta Dewi</strong>
-                                        <div class="testimonial-star d-flex align-items-center gap-2 mb-1">
-                                            <span class="star-rate-view star-rate-size-sm">
-                                                <span class="star-value rate-50"></span>
-                                            </span>
-                                            <span class="testimonial-date rounded-1">Apr 07 24</span>
-                                        </div>
-                                        <p class="mb-0">Sangat menyenangkan, saya akan kembali lagi!</p>
-                                    </div>
+                                    @empty
+                                    @endforelse
                                 </div>
                             </div>
 

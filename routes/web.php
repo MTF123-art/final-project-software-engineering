@@ -9,6 +9,7 @@ use App\Http\Controllers\auth\RegisterController;
 use App\Http\Controllers\landing\LandingController;
 use App\Http\Controllers\pengelola\DestinationController as PengelolaDestinationController;
 use App\Http\Controllers\pengelola\ReviewController as PengelolaReviewController;
+use App\Http\Controllers\pengelola\DashboardController as PengelolaDashboardController;
 use App\Http\Controllers\admin\ReviewController as AdminReviewController;
 use App\Http\Controllers\admin\CustomerMessageController;
 use App\Http\Controllers\ProfileController;
@@ -130,7 +131,7 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->grou
 
 // pengelola routes
 Route::middleware(['auth', 'role:pengelola'])->prefix('pengelola')->name('pengelola.')->group(function () {
-    Route::view('/dashboard', 'pengelola.dashboard')->name('dashboard');
+    Route::get('/dashboard', [PengelolaDashboardController::class, 'index'])->name('dashboard');
     Route::get('/notication', function(){
         echo 'notication';
     })->name('notification');

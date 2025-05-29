@@ -226,7 +226,9 @@
                                     <div class="horizontal-review rounded shadow-sm mb-4 aos-init" data-aos="fade">
                                         <h2 class="h4 review-title pb-4 mb-4 lh-base">Overall rating</h2>
                                         <div class="review-content">
-                                            <h3 class="review-score">{{ $destinasi->reviews->avg('rating') / 10 }}</h3>
+                                            <h3 class="review-score">
+                                                {{ number_format($destinasi->reviews->avg('rating') / 10, 2) }}</h3>
+
                                             <div class="review-total">
                                                 @php
                                                     $avg = $destinasi->reviews->avg('rating') ?? 0;

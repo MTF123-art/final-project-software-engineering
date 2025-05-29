@@ -25,7 +25,7 @@ class Destinasi extends Model
 
     public function reviews()
     {
-        return $this->hasMany(Review::class, 'destinasi_id', 'id');
+        return $this->hasMany(Review::class, 'destinasi_id', 'id')->latest();
     }
 
     public function bookmarks()
