@@ -11,6 +11,7 @@ use App\Http\Controllers\pengelola\DestinationController as PengelolaDestination
 use App\Http\Controllers\pengelola\ReviewController as PengelolaReviewController;
 use App\Http\Controllers\pengelola\DashboardController as PengelolaDashboardController;
 use App\Http\Controllers\admin\ReviewController as AdminReviewController;
+use App\Http\Controllers\admin\DashboardController as AdminDasboardController;
 use App\Http\Controllers\admin\CustomerMessageController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\user\BookmarkController;
@@ -74,7 +75,7 @@ Route::middleware(['auth', 'role:user'])->prefix('user')->name('user.')->group(f
 // admin routes
 Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->group(function () {
     // admin dashboard
-Route::get('/dashboard', [App\Http\Controllers\admin\UserController::class, 'dashboard'])->name('dashboard');
+Route::get('/dashboard', [AdminDasboardController::class, 'index'])->name('dashboard');
     // notification
     Route::get('/notication', function(){
         echo 'notication';

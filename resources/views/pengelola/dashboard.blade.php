@@ -22,7 +22,7 @@
                     <div class="col-12 col-xl-9">
                         <div class="pe-xl-4 me-xl-2">
                             <!-- Destinasi Info -->
-                            <div>
+                            @if ($mydestination)
                                 <div
                                     class="mini-card shadow-sm rounded p-4 mb-4 justify-content-between align-items-center">
                                     <div>
@@ -34,29 +34,36 @@
                                             Destinasi</a>
                                     </div>
                                 </div>
-                            </div>
-                            <!-- /Destinasi Info -->
 
-                            <!-- Review Section -->
-                            <div class="card border-0 shadow-sm">
-                                <div class="card-body">
-                                    <h2 class="h3 ff-primary mb-4 text-body-emphasis">Ulasan terbaru</h2>
-                                    @forelse ($mydestination->reviews->take(3) as $review)
-                                        <div class="border-bottom pb-3 mb-3">
-                                            <strong>{{ $review->user->name }}</strong>
-                                            <div class="testimonial-star d-flex align-items-center gap-2 mb-1">
-                                                <span class="star-rate-view star-rate-size-sm">
-                                                    <span class="star-value rate-{{ $review->rating }}"></span>
-                                                </span>
-                                                <span
-                                                    class="testimonial-date rounded-1">{{ $review->created_at->format('d-m-Y') }}</span>
+                                <!-- Review Section -->
+                                <div class="card border-0 shadow-sm">
+                                    <div class="card-body">
+                                        <h2 class="h3 ff-primary mb-4 text-body-emphasis">Ulasan terbaru</h2>
+                                        @forelse ($mydestination->reviews->take(3) as $review)
+                                            <div class="border-bottom pb-3 mb-3">
+                                                <strong>{{ $review->user->name }}</strong>
+                                                <div class="testimonial-star d-flex align-items-center gap-2 mb-1">
+                                                    <span class="star-rate-view star-rate-size-sm">
+                                                        <span class="star-value rate-{{ $review->rating }}"></span>
+                                                    </span>
+                                                    <span
+                                                        class="testimonial-date rounded-1">{{ $review->created_at->format('d-m-Y') }}</span>
+                                                </div>
+                                                <p class="mb-0">{{ $review->komentar }}</p>
                                             </div>
-                                            <p class="mb-0">{{ $review->komentar }}</p>
-                                        </div>
-                                    @empty
-                                    @endforelse
+                                        @empty
+                                            <p>Belum ada ulasan.</p>
+                                        @endforelse
+                                    </div>
                                 </div>
-                            </div>
+                            @else
+                                <div class="alert alert-warning">
+                                    <strong>Destinasi belum tersedia.</strong> Silakan <a
+                                        href="{{ route('pengelola.destination.index') }}">tambahkan destinasi</a>
+                                    terlebih dahulu.
+                                </div>
+                            @endif
+                            <!-- /Destinasi Info -->
 
                         </div>
                     </div>
