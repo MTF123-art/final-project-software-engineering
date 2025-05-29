@@ -4,6 +4,7 @@ namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Models\Review;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
@@ -107,4 +108,9 @@ class UserController extends Controller
 
         return redirect()->route('admin.user-management.index')->with('success', 'User deleted successfully');
     }
+ public function dashboard()
+{
+    $reviews = Review::with('tour', 'comments')->latest()->take(3)->get();
+    return view('admin.dashboard', compact('reviews'));
+}
 }

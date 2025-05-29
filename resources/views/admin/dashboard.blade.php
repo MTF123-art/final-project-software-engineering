@@ -4,15 +4,17 @@
 
 @section('content')
     <main>
-
         <div class="p-top-90 p-bottom-90 bg-gray-gradient aos-init aos-animate" data-aos="fade">
 
             <!-- Title -->
             <section class="container">
                 <div class="d-lg-flex align-items-lg-end pb-4">
                     <div class="block-title me-auto">
-                        <small class="sub-title">My Account</small>
-                        <h1 class="display-5 title">Dashboard</h1>
+                        <small class="sub-title">Admin Panel</small>
+                        <h1 class="display-5 title">Explore Sumenep - Dashboard Admin</h1>
+                        <p class="text-muted mt-2" style="font-size: 0.95em;">
+                            Anda adalah admin utama. Semua permintaan pengelola harus melalui persetujuan Anda.
+                        </p>
                     </div>
                 </div>
             </section>
@@ -51,198 +53,44 @@
                                 </div>
                             </div>
                             <!-- /Overview -->
-                            <!-- Booking list -->
-                            <div class="card border-0 shadow-sm">
+
+                            <!-- Review List -->
+                            <div class="card border-0 shadow-sm mt-5">
                                 <div class="card-body">
-                                    <div class="d-flex align-items-center justify-content-between border-bottom pb-4 mb-4">
-                                        <h2 class="h3 ff-primary mb-0 text-body-emphasis">Recent Booking</h2>
-                                        <a href="./booking.html" class="d-inline-block fw-medium">
-                                            <span>All Booking</span>
-                                            <i class="hicon hicon-flights-one-ways"></i>
-                                        </a>
-                                    </div>
+                                    <h2 class="h4 ff-primary mb-4 text-body-emphasis">Review Terbaru</h2>
                                     <div class="table-responsive">
-                                        <table class="table">
-                                            <thead class="text-center">
-                                                <tr class="table-light">
-                                                    <th scope="col">
-                                                        <strong>ID</strong>
-                                                    </th>
-                                                    <th scope="col">
-                                                        <strong>Tour</strong>
-                                                    </th>
-                                                    <th scope="col">
-                                                        <strong>Amount</strong>
-                                                    </th>
-                                                    <th scope="col">
-                                                        <strong>Date</strong>
-                                                    </th>
-                                                    <th scope="col">
-                                                        <strong>Status</strong>
-                                                    </th>
-                                                    <th scope="col">
-                                                        <strong>Details</strong>
-                                                    </th>
+                                        <table class="table table-bordered align-middle text-center">
+                                            <thead class="table-light">
+                                                <tr>
+                                                    <th style="width: 60px;">ID</th>
+                                                    <th>Nama Destinasi</th>
+                                                    <th>Jumlah Komentar</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
+                                                @foreach($reviews as $review)
                                                 <tr>
-                                                    <td class="text-center">
-                                                        <span>1</span>
+                                                    <td>
+                                                        <span class="badge bg-primary">{{ $review->id }}</span>
                                                     </td>
-                                                    <td class="text-nowrap">
-                                                        <div class="d-flex flex-column">
-                                                            <a href="./booking-details.html"
-                                                                class="link-dark link-hover"><strong>Explore ancient
-                                                                    castles</strong></a>
-                                                            <small class="text-nowrap d-block">code:#B0143</small>
-                                                        </div>
+                                                    <td class="text-start">
+                                                        <strong>{{ $review->destinasi->nama ?? '-' }}</strong>
                                                     </td>
-                                                    <td class="text-center">
-                                                        <strong><sup>$</sup>389.50</strong>
-                                                    </td>
-                                                    <td class="text-center">
-                                                        <small class="text-nowrap">10:30 Feb 21 2023</small>
-                                                    </td>
-                                                    <td class="text-center">
-                                                        <span class="booking-status booking-unpaid">Unpaid</span>
-                                                    </td>
-                                                    <td class="text-center">
-                                                        <a href="./booking-details.html"
-                                                            class="circle-icon circle-icon-link circle-icon-sm"
-                                                            title="Detail booking">
-                                                            <i class="hicon hicon-flights-one-ways"></i>
-                                                        </a>
+                                                    <td>
+                                                        <span class="badge bg-info text-dark">{{ $review->comments->count() }}</span>
                                                     </td>
                                                 </tr>
-                                                <tr>
-                                                    <td class="text-center">
-                                                        <span>2</span>
-                                                    </td>
-                                                    <td class="text-nowrap">
-                                                        <div class="d-flex flex-column">
-                                                            <a href="./booking-details.html"
-                                                                class="link-dark link-hover"><strong>Visit the Laken
-                                                                    Valley</strong></a>
-                                                            <small class="text-nowrap d-block">code:#B0154</small>
-                                                        </div>
-                                                    </td>
-                                                    <td class="text-center">
-                                                        <strong><sup>$</sup>412.50</strong>
-                                                    </td>
-                                                    <td class="text-center">
-                                                        <small class="text-nowrap">10:30 Feb 21 2023</small>
-                                                    </td>
-                                                    <td class="text-center">
-                                                        <span class="booking-status booking-cancelled">Cancelled</span>
-                                                    </td>
-                                                    <td class="text-center">
-                                                        <a href="./booking-details.html"
-                                                            class="circle-icon circle-icon-link circle-icon-sm"
-                                                            title="Detail booking">
-                                                            <i class="hicon hicon-flights-one-ways"></i>
-                                                        </a>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="text-center">
-                                                        <span>3</span>
-                                                    </td>
-                                                    <td class="text-nowrap">
-                                                        <div class="d-flex flex-column">
-                                                            <a href="./booking-details.html"
-                                                                class="link-dark link-hover"><strong>Bathing at Noriva
-                                                                    Beach</strong></a>
-                                                            <small class="text-nowrap d-block">code:#B0167</small>
-                                                        </div>
-                                                    </td>
-                                                    <td class="text-center">
-                                                        <strong><sup>$</sup>390.50</strong>
-                                                    </td>
-                                                    <td class="text-center">
-                                                        <small class="text-nowrap">10:30 Feb 21 2023</small>
-                                                    </td>
-                                                    <td class="text-center">
-                                                        <span class="booking-status booking-completed">Completed</span>
-                                                    </td>
-                                                    <td class="text-center">
-                                                        <a href="./booking-details.html"
-                                                            class="circle-icon circle-icon-link circle-icon-sm"
-                                                            title="Detail booking">
-                                                            <i class="hicon hicon-flights-one-ways"></i>
-                                                        </a>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="text-center">
-                                                        <span>3</span>
-                                                    </td>
-                                                    <td class="text-nowrap">
-                                                        <div class="d-flex flex-column">
-                                                            <a href="./booking-details.html"
-                                                                class="link-dark link-hover"><strong>Boating in Noriva
-                                                                    Bay</strong></a>
-                                                            <small class="text-nowrap d-block">code:#B0198</small>
-                                                        </div>
-                                                    </td>
-                                                    <td class="text-center">
-                                                        <strong><sup>$</sup>370.50</strong>
-                                                    </td>
-                                                    <td class="text-center">
-                                                        <small class="text-nowrap">10:30 Feb 21 2023</small>
-                                                    </td>
-                                                    <td class="text-center">
-                                                        <span class="booking-status booking-processing">Processing</span>
-                                                    </td>
-                                                    <td class="text-center">
-                                                        <a href="./booking-details.html"
-                                                            class="circle-icon circle-icon-link circle-icon-sm"
-                                                            title="Detail booking">
-                                                            <i class="hicon hicon-flights-one-ways"></i>
-                                                        </a>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="text-center">
-                                                        <span>3</span>
-                                                    </td>
-                                                    <td class="text-nowrap">
-                                                        <div class="d-flex flex-column">
-                                                            <a href="./booking-details.html"
-                                                                class="link-dark link-hover"><strong>Visit Valiba
-                                                                    swamp</strong></a>
-                                                            <small class="text-nowrap d-block">code:#B0215</small>
-                                                        </div>
-                                                    </td>
-                                                    <td class="text-center">
-                                                        <strong><sup>$</sup>410.50</strong>
-                                                    </td>
-                                                    <td class="text-center">
-                                                        <small class="text-nowrap">10:30 Feb 21 2023</small>
-                                                    </td>
-                                                    <td class="text-center">
-                                                        <span class="booking-status booking-completed">Completed</span>
-                                                    </td>
-                                                    <td class="text-center">
-                                                        <a href="./booking-details.html"
-                                                            class="circle-icon circle-icon-link circle-icon-sm"
-                                                            title="Detail booking">
-                                                            <i class="hicon hicon-flights-one-ways"></i>
-                                                        </a>
-                                                    </td>
-                                                </tr>
+                                                @endforeach
                                             </tbody>
                                         </table>
-                                    </div>
-                                    <div class="text-center">
-                                        <a href="#" class="fw-medium">
-                                            <i class="hicon hicon-bold hicon-refresh"></i>
-                                            <span>Load More</span>
-                                        </a>
+                                        @if($reviews->isEmpty())
+                                            <div class="text-center text-muted py-3">Belum ada review.</div>
+                                        @endif
                                     </div>
                                 </div>
                             </div>
-                            <!-- /Booking list -->
+                            <!-- /Review List -->
+
                         </div>
                     </div>
                     @include('admin.account-menu')
@@ -251,10 +99,8 @@
             <!-- /Dashboard -->
 
         </div>
-
     </main>
 
-    
     @if (session('success'))
         <x-toast type="success" />
     @endif

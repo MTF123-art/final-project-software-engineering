@@ -74,7 +74,7 @@ Route::middleware(['auth', 'role:user'])->prefix('user')->name('user.')->group(f
 // admin routes
 Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->group(function () {
     // admin dashboard
-    Route::view('/dashboard', 'admin.dashboard')->name('dashboard');
+Route::get('/dashboard', [App\Http\Controllers\admin\UserController::class, 'dashboard'])->name('dashboard');
     // notification
     Route::get('/notication', function(){
         echo 'notication';

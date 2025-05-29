@@ -17,4 +17,10 @@ class Review extends Model
     {
         return $this->belongsTo(Destinasi::class, 'destinasi_id', 'id');
     }
+
+    // Relasi komentar, jika komentar disimpan di tabel lain
+    public function comments()
+    {
+        return $this->hasMany(\App\Models\Comment::class, 'review_id', 'id');
+    }
 }
