@@ -46,9 +46,10 @@
                                             <strong>{{ $review->user->name }}</strong>
                                             <div class="testimonial-star d-flex align-items-center gap-2 mb-1">
                                                 <span class="star-rate-view star-rate-size-sm">
-                                                    <span class="star-value rate-45"></span>
+                                                    <span class="star-value rate-{{ $review->rating }}"></span>
                                                 </span>
-                                                <span class="testimonial-date rounded-1">{{ $review->created_at->format('d-m-Y') }}</span>
+                                                <span
+                                                    class="testimonial-date rounded-1">{{ $review->created_at->format('d-m-Y') }}</span>
                                             </div>
                                             <p class="mb-0">{{ $review->komentar }}</p>
                                         </div>
