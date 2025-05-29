@@ -93,4 +93,4 @@
             <x-toast type="success" />
         @endif
     </main>
-@endsectionw
+@endsection

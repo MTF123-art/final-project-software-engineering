@@ -13,6 +13,7 @@ use App\Http\Controllers\admin\ReviewController as AdminReviewController;
 use App\Http\Controllers\admin\CustomerMessageController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\user\BookmarkController;
+use App\Http\Controllers\user\DashboardController as UserDashboardController;
 use App\Http\Controllers\user\ReviewController;
 use App\Http\Controllers\user\RoleRequestController as UserRoleRequestController;
 use Illuminate\Auth\Events\Login;
@@ -39,7 +40,7 @@ Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
 // user routes
 Route::middleware(['auth', 'role:user'])->prefix('user')->name('user.')->group(function () {
-    Route::view('/dashboard', 'user.dashboard')->name('dashboard');
+    Route::get('/dashboard', [UserDashboardController::class, 'index'])->name('dashboard');
     // notification
     Route::get('/notication', function(){
         echo 'notication';
