@@ -45,7 +45,7 @@
                 </div>
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb mb-0">
-                        <li class="breadcrumb-item"><a href="{{ route('home') }}">Home</a></li>
+                        <li class="breadcrumb-item"><a href="{{ route('home') }}">Beranda</a></li>
                         <li class="breadcrumb-item"><a href="{{ route('destination') }}">Destinasi Wisata</a></li>
                         <li class="breadcrumb-item"><a href="{{ route('destination', ['slug' => $destinasi->kategori->slug]) }}">{{ $destinasi->kategori->nama_kategori }}</a></li>
                         <li class="breadcrumb-item active" aria-current="page">{{ $destinasi->nama_destinasi }}</li>
@@ -84,7 +84,7 @@
                     <div class="col-6 col-md-3">
                         <div class="mini-card card-simple card-mobile-small rounded">
                             <span class="card-icon">
-                                <i class="hicon hicon-star"></i>
+                                <i class="hicon hicon-hotel-star"></i>
                             </span>
                             <div class="card-content">
                                 <h2 class="card-title">{{ $destinasi->reviews->count() > 0 ? number_format($destinasi->reviews->avg('rating') / 10, 1) : '0.0' }}</h2>
@@ -98,7 +98,7 @@
                                 <i class="hicon hicon-user"></i>
                             </span>
                             <div class="card-content">
-                                <h2 class="card-title text-truncate" title="{{ $destinasi->pengelola->name }}">{{ Str::limit($destinasi->pengelola->name, 8) }}</h2>
+                                <h2 class="card-title text-truncate" title="{{ $destinasi->pengelola->name }}">{{ $destinasi->pengelola->name }}</h2>
                                 <small class="card-desc">Pengelola</small>
                             </div>
                         </div>

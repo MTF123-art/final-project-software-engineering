@@ -19,8 +19,7 @@
                 </div>
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb mb-0">
-                        <li class="breadcrumb-item"><a href="./index.html">Beranda</a></li>
-                        <li class="breadcrumb-item"><a href="#">Halaman</a></li>
+                        <li class="breadcrumb-item"><a href="{{ route('home') }}">Beranda</a></li>
                         <li class="breadcrumb-item active" aria-current="page">Tentang Kami</li>
                     </ol>
                 </nav>
@@ -77,7 +76,7 @@
             <div class="container">
                 <div class="row g-0">
                     <div class="col-12 col-xl-6 order-1 order-xl-0">
-                        <!-- Image -->
+                        <!-- Image -->  
                         <div class="image-info image-info-vertical me-xl-5">
                             <div class="vertical-title">
                                 <small class="ls-2">
@@ -87,16 +86,6 @@
                             </div>
                             <div class="image-center rounded">
                                 <img src="./assets/img/about/a5.jpg" alt="">
-                            </div>
-                            <div class="position-absolute top-0 end-0 me-4 mt-4">
-                                <div class="vertical-award rounded shadow-sm">
-                                    <div class="award-content">
-                                        <img src="./assets/img/logos/trip-best.png" class="w-100" alt="">
-                                    </div>
-                                    <div class="award-footer">
-                                        <small>Tripadvisor</small>
-                                    </div>
-                                </div>
                             </div>
                         </div>
                         <!-- /Image -->

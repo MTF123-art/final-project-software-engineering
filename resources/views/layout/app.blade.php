@@ -117,7 +117,9 @@
                         <div class="dropdown user-menu ms-xl-auto">
                             <button class="user-menu-avatar show" data-bs-toggle="dropdown" data-bs-display="static"
                                 aria-expanded="true">
-                                <img src="{{ asset('Storage/'.Auth::user()->image) }}" onerror="this.onerror=null; this.src='{{ asset('assets/img/destinations/placeholder.webp') }}';" alt="">
+                                <img src="{{ asset('Storage/' . Auth::user()->image) }}"
+                                    onerror="this.onerror=null; this.src='{{ asset('assets/img/destinations/placeholder.webp') }}';"
+                                    alt="">
                             </button>
                             <ul class="dropdown-menu dropdown-menu-end shadow-sm animate slideIn"
                                 data-bs-popper="static">
@@ -198,78 +200,11 @@
                             </a>
                             <p class="brand-desc">
                                 <em>
-                                    Moliva Travel Agency offers unique and memorable tours, providing rich experiences
-                                    in the beautiful country of Moliva.
+                                    Sumenep Explore adalah pintu gerbang Anda untuk menemukan pesona tersembunyi
+                                    Kabupaten Sumenep, Madura.
                                 </em>
                                 <a href="about.html">[+]</a>
                             </p>
-                            <ul class="social-list">
-                                <li class="social-item">
-                                    <a href="#">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
-                                            viewBox="0 0 24 24" fill="none" stroke-width="1.75" stroke="none"
-                                            stroke-linecap="round" stroke-linejoin="round">
-                                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                                            <path
-                                                d="M7 10v4h3v7h4v-7h3l1 -4h-4v-2a1 1 0 0 1 1 -1h3v-4h-3a5 5 0 0 0 -5 5v2h-3">
-                                            </path>
-                                        </svg>
-                                    </a>
-                                </li>
-                                <li class="social-item">
-                                    <a href="#">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
-                                            viewBox="0 0 24 24" fill="none" stroke="none" stroke-width="1.75"
-                                            stroke-linecap="round" stroke-linejoin="round">
-                                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                            <path d="M4 4l11.733 16h4.267l-11.733 -16z" />
-                                            <path d="M4 20l6.768 -6.768m2.46 -2.46l6.772 -6.772" />
-                                        </svg>
-                                    </a>
-                                </li>
-                                <li class="social-item">
-                                    <a href="#">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
-                                            viewBox="0 0 24 24" stroke-width="1.75" stroke="none" fill="none"
-                                            stroke-linecap="round" stroke-linejoin="round">
-                                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                                            <path
-                                                d="M3 5m0 4a4 4 0 0 1 4 -4h10a4 4 0 0 1 4 4v6a4 4 0 0 1 -4 4h-10a4 4 0 0 1 -4 -4z">
-                                            </path>
-                                            <path d="M10 9l5 3l-5 3z"></path>
-                                        </svg>
-                                    </a>
-                                </li>
-                                <li class="social-item">
-                                    <a href="#">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
-                                            viewBox="0 0 24 24" stroke-width="1.75" stroke="none" fill="none"
-                                            stroke-linecap="round" stroke-linejoin="round">
-                                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                                            <path d="M8 20l4 -9"></path>
-                                            <path
-                                                d="M10.7 14c.437 1.263 1.43 2 2.55 2c2.071 0 3.75 -1.554 3.75 -4a5 5 0 1 0 -9.7 1.7">
-                                            </path>
-                                            <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0"></path>
-                                        </svg>
-                                    </a>
-                                </li>
-                                <li class="social-item">
-                                    <a href="#">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
-                                            viewBox="0 0 24 24" stroke-width="1.75" stroke="none" fill="none"
-                                            stroke-linecap="round" stroke-linejoin="round">
-                                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                                            <path d="M6.5 13.5m-1.5 0a1.5 1.5 0 1 0 3 0a1.5 1.5 0 1 0 -3 0"></path>
-                                            <path d="M17.5 13.5m-1.5 0a1.5 1.5 0 1 0 3 0a1.5 1.5 0 1 0 -3 0"></path>
-                                            <path d="M17.5 9a4.5 4.5 0 1 0 3.5 1.671l1 -1.671h-4.5z"></path>
-                                            <path d="M6.5 9a4.5 4.5 0 1 1 -3.5 1.671l-1 -1.671h4.5z"></path>
-                                            <path d="M10.5 15.5l1.5 2l1.5 -2"></path>
-                                            <path d="M9 6.75c2 -.667 4 -.667 6 0"></path>
-                                        </svg>
-                                    </a>
-                                </li>
-                            </ul>
                         </div>
                         <!-- /Brand -->
                     </div>

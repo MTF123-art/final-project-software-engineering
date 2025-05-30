@@ -34,41 +34,12 @@
                 </div>
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb mb-0">
-                        <li class="breadcrumb-item active" aria-current="page">Home</li>
+                        <li class="breadcrumb-item active" aria-current="page">Beranda</li>
                     </ol>
                 </nav>
             </div>
         </section>
         <!-- /Hero Section -->
-
-        <!-- Search Section -->
-        <section class="bg-light aos-init aos-animate" data-aos="fade">
-            <div class="container">
-                <div class="search-tours">
-                    <form class="search-tour-form" method="GET" action="{{ route('destination') }}">
-                        <div class="search-tour-input">
-                            <div class="row g-3 g-xl-2 justify-content-center">
-                                <div class="col-12 col-xl-8 col-md-6">
-                                    <div class="input-icon-group">
-                                        <label for="txtKeyword" class="input-icon hicon hicon-flights-pin"></label>
-                                        <input id="txtKeyword" name="search" type="text" class="form-control shadow-sm"
-                                            placeholder="Cari destinasi wisata di Sumenep..."
-                                            value="{{ request('search') }}">
-                                    </div>
-                                </div>
-                                <div class="col-12 col-xl-2 col-md-6">
-                                    <button type="submit" class="btn btn-primary btn-uppercase w-100">
-                                        <i class="hicon hicon-bold hicon-search-box"></i>
-                                        <span>Cari</span>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </section>
-        <!-- /Search Section -->
 
         <!-- Statistics Section -->
         <section class="pt-5 pb-5 border-top aos-init aos-animate" data-aos="fade">
@@ -92,14 +63,14 @@
                             </span>
                             <div class="card-content">
                                 <h2 class="card-title">{{ $total_visitors ?? '10K+' }}</h2>
-                                <small class="card-desc">Pengunjung</small>
+                                <small class="card-desc">Pengguna</small>
                             </div>
                         </div>
                     </div>
                     <div class="col-6 col-md-3">
                         <div class="mini-card card-simple card-mobile-small rounded">
                             <span class="card-icon">
-                                <i class="hicon hicon-star"></i>
+                                <i class="hicon hicon-hotel-star"></i>
                             </span>
                             <div class="card-content">
                                 <h2 class="card-title">4.8</h2>
@@ -135,7 +106,7 @@
                         <h2 class="h1 title">Destinasi Favorit di Sumenep</h2>
                     </div>
                     <div class="mt-3 mt-xl-0">
-                        <a href="{{ route('destination') }}" class="btn btn-outline-primary btn-uppercase">
+                        <a href="{{ route('destination') }}" class="btn btn-primary btn-uppercase">
                             <i class="hicon hicon-bold hicon-flights-one-ways me-2"></i>
                             <span>Lihat Semua</span>
                         </a>

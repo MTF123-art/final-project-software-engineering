@@ -19,8 +19,7 @@
                 </div>
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb mb-0">
-                        <li class="breadcrumb-item"><a href="./index.html">Beranda</a></li>
-                        <li class="breadcrumb-item"><a href="#">Halaman</a></li>
+                        <li class="breadcrumb-item"><a href="{{ route('home') }}">Beranda</a></li>
                         <li class="breadcrumb-item active" aria-current="page">Kontak</li>
                     </ol>
                 </nav>
