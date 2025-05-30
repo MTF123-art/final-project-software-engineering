@@ -51,7 +51,7 @@
                                                     data-gallery="tour-photos">
                                                     <figure
                                                         class="image-hover image-hover-scale image-hover-overlay rounded mb-0">
-                                                        <img src="{{ asset('storage/' . $destination->highlight_photo) }}"
+                                                        <img src="{{ asset('storage/' . $destination->highlight_photo) }}" onerror="this.onerror=null; this.src='{{ asset('assets/img/destinations/placeholder.webp') }}';"
                                                             alt="Foto">
                                                         <i class="hicon hicon-zoom-bold image-hover-icon fs-5"></i>
                                                     </figure>
@@ -224,7 +224,7 @@
                                                         data-gallery="tour-photos">
                                                         <figure
                                                             class="image-hover image-hover-scale image-hover-overlay rounded mb-0">
-                                                            <img src="{{ asset('storage/' . $photo->url_gambar) }}"
+                                                            <img src="{{ asset('storage/' . $photo->url_gambar) }}" onerror="this.onerror=null; this.src='{{ asset('assets/img/destinations/placeholder.webp') }}';"
                                                                 alt="Foto">
                                                             <i class="hicon hicon-zoom-bold image-hover-icon fs-5"></i>
                                                         </figure>

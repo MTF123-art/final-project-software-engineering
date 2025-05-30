@@ -47,7 +47,7 @@ class RoleRequestController extends Controller
     {
         $roleRequest = RoleRequest::findOrFail($id);
         $roleRequest->delete();
-        return redirect()->route('user.upgrade.status')->with('success-upgrade', 'Upgrade request deleted successfully.');
+        return redirect()->route('user.upgrade')->with('success-upgrade', 'Upgrade request deleted successfully.');
     }
 
     public function destinationSubmit(Request $request){

@@ -102,15 +102,15 @@
                                                             <span>{{ $no++ }}</span>
                                                         </td>
                                                         <td class="text-center">
-                                                            <strong>{{ $single->user->name }}</strong>
-                                                            <td class="text-center">
-                                                                <span
-                                                                class="booking-status booking-@php echo $single->status == "pending" ? 'processing' : ($single->status == "rejected" ? 'cancelled' : 'unpaid'); @endphp
-                                                                ">{{ $single->status }}</span>
-                                                            </td>
+                                                            <small>{{ $single->user->name }}</small>
                                                         </td>
                                                         <td class="text-center">
-                                                            <strong>{{ $single->reason }}</strong>
+                                                            <span
+                                                            class="booking-status booking-@php echo $single->status == "pending" ? 'processing' : ($single->status == "rejected" ? 'cancelled' : 'unpaid'); @endphp
+                                                            ">{{ $single->status }}</span>
+                                                        </td>
+                                                        <td class="text-center">
+                                                            <small>{{ $single->reason }}</small>
                                                         </td>
                                                         <td class="text-center">
                                                             <form

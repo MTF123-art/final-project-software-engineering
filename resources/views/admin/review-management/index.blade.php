@@ -69,13 +69,13 @@
                                                             <span>{{ $no++ }}</span>
                                                         </td>
                                                         <td class="text-center">
-                                                            <strong>{{ $single->user->name }}</strong>
+                                                            <small>{{ $single->user->name }}</small>
                                                         </td>
                                                         <td class="text-center">
-                                                            <strong class="text-nowrap">{{ $single->destinasi->nama_destinasi }}</strong>
+                                                            <small class="text-nowrap">{{ $single->destinasi->nama_destinasi }}</small>
                                                         </td>
                                                         <td class="text-center">
-                                                            <strong>{{ $single->rating / 10 }} - ★</strong>
+                                                            <small>{{ $single->rating / 10 }} - ★</small>
                                                         </td>
                                                         <td class="text-center " style="max-width: 200px;">
                                                             <small class="text-wrap ">{{ $single->komentar }}</small>

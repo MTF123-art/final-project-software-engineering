@@ -53,10 +53,15 @@
                                                 <p class="text-muted">{{ $roleRequest->reason }}</p>
                                             </div>
 
-                                            @if ($roleRequest->status === 'rejected' && $roleRequest->admin_reason)
-                                                <div class="alert alert-warning mt-3 mb-0">
-                                                    <strong>Admin Note:</strong> {{ $roleRequest->admin_reason }}
-                                                </div>
+                                            @if ($roleRequest->status === 'rejected')
+                                                <form action="{{ route('user.upgrade.destroy', $roleRequest->id) }}"
+                                                    method="POST"
+                                                    onsubmit="return confirm('Are you sure you want to cancel this request?');"
+                                                    class="mt-3">
+                                                    @csrf
+                                                    <button type="submit" class="btn btn-outline-danger btn-sm">Delete
+                                                        Request</button>
+                                                </form>
                                             @endif
 
                                             @if ($roleRequest->status === 'pending')
@@ -71,13 +76,13 @@
                                             @endif
                                         </div>
                                     @else
-                                        <p class="text-muted">You have not submitted any role upgrade request yet.</p>
+                                        <p class="text-muted ">Request yang anda buat dihapus oleh admin silahkan <a href="{{ route('user.upgrade') }}"> kirim ulang</a></p>
                                     @endif
                                 </div>
                             </div>
                         </div>
 
-                        @if ($roleRequest->status === 'approved')
+                        @if ($roleRequest && $roleRequest->status === 'approved')
                             <div class="pe-xl-4 me-xl-2 mb-4">
                                 <div class="card border-0 shadow-sm">
                                     <div class="card-body">

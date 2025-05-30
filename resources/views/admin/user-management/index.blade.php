@@ -110,10 +110,7 @@
                                                             <span>{{ $no++ }}</span>
                                                         </td>
                                                         <td class="text-nowrap">
-                                                            <div class="d-flex flex-column">
-                                                                <a href="./booking-details.html"
-                                                                    class="link-dark link-hover"><strong>{{ $single->name }}</strong></a>
-                                                            </div>
+                                                            <small>{{ $single->name }}</small>
                                                         </td>
                                                         <td class="">
                                                             <div class="account-user justify-content-center">
@@ -125,7 +122,7 @@
                                                             </div>
                                                         </td>
                                                         <td class="text-center">
-                                                            <strong>{{ $single->email }}</strong>
+                                                            <small>{{ $single->email }}</small>
                                                         </td>
                                                         <td class="text-center">
                                                             <small class="text-nowrap">{{ $single->role }}</small>

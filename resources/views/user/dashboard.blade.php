@@ -34,11 +34,18 @@
                                                 <a href="{{ route('detail-destination', $mybookmark->destinasi->slug) }}"
                                                     class="d-block p-3 border rounded text-decoration-none text-dark shadow-sm hover-effect">
                                                     <strong>{{ $mybookmark->destinasi->nama_destinasi }}</strong>
-                                                    <p class="mb-0 small text-muted">{{ $mybookmark->destinasi->lokasi }}</p>
+                                                    <p class="mb-0 small text-muted">{{ $mybookmark->destinasi->lokasi }}
+                                                    </p>
                                                 </a>
                                             </div>
 
                                         @empty
+                                            <div class="alert alert-warning">
+                                                <strong>Belum ada destinasi yang disimpan.</strong> Silakan <a
+                                                    href="{{ route('destination') }}">tambahkan
+                                                    destinasi</a>
+                                                terlebih dahulu.
+                                            </div>
                                         @endforelse
                                     </div>
                                 </div>

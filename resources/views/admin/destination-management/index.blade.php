@@ -96,7 +96,7 @@
                                                                 <figure
                                                                     class="image-hover image-hover-scale image-hover-overlay rounded mb-0"
                                                                     style="max-width: 200px;">
-                                                                    <img src="{{ asset('storage/' . $single->highlight_photo) }}"
+                                                                    <img src="{{ asset('storage/' . $single->highlight_photo) }}" onerror="this.onerror=null; this.src='{{ asset('assets/img/destinations/placeholder.webp') }}';"
                                                                         alt="Foto">
                                                                     <i
                                                                         class="hicon hicon-zoom-bold image-hover-icon fs-5"></i>

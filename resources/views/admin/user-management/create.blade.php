@@ -14,6 +14,9 @@
                         <small class="sub-title">User</small>
                         <h1 class="display-5 title">Management</h1>
                     </div>
+                    <a href="{{ route('admin.user-management.index') }}" class="btn btn-primary mt-3 mt-lg-0">
+                        &larr; Back to List
+                    </a>
                 </div>
             </section>
             <!-- /Title -->

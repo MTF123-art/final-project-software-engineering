@@ -102,7 +102,7 @@
                                             <a href="{{ route('admin.destination.index') }}"
                                                 class="btn btn-outline-primary btn-sm w-100">
                                                 <i class="hicon hicon-bold hicon-poi-text-search me-1"></i>
-                                                Add Destination
+                                                Manage Destination
                                             </a>
                                         </div>
                                         <div class="col-6 col-md-3">

@@ -193,7 +193,7 @@
                                     <a href="{{ asset('Storage/' . $single->url_gambar) }}" class="glightbox"
                                         data-glightbox="title:Explore Noriva Bay" data-gallery="tour-photos">
                                         <figure class="image-hover image-hover-scale image-hover-overlay rounded mb-0">
-                                            <img src="{{ asset('Storage/' . $single->url_gambar) }}" alt="">
+                                            <img src="{{ asset('Storage/' . $single->url_gambar) }}" alt="" onerror="this.onerror=null; this.src='{{ asset('assets/img/destinations/placeholder.webp') }}';">
                                             <i class="hicon hicon-zoom-bold image-hover-icon fs-5"></i>
                                         </figure>
                                     </a>

@@ -41,16 +41,13 @@
                                                         <strong>Name</strong>
                                                     </th>
                                                     <th scope="col">
-                                                        <strong>Email</strong>
-                                                    </th>
-                                                    <th scope="col">
                                                         <strong>Subject</strong>
                                                     </th>
                                                     <th scope="col">
-                                                        <strong>Message</strong>
+                                                        <strong>Date</strong>
                                                     </th>
                                                     <th scope="col">
-                                                        <strong>Date</strong>
+                                                        <strong>Status</strong>
                                                     </th>
                                                     <th scope="col">
                                                         <strong>Action</strong>
@@ -68,27 +65,30 @@
                                                             <small class="text-nowrap">{{ $single->name }}</small>
                                                         </td>
                                                         <td class="text-center">
-                                                            <small class="text-nowrap">{{ $single->email }}</small>
-                                                        </td>
-                                                        <td class="text-center">
                                                             <small class="text-nowrap">{{ $single->subject }}</small>
-                                                        </td>
-                                                        <td class="text-center" style="max-width: 200px;">
-                                                            <small class="text-wrap">{{ $single->message }}</small>
                                                         </td>
                                                         <td class="text-center">
                                                             <small
-                                                                class="text-nowrap">{{ $single->created_at->format('m-M-Y') }}</small>
+                                                                class="text-nowrap">{{ $single->created_at->format('d-M-Y') }}</small>
                                                         </td>
                                                         <td class="text-center">
+                                                            <span
+                                                                class="booking-status booking-{{ $single->is_read ? 'completed' : 'cancelled' }}">{{ $single->is_read == 1 ? 'Read' : 'Unread' }}</span>
+                                                        </td>
+                                                        <td class="text-center d-flex justify-content-center">
+                                                            <a href="{{ route('admin.customer-message.show', $single->id) }}"
+                                                                class="circle-icon circle-icon-link circle-icon-sm me-2"
+                                                                title="View Detail">
+                                                                <i class="hicon hicon-last-viewed"></i>
+                                                            </a>
                                                             <form
                                                                 action="{{ route('admin.customer-message.delete', ['id' => $single->id]) }}"
-                                                                class="m-1" method="POST">
+                                                                method="POST"
+                                                                onsubmit="return confirm('Are you sure you want to delete this message?')">
                                                                 @csrf
                                                                 <button type="submit"
-                                                                    onclick="return confirm('Are you sure you want to delete this message?')"
                                                                     class="circle-icon circle-icon-link circle-icon-sm"
-                                                                    title="Delete Review">
+                                                                    title="Delete Message">
                                                                     <i class="hicon hicon-trash"></i>
                                                                 </button>
                                                             </form>
@@ -102,6 +102,7 @@
                                                     </tr>
                                                 @endforelse
                                             </tbody>
+
 
                                         </table>
                                     </div>

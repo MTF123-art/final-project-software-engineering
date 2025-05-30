@@ -48,7 +48,7 @@
                     </a>
                 </li>
                 <li class="menu-item ">
-                    <a href="{{ route('admin.customer-message.index') }}" class="{{ request()->routeIs('admin.customer.index') ? 'active' : '' }}">
+                    <a href="{{ route('admin.customer-message.index') }}" class="{{ request()->routeIs('admin.customer-message.index') ? 'active' : '' }}">
                         <i class="hicon hicon-bold hicon-email-envelope"></i> <span>Customer Message</span>
                     </a>
                 </li>

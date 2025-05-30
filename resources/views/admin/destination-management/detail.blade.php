@@ -12,6 +12,9 @@
                         <small class="sub-title">Destination</small>
                         <h1 class="display-5 title">Management</h1>
                     </div>
+                    <a href="{{ route('admin.destination.index') }}" class="btn btn-primary mt-3 mt-lg-0">
+                        &larr; Back to List
+                    </a>
                 </div>
             </section>
             <!-- Title -->
@@ -50,6 +53,7 @@
                                                 <figure
                                                     class="image-hover image-hover-scale image-hover-overlay rounded mb-0">
                                                     <img src="{{ asset('storage/' . $detail->highlight_photo) }}"
+                                                        onerror="this.onerror=null; this.src='{{ asset('assets/img/destinations/placeholder.webp') }}';"
                                                         alt="Foto">
                                                     <i class="hicon hicon-zoom-bold image-hover-icon fs-5"></i>
                                                 </figure>
@@ -232,6 +236,7 @@
                                                     <figure
                                                         class="image-hover image-hover-scale image-hover-overlay rounded mb-0">
                                                         <img src="{{ asset('storage/' . $photo->url_gambar) }}"
+                                                            onerror="this.onerror=null; this.src='{{ asset('assets/img/destinations/placeholder.webp') }}';"
                                                             alt="Foto">
                                                         <i class="hicon hicon-zoom-bold image-hover-icon fs-5"></i>
                                                     </figure>
