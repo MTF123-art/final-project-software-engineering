@@ -1,6 +1,6 @@
 @extends('layout.app')
 
-@section('title', 'Destination')
+@section('title', 'Destinasi Wisata - Sumenep Explore')
 
 @section('content')
     <main>
@@ -13,8 +13,8 @@
                     <!-- Title -->
                     <div class="d-lg-flex align-items-lg-end pb-3">
                         <div class="block-title me-auto">
-                            <small class="sub-title">Sumenep Destination</small>
-                            <h1 class="display-5 title">Explore Sumenep</h1>
+                            <small class="sub-title">Destinasi Wisata Sumenep</small>
+                            <h1 class="display-5 title">Jelajahi Sumenep</h1>
                         </div>
                     </div>
                     <!-- /Title -->
@@ -41,7 +41,7 @@
                                     style="margin-right: 1rem; width: calc(20% - 0.8rem);" aria-hidden="false">
                                     <a href="{{ route('destination', ['slug' => 'all']) }}"
                                         class="shadow-sm hover-effect rounded {{ request('slug') === 'all' || !request('slug') ? 'active' : '' }}">
-                                        <h2 class="title h6 mb-0 lh-1">All Category</h2>
+                                        <h2 class="title h6 mb-0 lh-1">Semua Kategori</h2>
                                     </a>
                                 </li>
                                 @foreach ($kategori as $index => $single)
@@ -92,17 +92,17 @@
                                         </h3>
                                         <div class="post-link">
                                             <div class="post-ext">
-                                                <div class="post-date">
-                                                    <i class="hicon hicon-menu-calendar"></i>
-                                                    <span>{{ $single->created_at->format('d-M-Y') }}</span>
-                                                </div>
                                                 <div class="post-comment">
                                                     <i class="hicon hicon-chat"></i>
-                                                    <span>{{ $single->reviews->count() }}</span>
+                                                    <span>{{ $single->reviews->count() }} Ulasan</span>
+                                                </div>
+                                                <div class="post-comment">
+                                                    <i class="hicon hicon-dynamic-banner"></i>
+                                                    <span>{{ $single->bookmarks->count() }} Bookmark</span>
                                                 </div>
                                             </div>
                                             <a href="{{ route('detail-destination', ['slug' => $single->slug]) }}"
-                                                class="circle-icon circle-icon-link">
+                                                class="circle-icon circle-icon-link" title="Lihat Detail">
                                                 <i class="hicon hicon-flights-one-ways fs-4"></i>
                                             </a>
                                         </div>
@@ -113,8 +113,8 @@
                         @empty
                             <div class="col-12">
                                 <div class="post shadow-sm rounded text-center p-5 mb-4">
-                                    <h4 class="mb-2">Tidak ada destinasi yang ditemukan</h4>
-                                    <p class="text-muted mb-0">Silakan coba lagi nanti atau pilih kategori lain.</p>
+                                    <h4 class="mb-2">Tidak ada destinasi wisata yang ditemukan</h4>
+                                    <p class="text-muted mb-0">Silakan coba lagi nanti atau pilih kategori wisata lain untuk menjelajahi keindahan Sumenep.</p>
                                 </div>
                             </div>
                         @endforelse
