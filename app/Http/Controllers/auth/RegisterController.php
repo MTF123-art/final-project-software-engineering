@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\auth;
 
+use Illuminate\Auth\Events\Registered;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\RegisterRequest;
 use App\Models\User;
@@ -23,6 +24,8 @@ class RegisterController extends Controller
             'is_active' => "true",
         ]);
 
-        return back()->with('success', 'Registration successful! Please login.');
+        event(new Registered($user));        
+
+        return redirect()->route('login-form')->with('success', 'Registration successful! Please login.');
     }
 }

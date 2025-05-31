@@ -1,25 +1,47 @@
 <?php
 
 use App\Http\Controllers\admin\CategoryController;
+use App\Http\Controllers\admin\CustomerMessageController;
+use App\Http\Controllers\admin\DashboardController as AdminDasboardController;
 use App\Http\Controllers\admin\DestinationController as AdminDestinationController;
+use App\Http\Controllers\admin\ReviewController as AdminReviewController;
 use App\Http\Controllers\admin\RoleRequestController as AdminRoleRequestController;
 use App\Http\Controllers\admin\UserController;
 use App\Http\Controllers\auth\LoginController;
 use App\Http\Controllers\auth\RegisterController;
 use App\Http\Controllers\landing\LandingController;
+use App\Http\Controllers\pengelola\DashboardController as PengelolaDashboardController;
 use App\Http\Controllers\pengelola\DestinationController as PengelolaDestinationController;
 use App\Http\Controllers\pengelola\ReviewController as PengelolaReviewController;
-use App\Http\Controllers\pengelola\DashboardController as PengelolaDashboardController;
-use App\Http\Controllers\admin\ReviewController as AdminReviewController;
-use App\Http\Controllers\admin\DashboardController as AdminDasboardController;
-use App\Http\Controllers\admin\CustomerMessageController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\user\BookmarkController;
 use App\Http\Controllers\user\DashboardController as UserDashboardController;
 use App\Http\Controllers\user\ReviewController;
 use App\Http\Controllers\user\RoleRequestController as UserRoleRequestController;
 use Illuminate\Auth\Events\Login;
+use Illuminate\Foundation\Auth\EmailVerificationRequest;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+
+
+
+// Email verification 
+Route::get('/email/verify', function () {
+    return view('auth.verify-email');
+})->middleware('auth')->name('verification.notice');
+
+Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
+    $request->fulfill();
+    return redirect()->route(Auth::user()->role.'.dashboard');
+})->middleware(['auth', 'signed'])->name('verification.verify');
+
+Route::post('/email/verification-notification', function (Request $request) {
+    $request->user()->sendEmailVerificationNotification();
+    return back()->with('success', 'Verification link sent!');
+})->middleware(['auth', 'throttle:6,1'])->name('verification.send');
+
+
 
 // public routes
 Route::get('/', [LandingController::class, 'home'])->name('home');
@@ -37,7 +59,7 @@ Route::post('/register', [RegisterController::class, 'register'])->name('registe
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
 // user routes
-Route::middleware(['auth', 'role:user'])
+Route::middleware(['auth', 'role:user', 'verified'])
     ->prefix('user')
     ->name('user.')
     ->group(function () {
@@ -76,7 +98,7 @@ Route::middleware(['auth', 'role:user'])
     });
 
 // admin routes
-Route::middleware(['auth', 'role:admin'])
+Route::middleware(['auth', 'role:admin', 'verified'])
     ->prefix('admin')
     ->name('admin.')
     ->group(function () {
@@ -149,7 +171,7 @@ Route::middleware(['auth', 'role:admin'])
 });
 
 // pengelola routes
-Route::middleware(['auth', 'role:pengelola'])
+Route::middleware(['auth', 'role:pengelola', 'verified'])
     ->prefix('pengelola')
     ->name('pengelola.')
     ->group(function () {

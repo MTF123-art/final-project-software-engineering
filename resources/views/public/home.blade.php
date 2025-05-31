@@ -22,11 +22,11 @@
                             Populer</span>
                     </div>
                     <div class="mt-4">
-                        <a href="{{ route('destination') }}" class="btn btn-primary btn-uppercase mnw-180 me-3">
+                        <a href="{{ route('destination') }}" class="btn btn-primary btn-uppercase mnw-180 me-3 mb-3">
                             <i class="hicon hicon-bold hicon-search-box"></i>
                             <span>Jelajahi Destinasi</span>
                         </a>
-                        <a href="#popular-destinations" class="btn btn-outline-light btn-uppercase mnw-180">
+                        <a href="#popular-destinations" class="btn btn-outline-light btn-uppercase mnw-180 mb-3">
                             <i class="hicon hicon-bold hicon-flights-one-ways"></i>
                             <span>Lihat Populer</span>
                         </a>

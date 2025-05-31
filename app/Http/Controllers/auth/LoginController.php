@@ -21,10 +21,14 @@ class LoginController extends Controller
         if (Auth::attempt($request->only('email', 'password'), $remember)) {
             $request->session()->regenerate();
 
-            $role = Auth::user()->role;
+            $user = Auth::user();
 
+            if (!$user->hasVerifiedEmail()) {
+                // Biarkan user tetap login
+                return redirect()->route('verification.notice')->with('error', 'Kamu harus memverifikasi email sebelum lanjut.');
+            }
             return redirect()
-                ->route("$role.dashboard")
+                ->route($user->role.".dashboard")
                 ->with('success', 'Login berhasil!');
         }
 
