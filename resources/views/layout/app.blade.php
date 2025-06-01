@@ -113,41 +113,7 @@
                         </div>
                     </div>
                     @if (Auth::check())
-                        {{-- auth --}}
-                        <div class="dropdown user-menu ms-xl-auto">
-                            <button class="user-menu-avatar show" data-bs-toggle="dropdown" data-bs-display="static"
-                                aria-expanded="true">
-                                <img src="{{ asset('Storage/' . Auth::user()->image) }}"
-                                    onerror="this.onerror=null; this.src='{{ asset('assets/img/destinations/placeholder.webp') }}';"
-                                    alt="">
-                            </button>
-                            <ul class="dropdown-menu dropdown-menu-end shadow-sm animate slideIn"
-                                data-bs-popper="static">
-                                <li>
-                                    <a class="dropdown-item fw-medium" href="#">
-                                        {{ Auth::user()->name }}
-                                    </a>
-                                </li>
-                                <li class="ps-4 pe-4">
-                                    <hr class="dropdown-divider">
-                                </li>
-                                <li>
-                                    <a class="dropdown-item" href="{{ route(Auth::user()->role . '.dashboard') }}">
-                                        <i class="hicon hicon-ycs-dashboard me-1"></i>
-                                        <span>Dashboard</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <form class="dropdown-item" action="{{ route('logout') }}" method="POST">
-                                        @csrf
-                                        <i class="hicon hicon-close-popup me-1"></i>
-                                        <button type="submit"
-                                            style="background: none; border: none; color: inherit; padding: 0; font: inherit; cursor: pointer;">Logout</button>
-                                    </form>
-                                </li>
-                            </ul>
-                        </div>
-                        {{-- auth --}}
+                        @yield('mini-account-menu')
                     @else
                         {{-- guest --}}
                         <div class="dropdown user-menu ms-xl-auto">

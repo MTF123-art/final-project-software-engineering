@@ -2,6 +2,10 @@
 
 @section('title', $title)
 
+@section('mini-account-menu')
+@include('pengelola.mini-account-menu')
+@endsection
+
 @section('content')
     <main>
 

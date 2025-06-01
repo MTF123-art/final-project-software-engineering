@@ -2,6 +2,10 @@
 
 @section('title', 'Role Request Status')
 
+@section('mini-account-menu')
+@include('user.mini-account-menu')
+@endsection
+
 @section('content')
     <main>
         <div class="p-top-90 p-bottom-90 bg-gray-gradient aos-init aos-animate" data-aos="fade">

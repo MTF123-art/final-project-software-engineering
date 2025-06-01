@@ -8,7 +8,7 @@
         <!-- Title -->
         <section class="hero aos-init aos-animate" data-aos="fade">
             <div class="hero-bg">
-                <img src="./assets/img/about/a7.jpg" alt="">
+                <img src="{{ asset('assets') }}/img/destinations/d7.png" alt="">
             </div>
             <div class="bg-content container">
                 <div class="hero-page-title">

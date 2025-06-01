@@ -2,6 +2,10 @@
 
 @section('title', $title)
 
+@section('mini-account-menu')
+@include('user.mini-account-menu')
+@endsection
+
 @section('content')
     <main>
 

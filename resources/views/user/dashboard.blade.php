@@ -2,6 +2,10 @@
 
 @section('title', 'User Dashboard')
 
+@section('mini-account-menu')
+    @include('user.mini-account-menu')
+@endsection
+
 @section('content')
     <main>
 
