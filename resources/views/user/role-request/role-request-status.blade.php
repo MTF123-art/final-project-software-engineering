@@ -3,7 +3,7 @@
 @section('title', 'Role Request Status')
 
 @section('mini-account-menu')
-@include('user.mini-account-menu')
+    @include('user.mini-account-menu')
 @endsection
 
 @section('content')
@@ -80,7 +80,8 @@
                                             @endif
                                         </div>
                                     @else
-                                        <p class="text-muted ">Request yang anda buat dihapus oleh admin silahkan <a href="{{ route('user.upgrade') }}"> kirim ulang</a></p>
+                                        <p class="text-muted ">Request yang anda buat dihapus oleh admin silahkan <a
+                                                href="{{ route('user.upgrade') }}"> kirim ulang</a></p>
                                     @endif
                                 </div>
                             </div>
@@ -115,6 +116,21 @@
                                                 @error('nama')
                                                     <small class="text-danger">{{ $message }}</small>
                                                 @enderror
+                                            </div>
+
+                                            <div class="mb-4">
+                                                <label class="form-label" for="kategori_id">Category<span
+                                                        class="text-danger">*</span></label>
+                                                <select
+                                                    class="form-select shadow-sm dropdown-select me-3 mb-3 use-bootstrap-select-target"
+                                                    aria-label="Booking status" tabindex="-1" name="kategori_id" required
+                                                    id="kategori_id">
+                                                    <option selected="">---</option>
+                                                    @foreach ($kategori as $kt)
+                                                        <option value="{{ $kt->id }}">{{ $kt->nama_kategori }}
+                                                        </option>
+                                                    @endforeach
+                                                </select>
                                             </div>
 
                                             <div class="mb-4">

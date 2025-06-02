@@ -6,7 +6,10 @@ use App\Http\Controllers\Controller;
 use App\Models\Contact;
 use App\Models\Destinasi;
 use App\Models\Kategori;
+use App\Models\User;
+use App\Notifications\admin\NewCustomerMessageNotification;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Notification;
 
 class LandingController extends Controller
 {
@@ -33,12 +36,15 @@ class LandingController extends Controller
             'message' => 'required|string',
         ]);
 
-        Contact::create([
+        $message = Contact::create([
             'name' => $request->name,
             'email' => $request->email,
             'subject' => $request->subject,
             'message' => $request->message,
         ]);
+
+        $admins = User::where('role', 'admin')->get();
+        Notification::send($admins, new NewCustomerMessageNotification($message, $request->name));
 
         return redirect()->back()->with('success', 'Pesan Anda telah terkirim!');
     }

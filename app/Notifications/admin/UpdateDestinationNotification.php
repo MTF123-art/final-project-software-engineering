@@ -34,7 +34,7 @@ class UpdateDestinationNotification extends Notification
         return [
             'title' => 'Destinasi Diperbarui',
             'message' => $this->kolom . 'Destinasi "' . $this->destination->nama_destinasi . '" telah diperbarui oleh ' . $this->updater->name . '.',
-            'url' => route('destination', ['slug' => $this->destination->slug]),
+            'url' => route('detail-destination', ['slug' => $this->destination->slug]),
             'type' => 'update_destination',
             'destination_id' => $this->destination->id,
         ];

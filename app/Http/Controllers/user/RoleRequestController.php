@@ -5,9 +5,15 @@ namespace App\Http\Controllers\user;
 use App\Http\Controllers\Controller;
 use App\Models\Destinasi;
 use App\Models\Galeri;
+use App\Models\Kategori;
 use App\Models\RoleRequest;
-use Illuminate\Support\Facades\Auth;
+use App\Models\User;
+use App\Notifications\admin\NewDestinationNotification;
+use App\Notifications\admin\NewRoleRequestNotification;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Notification;
+use Illuminate\Support\Str;
 
 class RoleRequestController extends Controller
 {
@@ -33,14 +39,17 @@ class RoleRequestController extends Controller
             'reason' => $request->reason,
             'status' => 'pending',
         ]);
-
+        $admins = User::where('role', 'admin')->get();
+        Notification::send($admins, new NewRoleRequestNotification(Auth::user()));
         return redirect()->route('user.upgrade.status')->with('success-upgrade', 'Upgrade request submitted successfully.');
     }
 
     public function roleRequestStatus()
     {
+        $kategori = Kategori::get();
         $roleRequest = RoleRequest::where('user_id', auth()->id())->first();
-        return view('user.role-request.role-request-status', compact('roleRequest'));
+        return view('user.role-request.role-request-status', compact('roleRequest', 'kategori'))
+            ->with('title', 'Role Request Status');
     }
 
     public function roleRequestDestroy($id)
@@ -50,11 +59,13 @@ class RoleRequestController extends Controller
         return redirect()->route('user.upgrade')->with('success-upgrade', 'Upgrade request deleted successfully.');
     }
 
-    public function destinationSubmit(Request $request){
+    public function destinationSubmit(Request $request)
+    {
         // dd($request->all());
         $request->validate([
             'nama' => 'required|string|max:255',
             'highlight_photo' => 'required|image|mimes:jpeg,png,jpg|max:2048',
+            'kategori_id' => 'required|exists:kategoris,id',
             'lokasi' => 'required|string|max:255',
             'deskripsi' => 'required|string',
             'gambar' => 'required|array|min:5|max:8',
@@ -69,9 +80,10 @@ class RoleRequestController extends Controller
             'user_id' => auth()->id(),
             'highlight_photo' => $highlightPath,
             'nama_destinasi' => $request->nama,
+            'kategori_id' => $request->kategori_id,
             'deskripsi' => $request->deskripsi,
+            'slug' => Str::slug($request->nama) . '-' . Str::random(5),
             'lokasi' => $request->lokasi,
-            'status' => 'menunggu',
         ]);
         // dd($destinasi->id);
         // ========== Simpan semua gambar galeri ==========
@@ -88,6 +100,9 @@ class RoleRequestController extends Controller
         $user = Auth::user();
         $user->role = 'pengelola';
         $user->save();
+
+        $admins = User::where('role', 'admin')->get();
+        Notification::send($admins, new NewDestinationNotification($destinasi, Auth::user()));
 
         Auth::logout();
 

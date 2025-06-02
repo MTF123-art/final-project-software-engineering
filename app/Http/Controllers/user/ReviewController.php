@@ -3,15 +3,22 @@
 namespace App\Http\Controllers\user;
 
 use App\Http\Controllers\Controller;
+use App\Models\Destinasi;
 use App\Models\Review;
+use App\Models\User;
+use App\Notifications\admin\NewReviewNotification;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Notification;
 
 class ReviewController extends Controller
 {
     public function index()
     {
         return view('user.review.index', [
-            'reviews' => Review::with('destinasi')->where('user_id', auth()->user()->id)->get(),
+            'reviews' => Review::with('destinasi')
+                ->where('user_id', auth()->user()->id)
+                ->get(),
             'title' => 'My Reviews',
         ]);
     }
@@ -23,12 +30,18 @@ class ReviewController extends Controller
             'komentar' => 'nullable|string|max:1000',
         ]);
 
-        Review::create([
+        $review = Review::create([
             'user_id' => auth()->user()->id,
             'destinasi_id' => $id,
             'rating' => $request->rating,
             'komentar' => $request->komentar ?? null,
         ]);
+
+        $destinasi = Destinasi::findOrFail($id);
+        $admins = User::where('role', 'admin')->get();
+        
+        Notification::send($admins, new NewReviewNotification($review, $destinasi, Auth::user()));
+
 
         return redirect()->back()->with('success', 'Review berhasil ditambahkan');
     }
@@ -40,7 +53,7 @@ class ReviewController extends Controller
             'komentar' => 'nullable|string|max:1000',
         ]);
 
-        $review = Review::where('id',$id)->first();
+        $review = Review::where('id', $id)->first();
         $review->update([
             'rating' => $request->rating,
             'komentar' => $request->komentar ?? null,
