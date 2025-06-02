@@ -169,7 +169,6 @@ Route::middleware(['auth', 'role:admin', 'verified'])
                 Route::post('/delete/{id}', [CustomerMessageController::class, 'delete'])->name('delete');
             });
 });
-
 // pengelola routes
 Route::middleware(['auth', 'role:pengelola', 'verified'])
     ->prefix('pengelola')

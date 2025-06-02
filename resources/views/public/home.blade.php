@@ -2,6 +2,12 @@
 
 @section('title', 'Explore Sumenep - Temukan Keindahan Wisata Sumenep')
 
+@auth
+    @section('mini-account-menu')
+        @include(Auth::user()->role . '.mini-account-menu')
+    @endsection
+@endauth
+
 @section('content')
     <main>
         <!-- Hero Section -->
@@ -96,8 +102,7 @@
 
 
         <!-- Popular Destinations -->
-        <section id="popular-destinations" class="pt-5 p-bottom-90 bg-gray-gradient aos-init aos-animate"
-            data-aos="fade">
+        <section id="popular-destinations" class="pt-5 p-bottom-90 bg-gray-gradient aos-init aos-animate" data-aos="fade">
             <div class="container">
                 <!-- Section Title -->
                 <div class="d-xl-flex align-items-xl-center pb-4">

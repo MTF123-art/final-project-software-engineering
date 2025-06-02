@@ -2,6 +2,12 @@
 
 @section('title', $destinasi->nama_destinasi . ' - Sumenep Explore')
 
+@auth
+    @section('mini-account-menu')
+        @include(Auth::user()->role . '.mini-account-menu')
+    @endsection
+@endauth
+
 @section('content')
     <main>
         <!-- Hero Section -->

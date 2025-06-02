@@ -14,7 +14,7 @@
             <hr class="dropdown-divider">
         </li>
         <li>
-            <a href="{{ route('user.dashboard') }}"
+            <a href="{{ route('admin.dashboard') }}"
                 class="{{ request()->routeIs('user.dashboard') ? 'active' : '' }} dropdown-item ">
                 <i class="hicon hicon-bold hicon-ycs-dashboard"></i> <span>Dashboard</span>
             </a>

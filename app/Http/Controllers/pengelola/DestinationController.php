@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Models\Destinasi;
 use App\Models\Galeri;
 use App\Models\Kategori;
+use App\Models\User;
+use App\Notifications\admin\UpdateDestinationNotification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -15,7 +17,9 @@ class DestinationController extends Controller
 {
     public function index()
     {
-        $destination = Destinasi::with('galeri')->where('user_id', auth()->id())->first();
+        $destination = Destinasi::with('galeri')
+            ->where('user_id', auth()->id())
+            ->first();
         $kategori = Kategori::get();
         $title = 'My Destinasi';
 
@@ -24,7 +28,7 @@ class DestinationController extends Controller
 
     public function update(Request $request)
     {
-        $destinasi = Destinasi::where('user_id', auth()->id())->firstOrFail();
+        $destinasi = Destinasi::where('user_id', Auth::user()->id)->firstOrFail();
 
         if ($request->has('highlight_photo')) {
             $request->validate([
@@ -42,6 +46,12 @@ class DestinationController extends Controller
             $destinasi->update([
                 'highlight_photo' => $highlightPath,
             ]);
+
+            $admins = User::where('role', 'admin')->get();
+            foreach ($admins as $admin) {
+                $admin->notify(new UpdateDestinationNotification($destinasi, Auth::user(), 'Highlight Photo '));
+            }
+
             return redirect()->route('pengelola.destination.index')->with('success', 'Highlight photo updated successfully.');
         } elseif ($request->has(['lokasi', 'deskripsi', 'kategori_id'])) {
             $request->validate([
@@ -54,6 +64,11 @@ class DestinationController extends Controller
                 'kategori_id' => $request->kategori_id,
                 'deskripsi' => $request->deskripsi,
             ]);
+
+            $admins = User::where('role', 'admin')->get();
+            foreach ($admins as $admin) {
+                $admin->notify(new UpdateDestinationNotification($destinasi, Auth::user(), 'Lokasi, Deskripsi, Kategori '));
+            }
             return redirect()->route('pengelola.destination.index')->with('success', 'Destination updated successfully.');
         } elseif ($request->hasfile('gambar')) {
             $request->validate([
@@ -73,6 +88,11 @@ class DestinationController extends Controller
                     'destinasi_id' => $destinasi->id,
                     'url_gambar' => $path,
                 ]);
+            }
+
+            $admins = User::where('role', 'admin')->get();
+            foreach ($admins as $admin) {
+                $admin->notify(new UpdateDestinationNotification($destinasi, Auth::user(), 'Galery '));
             }
             return redirect()->route('pengelola.destination.index')->with('success', 'Gallery updated successfully.');
         } else {
@@ -118,7 +138,6 @@ class DestinationController extends Controller
                 'url_gambar' => $path,
             ]);
         }
-
 
         $user = Auth::user();
         if ($user->role == 'user') {

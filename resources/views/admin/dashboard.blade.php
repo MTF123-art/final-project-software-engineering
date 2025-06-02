@@ -3,7 +3,7 @@
 @section('title', 'Admin Dashboard')
 
 @section('mini-account-menu')
-@include('admin.mini-account-menu')
+    @include('admin.mini-account-menu')
 @endsection
 
 @section('content')

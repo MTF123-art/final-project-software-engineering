@@ -2,6 +2,10 @@
 
 @section('title', $title)
 
+@section('mini-account-menu')
+    @include('admin.mini-account-menu')
+@endsection
+
 @section('content')
     <main>
 
@@ -38,7 +42,7 @@
                                         <div
                                             class="account-user border-bottom pb-4 mb-3 mt-4 d-flex justify-content-center">
                                             <div class="user-avatar">
-                                                <img src="{{ asset('storage/'.Auth::user()->image) }}" alt=""
+                                                <img src="{{ asset('storage/' . Auth::user()->image) }}" alt=""
                                                     onerror="this.onerror=null; this.src='{{ asset('assets/img/destinations/placeholder.webp') }}';"
                                                     class="show-avatar rounded-circle" style="width: 150px; height: 150px;">
                                                 <label for="filAvatar"
@@ -117,8 +121,7 @@
                                                         id="current_password" name="current_password" required=""
                                                         minlength="8">
                                                     @if (session('current_password'))
-                                                        <small
-                                                            class="text-danger">{{ session('current_password') }}</small>
+                                                        <small class="text-danger">{{ session('current_password') }}</small>
                                                     @endif
                                                 </div>
                                             </div>
