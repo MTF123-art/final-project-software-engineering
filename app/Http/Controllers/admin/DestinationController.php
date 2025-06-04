@@ -7,7 +7,9 @@ use App\Models\Destinasi;
 use App\Models\Galeri;
 use App\Models\Kategori;
 use App\Models\User;
+use App\Notifications\pengelola\UpdateDestinationNotification as PengelolaUpdateDestinationNotification;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
 class DestinationController extends Controller
@@ -61,6 +63,10 @@ class DestinationController extends Controller
             $destinasi->update([
                 'highlight_photo' => $highlightPath,
             ]);
+
+            $pengelola = $destinasi->pengelola;
+            $pengelola->notify(new PengelolaUpdateDestinationNotification($destinasi, Auth::user(), ['Highlight Photo']));
+
             return redirect()->route('admin.destination.index')->with('success', 'Highlight photo updated successfully.');
         } elseif ($request->has(['lokasi', 'deskripsi', 'kategori_id'])) {
             $request->validate([
@@ -73,6 +79,10 @@ class DestinationController extends Controller
                 'kategori_id' => $request->kategori_id,
                 'deskripsi' => $request->deskripsi,
             ]);
+
+            $pengelola = $destinasi->pengelola;
+            $pengelola->notify(new PengelolaUpdateDestinationNotification($destinasi, Auth::user(), ['Lokasi', 'Deskripsi', 'Kategori']));
+
             return redirect()->route('admin.destination.index')->with('success', 'Destination updated successfully.');
         } elseif ($request->hasfile('gambar')) {
             $request->validate([
@@ -93,6 +103,10 @@ class DestinationController extends Controller
                     'url_gambar' => $path,
                 ]);
             }
+
+            $pengelola = $destinasi->pengelola;
+            $pengelola->notify(new PengelolaUpdateDestinationNotification($destinasi, Auth::user(), ['gambar galeri']));
+
             return redirect()->route('admin.destination.index')->with('success', 'Gallery updated successfully.');
         }else{
             return redirect()->route('admin.destination.index')->with('error', 'No changes made.');

@@ -7,13 +7,16 @@ use App\Models\Destinasi;
 use App\Models\Galeri;
 use App\Models\Kategori;
 use App\Models\User;
-use App\Notifications\admin\NewDestinationNotification;
-use App\Notifications\admin\UpdateDestinationNotification;
+use App\Notifications\admin\NewDestinationNotification as AdminNewDestinationNotification;
+use App\Notifications\user\NewDestinationNotification as UserNewDestinationNotification;
+use App\Notifications\admin\UpdateDestinationNotification as AdminUpdateDestinationNotification;
+use App\Notifications\user\UpdateDestinationNotification as UserUpdateDestinationNotification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use App\Models\Bookmark;
 
 class DestinationController extends Controller
 {
@@ -50,7 +53,11 @@ class DestinationController extends Controller
             ]);
 
             $admins = User::where('role', 'admin')->get();
-            Notification::send($admins, new UpdateDestinationNotification($destinasi, Auth::user(), 'Highlight Photo '));
+            Notification::send($admins, new AdminUpdateDestinationNotification($destinasi, Auth::user(), 'Highlight Photo '));
+            $users = User::whereHas('bookmakrs', function ($query) use ($destinasi) {
+                $query->where('destinasi_id', $destinasi->id);
+            })->get();
+            Notification::send($users, new UserUpdateDestinationNotification($destinasi, Auth::user(), 'Highlight Photo '));
 
             return redirect()->route('pengelola.destination.index')->with('success', 'Highlight photo updated successfully.');
         } elseif ($request->has(['lokasi', 'deskripsi', 'kategori_id'])) {
@@ -66,7 +73,12 @@ class DestinationController extends Controller
             ]);
 
             $admins = User::where('role', 'admin')->get();
-            Notification::send($admins, new UpdateDestinationNotification($destinasi, Auth::user(), 'Lokasi, Deskripsi, Kategori '));
+            Notification::send($admins, new AdminUpdateDestinationNotification($destinasi, Auth::user(), 'Lokasi, Deskripsi, Kategori '));
+            $users = User::whereHas('bookmakrs', function ($query) use ($destinasi) {
+                $query->where('destinasi_id', $destinasi->id);
+            })->get();
+            Notification::send($users, new UserUpdateDestinationNotification($destinasi, Auth::user(), 'Lokasi, Deskripsi, Kategori '));
+
             return redirect()->route('pengelola.destination.index')->with('success', 'Destination updated successfully.');
         } elseif ($request->hasfile('gambar')) {
             $request->validate([
@@ -89,7 +101,11 @@ class DestinationController extends Controller
             }
 
             $admins = User::where('role', 'admin')->get();
-            Notification::send($admins, new UpdateDestinationNotification($destinasi, Auth::user(), 'Galery '));
+            Notification::send($admins, new AdminUpdateDestinationNotification($destinasi, Auth::user(), 'Galery '));
+            $users = User::whereHas('bookmakrs', function ($query) use ($destinasi) {
+                $query->where('destinasi_id', $destinasi->id);
+            })->get();
+            Notification::send($users, new UserUpdateDestinationNotification($destinasi, Auth::user(), 'Galery '));
             return redirect()->route('pengelola.destination.index')->with('success', 'Gallery updated successfully.');
         } else {
             return redirect()->route('pengelola.destination.index')->with('error', 'No changes made.');
@@ -135,7 +151,9 @@ class DestinationController extends Controller
         }
 
         $admins = User::where('role', 'admin')->get();
-        Notification::send($admins, new NewDestinationNotification($destinasi, Auth::user()));
+        Notification::send($admins, new AdminNewDestinationNotification($destinasi, Auth::user()));
+        $users = User::where('role', 'user')->get();
+        Notification::send($users, new UserNewDestinationNotification($destinasi, Auth::user()));
 
         $user = Auth::user();
         if ($user->role == 'user') {

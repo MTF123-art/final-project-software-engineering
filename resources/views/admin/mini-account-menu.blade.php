@@ -62,7 +62,7 @@
             </a>
         </li>
         <li>
-            <a href="./security.html" class="dropdown-item">
+            <a href="{{ route('admin.notification.index') }}" class="dropdown-item {{ request()->routeIs('admin.notification.index') ? 'active' : '' }}">
                 <i class="hicon hicon-bold hicon-bell-alerts"></i> <span>Notifikasi</span>
             </a>
         </li>

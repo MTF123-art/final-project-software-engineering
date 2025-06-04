@@ -33,7 +33,7 @@
                     </a>
                 </li>
                 <li class="menu-item">
-                    <a href="{{ route('user.notification') }}" class="{{ request()->routeIs('user.notification') ? 'active' : '' }}">
+                    <a href="{{ route('user.notification.index') }}" class="{{ request()->routeIs('user.notification.index') ? 'active' : '' }}">
                         <i class="hicon hicon-bold hicon-bell-alerts"></i> <span>Notifikasi</span>
                     </a>
                 </li>

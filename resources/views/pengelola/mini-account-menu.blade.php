@@ -38,8 +38,8 @@
             </a>
         </li>
         <li>
-            <a href="{{ route('pengelola.notification') }}"
-                class="{{ request()->routeIs('pengelola.notification') ? 'active' : '' }} dropdown-item">
+            <a href="{{ route('pengelola.notification.index') }}"
+                class="{{ request()->routeIs('pengelola.notification.index') ? 'active' : '' }} dropdown-item">
                 <i class="hicon hicon-bold hicon-bell-alerts"></i> <span>Notifikasi</span>
             </a>
         </li>

@@ -35,7 +35,7 @@
                     </a>
                 </li>
                 <li class="menu-item">
-                    <a href="{{ route('pengelola.notification') }}" class="{{ request()->routeIs('pengelola.notification') ? 'active' : '' }}">
+                    <a href="{{ route('pengelola.notification.index') }}" class="{{ request()->routeIs('pengelola.notification.index') ? 'active' : '' }}">
                         <i class="hicon hicon-bold hicon-bell-alerts"></i> <span>Notifikasi</span>
                     </a>
                 </li>

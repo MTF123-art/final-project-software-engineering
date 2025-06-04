@@ -3,8 +3,11 @@
 namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use App\Models\RoleRequest;
+use App\Models\User;
+use App\Notifications\user\RoleRequestStatusNotification;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Notification;
 
 class RoleRequestController extends Controller
 {
@@ -37,6 +40,9 @@ class RoleRequestController extends Controller
         $roleRequest->status = 'approved';
         $roleRequest->save();
 
+        $user = $roleRequest->user;
+        $user->notify(new RoleRequestStatusNotification($roleRequest->status));
+
         return redirect()->route('admin.role-request.index')->with('success', 'Role request approved successfully.');
     }
     public function reject($id)
@@ -44,6 +50,9 @@ class RoleRequestController extends Controller
         $roleRequest = RoleRequest::findOrFail($id);
         $roleRequest->status = 'rejected';
         $roleRequest->save();
+
+        $user = $roleRequest->user;
+        $user->notify(new RoleRequestStatusNotification($roleRequest->status));
 
         return redirect()->route('admin.role-request.index')->with('success', 'Role request rejected successfully.');
     }

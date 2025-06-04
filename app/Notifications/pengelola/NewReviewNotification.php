@@ -1,26 +1,28 @@
 <?php
 
-namespace App\Notifications\admin;
+namespace App\Notifications\pengelola;
 
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class NewDestinationNotification extends Notification
+class NewReviewNotification extends Notification
 {
     use Queueable;
 
-    protected $destination;
-    protected $creator;
+     protected $destinasi;
+    protected $reviewer;
+    protected $rating;
+    protected $komentar;
 
     /**
      * Create a new notification instance.
      */
-    public function __construct($destination, $creator)
+    public function __construct($destinasi, $reviewer)
     {
-        $this->destination = $destination;
-        $this->creator = $creator;
+        $this->destinasi = $destinasi;
+        $this->reviewer = $reviewer;
     }
 
     /**
@@ -41,11 +43,11 @@ class NewDestinationNotification extends Notification
     public function toArray(object $notifiable): array
     {
         return [
-            'title' => 'Destinasi Baru',
-            'message' => 'Destinasi "' . $this->destination->nama_destinasi . '" telah ditambahkan oleh "' . $this->creator->name . '"',
-            'url' => route('detail-destination', ['slug' => $this->destination->slug]),
-            'type' => 'new_destination',
-            'destination_id' => $this->destination->id,
+            'title' => 'Review Baru pada Destinasi Anda',
+            'message' => 'Destinasi anda telah mendapatkan rating ' . ($this->rating / 10) . ' ★ dari ' . $this->reviewer->name . '.',
+            'url' => route('pengelola.review.index'),
+            'type' => 'new_review',
+            'destination_id' => $this->destinasi->id,
         ];
     }
 }

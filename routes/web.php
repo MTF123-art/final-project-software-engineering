@@ -16,6 +16,9 @@ use App\Http\Controllers\pengelola\ReviewController as PengelolaReviewController
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\user\BookmarkController;
 use App\Http\Controllers\user\DashboardController as UserDashboardController;
+use App\Http\Controllers\user\NotificationController as UserNotificationController;
+use App\Http\Controllers\admin\NotificationController as AdminNotificationController;
+use App\Http\Controllers\pengelola\NotificationController as PengelolaNotificationController;
 use App\Http\Controllers\user\ReviewController;
 use App\Http\Controllers\user\RoleRequestController as UserRoleRequestController;
 use Illuminate\Auth\Events\Login;
@@ -24,24 +27,26 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
-
-
-// Email verification 
+// Email verification
 Route::get('/email/verify', function () {
     return view('auth.verify-email');
-})->middleware('auth')->name('verification.notice');
+})
+    ->middleware('auth')
+    ->name('verification.notice');
 
 Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
     $request->fulfill();
-    return redirect()->route(Auth::user()->role.'.dashboard');
-})->middleware(['auth', 'signed'])->name('verification.verify');
+    return redirect()->route(Auth::user()->role . '.dashboard');
+})
+    ->middleware(['auth', 'signed'])
+    ->name('verification.verify');
 
 Route::post('/email/verification-notification', function (Request $request) {
     $request->user()->sendEmailVerificationNotification();
     return back()->with('success', 'Verification link sent!');
-})->middleware(['auth', 'throttle:6,1'])->name('verification.send');
-
-
+})
+    ->middleware(['auth', 'throttle:6,1'])
+    ->name('verification.send');
 
 // public routes
 Route::get('/', [LandingController::class, 'home'])->name('home');
@@ -65,9 +70,15 @@ Route::middleware(['auth', 'role:user', 'verified'])
     ->group(function () {
         Route::get('/dashboard', [UserDashboardController::class, 'index'])->name('dashboard');
         // notification
-        Route::get('/notication', function () {
-            echo 'notication';
-        })->name('notification');
+        Route::prefix('notification')
+            ->name('notification.')
+            ->group(function () {
+                Route::get('/', [UserNotificationController::class, 'index'])->name('index');
+                Route::post('/mark-all-read', [UserNotificationController::class, 'markAllAsRead'])->name('markAllRead');
+                Route::post('/delete-all', [UserNotificationController::class, 'deleteAll'])->name('deleteAll');
+                Route::post('/mark-read/{id}', [UserNotificationController::class, 'markAsRead'])->name('markRead');
+                Route::delete('/delete/{id}', [UserNotificationController::class, 'delete'])->name('delete');
+            });
         // review
         Route::prefix('review')
             ->name('review.')
@@ -102,12 +113,18 @@ Route::middleware(['auth', 'role:admin', 'verified'])
     ->prefix('admin')
     ->name('admin.')
     ->group(function () {
-        // admin dashboard
+        
         Route::get('/dashboard', [AdminDasboardController::class, 'index'])->name('dashboard');
-        // notification
-        Route::get('/notication', function () {
-            echo 'notication';
-        })->name('notification');
+        
+        Route::prefix('notification')
+            ->name('notification.')
+            ->group(function () {
+                Route::get('/', [AdminNotificationController::class, 'index'])->name('index');
+                Route::post('/mark-all-read', [AdminNotificationController::class, 'markAllAsRead'])->name('markAllRead');
+                Route::post('/delete-all', [AdminNotificationController::class, 'deleteAll'])->name('deleteAll');
+                Route::post('/mark-read/{id}', [AdminNotificationController::class, 'markAsRead'])->name('markRead');
+                Route::delete('/delete/{id}', [AdminNotificationController::class, 'delete'])->name('delete');
+            });
 
         Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
         Route::post('/profile/edit', [ProfileController::class, 'editProfile'])->name('profile.edit');
@@ -142,7 +159,7 @@ Route::middleware(['auth', 'role:admin', 'verified'])
                 Route::post('/delete/{id}', [CategoryController::class, 'delete'])->name('delete');
                 Route::post('/update/{id}', [CategoryController::class, 'update'])->name('update');
             });
-        // manage role request
+        
         Route::prefix('role-request')
             ->name('role-request.')
             ->group(function () {
@@ -168,23 +185,31 @@ Route::middleware(['auth', 'role:admin', 'verified'])
                 Route::get('/show/{id}', [CustomerMessageController::class, 'show'])->name('show');
                 Route::post('/delete/{id}', [CustomerMessageController::class, 'delete'])->name('delete');
             });
-});
+    });
 // pengelola routes
 Route::middleware(['auth', 'role:pengelola', 'verified'])
     ->prefix('pengelola')
     ->name('pengelola.')
     ->group(function () {
+        
         Route::get('/dashboard', [PengelolaDashboardController::class, 'index'])->name('dashboard');
-        Route::get('/notication', function () {
-            echo 'notication';
-        })->name('notification');
-        // // profile routes
+        
+        Route::prefix('notification')
+            ->name('notification.')
+            ->group(function () {
+                Route::get('/', [PengelolaNotificationController::class, 'index'])->name('index');
+                Route::post('/mark-all-read', [PengelolaNotificationController::class, 'markAllAsRead'])->name('markAllRead');
+                Route::post('/delete-all', [PengelolaNotificationController::class, 'deleteAll'])->name('deleteAll');
+                Route::post('/mark-read/{id}', [PengelolaNotificationController::class, 'markAsRead'])->name('markRead');
+                Route::delete('/delete/{id}', [PengelolaNotificationController::class, 'delete'])->name('delete');
+            });
+
         Route::prefix('profile')->group(function () {
             Route::get('/', [ProfileController::class, 'index'])->name('profile');
             Route::post('/edit', [ProfileController::class, 'editProfile'])->name('profile.edit');
             Route::post('/edit-password', [ProfileController::class, 'editPassword'])->name('profile.edit-password');
         });
-        // manage destination
+    
         Route::prefix('destination')
             ->name('destination.')
             ->group(function () {
@@ -199,4 +224,4 @@ Route::middleware(['auth', 'role:pengelola', 'verified'])
                 Route::get('/', [PengelolaReviewController::class, 'index'])->name('index');
                 Route::post('/update/{id}', [PengelolaReviewController::class, 'updateStatus'])->name('update');
             });
-});
+    });

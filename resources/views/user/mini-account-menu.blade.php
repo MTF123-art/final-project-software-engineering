@@ -36,8 +36,8 @@
             </a>
         </li>
         <li>
-            <a href="{{ route('user.notification') }}"
-                class="{{ request()->routeIs('user.notification') ? 'active' : '' }} dropdown-item">
+            <a href="{{ route('user.notification.index') }}"
+                class="{{ request()->routeIs('user.notification.index') ? 'active' : '' }} dropdown-item">
                 <i class="hicon hicon-bold hicon-bell-alerts"></i> <span>Notifikasi</span>
             </a>
         </li>

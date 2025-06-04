@@ -248,79 +248,79 @@
 
     {{-- offcanvas notification --}}
 
-    @auth
-        <div class="offcanvas offcanvas-end offcanvas-navbar border-start-0" tabindex="-1" id="offcanvasRight"
-            aria-labelledby="offcanvasRightLabel">
-            <div class="offcanvas-header border-bottom p-4">
-                <h5 class="offcanvas-title h4" id="offcanvasRightLabel">
-                    <i class="hicon hicon-bold hicon-bell-alerts me-2"></i>
-                    Notifikasi
-                </h5>
-                <button type="button" class="btn-close shadow-none" data-bs-dismiss="offcanvas"
-                    aria-label="Close"></button>
-            </div>
-            <div class="offcanvas-body p-4">
-                @forelse(auth()->user()->notifications as $notification)
-                    <div
-                        class="notification-item {{ $notification->unread() ? 'notification-unread' : 'notification-read' }} mb-3">
-                        <div class="notification-content">
-                            <div class="d-flex align-items-start">
-                                <div class="notification-icon me-3">
-                                    <div class="circle-icon circle-icon-sm bg-primary">
-                                        <i class="hicon hicon-email-envelope text-white"></i>
-                                    </div>
+@auth
+    <div class="offcanvas offcanvas-end offcanvas-navbar border-start-0" tabindex="-1" id="offcanvasRight"
+        aria-labelledby="offcanvasRightLabel">
+        <div class="offcanvas-header border-bottom p-4">
+            <h5 class="offcanvas-title h4" id="offcanvasRightLabel">
+                <i class="hicon hicon-bold hicon-bell-alerts me-2"></i>
+                Notifikasi
+            </h5>
+            <button type="button" class="btn-close shadow-none" data-bs-dismiss="offcanvas"
+                aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body p-4">
+            @forelse(auth()->user()->unreadNotifications as $notification)
+                <div
+                    class="notification-item notification-unread mb-3">
+                    <div class="notification-content">
+                        <div class="d-flex align-items-start">
+                            <div class="notification-icon me-3">
+                                <div class="circle-icon circle-icon-sm bg-primary">
+                                    <i class="hicon hicon-email-envelope text-white"></i>
                                 </div>
-                                <div class="notification-body flex-grow-1">
-                                    <h6 class="notification-title mb-1">
-                                        {{ $notification->data['title'] ?? 'No Title' }}
-                                    </h6>
-                                    <p class="notification-text text-muted mb-2">
-                                        {{ $notification->data['message'] ?? 'No Message' }}
-                                    </p>
-                                    <div class="d-flex align-items-center justify-content-between">
-                                        <small class="text-muted">
-                                            <i class="hicon hicon-time me-1"></i>
-                                            {{ $notification->created_at->diffForHumans() }}
-                                        </small>
-                                        @if ($notification->data['url'] ?? false)
-                                            <a href="{{ $notification->data['url'] }}" class="btn btn-primary btn-sm">
-                                                <i class="hicon hicon-last-viewed me-1"></i>
-                                                Lihat
-                                            </a>
-                                        @endif
-                                    </div>
+                            </div>
+                            <div class="notification-body flex-grow-1">
+                                <h6 class="notification-title mb-1">
+                                    {{ $notification->data['title'] ?? 'No Title' }}
+                                </h6>
+                                <p class="notification-text text-muted mb-2">
+                                    {{ $notification->data['message'] ?? 'No Message' }}
+                                </p>
+                                <div class="d-flex align-items-center justify-content-between">
+                                    <small class="text-muted">
+                                        <i class="hicon hicon-time me-1"></i>
+                                        {{ $notification->created_at->diffForHumans() }}
+                                    </small>
+                                    @if ($notification->data['url'] ?? false)
+                                        <a href="{{ $notification->data['url'] }}" class="btn btn-primary btn-sm">
+                                            <i class="hicon hicon-last-viewed me-1"></i>
+                                            Lihat
+                                        </a>
+                                    @endif
                                 </div>
                             </div>
                         </div>
-                        @if ($notification->unread())
-                            <div class="notification-indicator"></div>
-                        @endif
                     </div>
-                @empty
-                    <div class="empty-state text-center py-5">
-                        <div class="circle-icon circle-icon-lg bg-light mx-auto mb-3">
-                            <i class="hicon hicon-bell-alerts text-muted"></i>
-                        </div>
-                        <h6 class="text-muted mb-2">Tidak Ada Notifikasi</h6>
-                        <p class="text-muted small">Notifikasi baru akan muncul di sini</p>
+                    <div class="notification-indicator"></div>
+                </div>
+            @empty
+                <div class="empty-state text-center py-5">
+                    <div class="circle-icon circle-icon-lg bg-light mx-auto mb-3">
+                        <i class="hicon hicon-bell-alerts text-muted"></i>
                     </div>
-                @endforelse
+                    <h6 class="text-muted mb-2">Tidak Ada Notifikasi</h6>
+                    <p class="text-muted small">Notifikasi baru akan muncul di sini</p>
+                </div>
+            @endforelse
 
-                @if (auth()->user()->notifications->count() > 0)
-                    <div class="notification-actions border-top pt-3 mt-3">
-                        <div class="d-flex justify-content-between">
-                            <form action="">
-                                <button href="#" class="btn btn-link btn-sm text-decoration-none p-0">
-                                    <i class="hicon hicon-check-circle me-1"></i>
-                                    Tandai Semua Dibaca
-                                </button>
-                            </form>
-                        </div>
+            @if (auth()->user()->unreadNotifications->count() > 0)
+                <div class="notification-actions border-top pt-3 mt-3">
+                    <div class="d-flex justify-content-between">
+                        <form action="{{ route(Auth::user()->role.'.notification.markAllRead') }}" method="POST">
+                            @csrf
+                            <button href="#" class="btn btn-link btn-sm text-decoration-none p-0">
+                                <i class="hicon hicon-check-circle me-1"></i>
+                                Tandai Semua Dibaca
+                            </button>
+                        </form>
                     </div>
-                @endif
-            </div>
+                </div>
+            @endif
         </div>
-    @endauth
+    </div>
+@endauth
+
 
 
     {{-- offcanvas notification --}}

@@ -6,7 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Models\Destinasi;
 use App\Models\Review;
 use App\Models\User;
-use App\Notifications\admin\NewReviewNotification;
+use App\Notifications\admin\NewReviewNotification as AdminNewreviewNotification;
+use App\Notifications\pengelola\NewReviewNotification as PengelolaNewReviewNotification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Notification;
@@ -38,10 +39,12 @@ class ReviewController extends Controller
         ]);
 
         $destinasi = Destinasi::findOrFail($id);
-        $admins = User::where('role', 'admin')->get();
-        
-        Notification::send($admins, new NewReviewNotification($review, $destinasi, Auth::user()));
 
+        $admins = User::where('role', 'admin')->get();
+        Notification::send($admins, new AdminNewreviewNotification($review, $destinasi, Auth::user()));
+
+        $pengelola = $destinasi->user;
+        $pengelola->notify(new PengelolaNewReviewNotification($destinasi, Auth::user()));
 
         return redirect()->back()->with('success', 'Review berhasil ditambahkan');
     }
