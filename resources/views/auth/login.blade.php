@@ -23,21 +23,8 @@
                                     <!-- Login Facebook/Google -->
                                     <div class="border-bottom pb-4 mb-4">
                                         <div class="row g-3">
-                                            <div class="col-6">
-                                                <button type="button" class="btn btn-facebook w-100">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve"
-                                                        viewBox="0 0 1000 1000" width="20" height="20">
-                                                        <path fill="#3b579d"
-                                                            d="M500 1000A500 500 0 0 1 500 0a500 500 0 0 1 0 1000z"></path>
-                                                        <path fill="#fff"
-                                                            d="M630 1000V613h130l20-151H630v-97c0-43 12-73 75-73h80V157c-14-2-62-6-117-6-115 0-194 70-194 200v111H344v151h130v387h156z">
-                                                        </path>
-                                                    </svg>
-                                                    <span class="ms-2">Facebook</span>
-                                                </button>
-                                            </div>
-                                            <div class="col-6">
-                                                <button type="button" class="btn btn-google w-100">
+                                            <div class="col-12">
+                                                <button type="button" class="btn btn-google w-100" title="login with google">
                                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 534 544"
                                                         width="20" height="20">
                                                         <path fill="#4285f4"
@@ -105,7 +92,7 @@
                                     </div>
                                     <!-- /Login Email -->
                                     <div class="mt-4">
-                                        <span>Don't have an account? <a href="./register.html">Register</a></span>
+                                        <span>Don't have an account? <a href="{{ route('register-form') }}">Register</a></span>
                                     </div>
                                 </form>
                             </div>

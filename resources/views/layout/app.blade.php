@@ -10,7 +10,7 @@
     <title>Explore Sumenep | @yield('title')</title>
     <meta name="description" content="">
     <meta name="keywords" content="">
-    <meta name="author" content="Themenix.com">
+    <meta name="author" content="Explore Sumenep">
     <link href="{{ asset('assets') }}/img/logos/favicon.png" rel="shortcut icon" type="image/png">
     <link href="{{ asset('assets') }}/css/theme-1.min.css" rel="stylesheet">
     <link href="{{ asset('assets') }}/css/theme-2.min.css" rel="stylesheet">
@@ -22,11 +22,11 @@
 <body>
 
     <!-- Preloader -->
-    {{-- <div id="preloader">
+    <div id="preloader">
         <div class="spinner-border text-primary" role="status">
             <span class="visually-hidden">Loading...</span>
         </div>
-    </div> --}}
+    </div>
     <!-- /Preloader -->
 
     <!-- Header -->
