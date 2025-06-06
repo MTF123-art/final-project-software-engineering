@@ -4,21 +4,23 @@ use App\Http\Controllers\admin\CategoryController;
 use App\Http\Controllers\admin\CustomerMessageController;
 use App\Http\Controllers\admin\DashboardController as AdminDasboardController;
 use App\Http\Controllers\admin\DestinationController as AdminDestinationController;
+use App\Http\Controllers\admin\NotificationController as AdminNotificationController;
 use App\Http\Controllers\admin\ReviewController as AdminReviewController;
 use App\Http\Controllers\admin\RoleRequestController as AdminRoleRequestController;
 use App\Http\Controllers\admin\UserController;
+use App\Http\Controllers\auth\ForgotPasswordController;
 use App\Http\Controllers\auth\LoginController;
 use App\Http\Controllers\auth\RegisterController;
+use App\Http\Controllers\auth\ResetPasswordController;
 use App\Http\Controllers\landing\LandingController;
 use App\Http\Controllers\pengelola\DashboardController as PengelolaDashboardController;
 use App\Http\Controllers\pengelola\DestinationController as PengelolaDestinationController;
+use App\Http\Controllers\pengelola\NotificationController as PengelolaNotificationController;
 use App\Http\Controllers\pengelola\ReviewController as PengelolaReviewController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\user\BookmarkController;
 use App\Http\Controllers\user\DashboardController as UserDashboardController;
 use App\Http\Controllers\user\NotificationController as UserNotificationController;
-use App\Http\Controllers\admin\NotificationController as AdminNotificationController;
-use App\Http\Controllers\pengelola\NotificationController as PengelolaNotificationController;
 use App\Http\Controllers\user\ReviewController;
 use App\Http\Controllers\user\RoleRequestController as UserRoleRequestController;
 use Illuminate\Auth\Events\Login;
@@ -26,6 +28,7 @@ use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+
 
 // Email verification
 Route::get('/email/verify', function () {
@@ -62,6 +65,11 @@ Route::post('/login', [LoginController::class, 'login'])->name('login.post');
 Route::get('/register', [RegisterController::class, 'showRegisterForm'])->name('register-form');
 Route::post('/register', [RegisterController::class, 'register'])->name('register.post');
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
+
+Route::get('/forgot-password', [ForgotPasswordController::class, 'ForgotPasswordForm'])->name('forgotPasswordForm');
+Route::post('/forgot-password', [ForgotPasswordController::class, 'sendResetLink'])->name('sendResetLink');
+Route::get('/reset-password/{token}', [ResetPasswordController::class, 'resetPasswordForm'])->middleware('guest')->name('password.reset');
+Route::post('/reset-password', [ResetPasswordController::class, 'reset'])->middleware('guest')->name('password.update');
 
 // user routes
 Route::middleware(['auth', 'role:user', 'verified'])

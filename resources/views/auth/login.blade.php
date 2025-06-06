@@ -79,7 +79,7 @@
                                             </div>
                                             <div class="col-6">
                                                 <div class="mb-4 text-end">
-                                                    <a href="./forgot-password.html">Forgot password?</a>
+                                                    <a href="{{ route('forgotPasswordForm') }}">Forgot password?</a>
                                                 </div>
                                             </div>
                                         </div>
@@ -106,5 +106,11 @@
     </main>
     @if (session('success'))
         <x-toast type="success" />
+    @endif
+    @if (session('status'))
+        <x-toast type="status" />
+    @endif
+    @if (session('email'))
+        <x-toast type="email" />
     @endif
 @endsection
